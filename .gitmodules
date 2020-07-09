@@ -1,0 +1,3 @@
+[submodule "ft_printf"]
+	path = ft_printf
+	url = git@github.com:CptnGreen/ft_printf.git
