@@ -1,0 +1,58 @@
+*** Development
+
+В проект в виде подмодуля включена библиотека =libftprintf=, содержащая в себе =ft_printf= и функции =libft=.
+
+Чтобы склонировать репозиторий вместе с ней, пишем:
+
+#+BEGIN_SRC bash
+
+git clone git@github.com:CptnGreen/Corewar.git --recursive
+
+#+END_SRC
+
+*** Unit-tests
+
+Проект настроен (скоро будет, нужно обкатать) на работу с unit-тестами через фреймворк [[https://github.com/ThrowTheSwitch/Ceedling/blob/master/docs/CeedlingPacket.md][=ceedling=]].
+
+Чтобы запустить тесты, нужно сначала установить =ceedling= под свою ОС. Установка сводится к следующему (на примере =ubuntu=):
+
+- Установить/обновить =ruby=:
+
+  #+BEGIN_SRC bash
+
+sudo apt-get install ruby
+
+  #+END_SRC
+
+- Установить =ceedling= (как =gem=):
+
+  #+BEGIN_SRC bash
+
+sudo gem install ceedling
+
+  #+END_SRC
+
+- При необходимости добавить =ruby= в =PATH= (в вашем случае версия =ruby= может отличаться!):
+
+  #+BEGIN_SRC bash
+
+export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
+
+  #+END_SRC
+
+  Чтобы добавить перманентно, прописываем данную команду в конец =~/.bashrc= и делаем =source ~/.bashrc=.
+
+После этого шага из корня проекта запускаем =ceedling= без аргументов, и система прогоняет тесты.
+
+
+*** Purpose
+
+Чтобы не платить Школе **50К**, нужно получить *14 lvl*,
+
+чтобы получить *14 lvl*, нужно пройти стажировку,
+
+чтобы пройти стажировку, нужно сначала на неё выйти,
+
+чтобы выйти на стажировку, нужно дойти до круга,
+
+чтобы дойти до круга, нужно сдать `Corewar`!

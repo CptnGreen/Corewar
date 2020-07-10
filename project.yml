@@ -10,7 +10,7 @@
   :use_test_preprocessor: TRUE
   :use_auxiliary_dependencies: TRUE
   :build_root: build
-#  :release_build: TRUE
+  :release_build: TRUE
   :test_file_prefix: test_
   :which_ceedling: gem
   :ceedling_version: 0.30.0
@@ -35,11 +35,15 @@
     - -:test/support
   :source:
     - src/**
+    - ft_printf/src/**
+    - ft_printf/libft/src/**
   :include:
     - includes/**
+    - ft_printf/includes/**
+    - ft_printf/libft/includes/**
   :support:
     - test/support
-  :libraries: []
+  :libraries: [ft_printf/libft, ft_printf]
 
 :defines:
   # in order to add common defines:
@@ -90,7 +94,7 @@
   :placement: :end
   :flag: "-l${1}"
   :path_flag: "-L ${1}"
-  :system: []    # for example, you might list 'm' to grab the math library
+  :system: [ft, ftprintf]    # for example, you might list 'm' to grab the math library
   :test: []
   :release: []
 
@@ -100,4 +104,8 @@
   :enabled:
     - stdout_pretty_tests_report
     - module_generator
+    - compile_commands_json
+
+:module_generator:
+  :inc_root: test/includes/
 ...
