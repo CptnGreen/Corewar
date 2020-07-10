@@ -10,7 +10,7 @@ git clone git@github.com:CptnGreen/Corewar.git --recursive
 
 *** Unit-tests
 
-Проект настроен (скоро будет, нужно обкатать) на работу с unit-тестами через фреймворк =[[https://github.com/ThrowTheSwitch/Ceedling/blob/master/docs/CeedlingPacket.md][ceedling]]=.
+Проект настроен (скоро будет, нужно обкатать) на работу с unit-тестами через фреймворк [[https://github.com/ThrowTheSwitch/Ceedling/blob/master/docs/CeedlingPacket.md][ceedling]].
 
 Чтобы запустить тесты, нужно сначала установить =ceedling= под свою ОС. Установка сводится к следующему (на примере =ubuntu=):
 
