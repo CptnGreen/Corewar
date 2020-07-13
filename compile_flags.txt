@@ -1,0 +1,11 @@
+-I./src
+-I./ft_printf/src
+-I./ft_printf/libft/src
+-I./includes
+-I./ft_printf/includes
+-I./ft_printf/libft/includes
+-I./test/asm/includes
+-Wall
+-Werror
+-Wextra
+-I/home/ak/.gem/ruby/2.7.0/gems/ceedling-0.30.0/vendor/unity/src
