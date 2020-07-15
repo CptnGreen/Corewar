@@ -17,7 +17,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 # --------------- ASSEMBLER: PREREQUISITES ------------------
 
-EXEC_ASM = asm
+EXEC_ASM = asm.out
 
 SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
