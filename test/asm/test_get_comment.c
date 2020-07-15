@@ -10,7 +10,7 @@ void tearDown(void)
 {
 }
 
-void test_get_comment_NeedToImplement(void)
+void test_1(void)
 {
-    TEST_IGNORE_MESSAGE("Need to Implement get_comment");
+    TEST_ASSERT_EQUAL_MEMORY("\x63\x6f\x6d\x6d\x65\x6e\x74", get_comment("comment"), 7);
 }
