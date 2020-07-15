@@ -8,6 +8,7 @@
             "-Wextra",
             "obj/get_byte_code.o",
             "obj/get_magic_header.o",
+            "obj/get_name.o",
             "-I",
             "includes/",
             "-I",

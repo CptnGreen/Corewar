@@ -5,5 +5,6 @@
 
 char	*get_byte_code(char const *asm_code);
 char	*get_magic_header(void);
+char	*get_name(char const *name);
 
 #endif
