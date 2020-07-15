@@ -18,12 +18,16 @@ git checkout -b concise-feature-branch-name
 
 Проект настроен (скоро будет, нужно обкатать) на работу с unit-тестами через фреймворк [[https://github.com/ThrowTheSwitch/Ceedling/blob/master/docs/CeedlingPacket.md][ceedling]].
 
-Чтобы запустить тесты, нужно сначала установить =ceedling= под свою ОС. Установка сводится к следующему (на примере =ubuntu=):
+Чтобы запустить тесты, нужно сначала установить =ceedling= под свою ОС. Установка сводится к следующему (на примере =Linux=):
 
 - Установить/обновить =ruby=:
 
 #+BEGIN_SRC bash
+# для Ubuntu:
 sudo apt-get install ruby
+
+# для Arch:
+sudo pacman -Syu ruby
 #+END_SRC
 
 - Установить =ceedling= (как =gem=):
@@ -32,7 +36,7 @@ sudo apt-get install ruby
 sudo gem install ceedling
 #+END_SRC
 
-- При необходимости добавить =ruby= в =PATH= (в вашем случае версия =ruby= может отличаться!):
+- При необходимости добавить =ruby= в =PATH= (понадобилось в =Arch=; в вашем случае версия =ruby= может отличаться!):
 
 #+BEGIN_SRC bash
 export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
@@ -40,7 +44,7 @@ export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
 
   Чтобы добавить перманентно, прописываем данную команду в конец =~/.bashrc= и делаем =source ~/.bashrc=.
 
-После этого шага из корня проекта запускаем =ceedling= без аргументов, и система прогоняет тесты.
+После этого шага из корня проекта запускаем =ceedling= без аргументов, и система прогоняет тесты. Не забудьте предварительно скомпилировать библиотеки проекта (с помощью =make -C ft_printf=), иначе будет ошибка.
 
 *** Purpose
 

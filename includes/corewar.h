@@ -4,5 +4,6 @@
 # include "libftprintf.h"
 
 char	*get_byte_code(char const *asm_code);
+char	*get_magic_header(void);
 
 #endif

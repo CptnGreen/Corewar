@@ -12,19 +12,18 @@ void tearDown(void)
 
 void test_brazhnik(void)
 {
-    char	*asm_code;
+	char	*asm_code;
 
-    asm_code = \
-".name       \"Batman\"\n\
+	asm_code = \
+		".name       \"Batman\"\n\
 .comment    \"This city needs me\"\n\
 \n\
 loop:\n\
-        sti r1, %:live, %1\n\
+		sti r1, %:live, %1\n\
 live:\n\
-        live %0\n\
-        ld %0, r2\n\
-        zjmp %:loop";
+		live %0\n\
+		ld %0, r2\n\
+		zjmp %:loop";
 
-    printf("%s\n", asm_code);
-    TEST_ASSERT_EQUAL_STRING(asm_code, asm_code);
+	TEST_ASSERT_EQUAL_STRING(asm_code, asm_code);
 }
