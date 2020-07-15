@@ -3,8 +3,13 @@
 
 # include "libftprintf.h"
 
+/*
+** Assembly part
+*/
+
 char	*get_byte_code(char const *asm_code);
 char	*get_magic_header(void);
 char	*get_name(char const *name);
+char	*get_zeroes(unsigned int n_zeroes);
 
 #endif
