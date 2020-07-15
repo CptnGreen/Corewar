@@ -1,0 +1,25 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: install ceedling
+      run: sudo gem install ceedling
+    - name: add ceedling to path
+      run: export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
+    - name: make all
+      run: make
+    - name: run tests
+      run: ceedling
