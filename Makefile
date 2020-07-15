@@ -22,7 +22,8 @@ EXEC_ASM = asm
 SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
 	  get_byte_code.c \
-	  get_magic_header.c
+	  get_magic_header.c \
+	  get_name.c
 SRC_ASM = $(addprefix $(SRC_DIR_ASM)/,$(SRC_RAW_ASM))
 
 OBJ_DIR = obj
