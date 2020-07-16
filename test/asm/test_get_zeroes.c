@@ -12,5 +12,6 @@ void tearDown(void)
 
 void test_three_zeroes(void)
 {
+    TEST_IGNORE();
     TEST_ASSERT_EQUAL_MEMORY("\x00\x00\x00", get_zeroes(3), 3);
 }

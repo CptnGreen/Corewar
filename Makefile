@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re libftprintf norm asm
+.PHONY: all clean fclean re libftprintf norm asm test
 
 CC = clang
 CFLAGS = -Wall -Werror -Wextra
@@ -21,9 +21,10 @@ EXEC_ASM = asm.out
 
 SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
-	  get_byte_code.c \
-	  get_magic_header.c \
-	  get_name.c
+		get_magic_header.c \
+		chars_to_bytes.c \
+		get_zeroes.c \
+		get_byte_code.c
 SRC_ASM = $(addprefix $(SRC_DIR_ASM)/,$(SRC_RAW_ASM))
 
 OBJ_DIR = obj
@@ -71,3 +72,5 @@ norm: fclean
 	@ make -C ft_printf/ norm
 	@ make -C ft_printf/libft/ norm
 	@ norminette includes/ src/
+test: all
+	@ ceedling

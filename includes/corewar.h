@@ -7,9 +7,9 @@
 ** Assembly part
 */
 
-char	*get_byte_code(char const *asm_code);
 char	*get_magic_header(void);
-char	*get_name(char const *name);
+char	*chars_to_bytes(char const *str);
 char	*get_zeroes(unsigned int n_zeroes);
+char	*get_byte_code(char const *asm_code);
 
 #endif
