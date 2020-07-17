@@ -30,12 +30,11 @@ sudo apt-get install ruby
 
 # для Arch:
 sudo pacman -Syu ruby
-#+END_SRC
 
-- Установить =ceedling= (как =gem=):
-
-#+BEGIN_SRC bash
-sudo gem install ceedling
+# для macOS:
+brew install ruby
+# если в системе уже установлена другая версия =ruby=, нужно запустить следующую команду и перезапустить терминал
+brew link --overwrite ruby
 #+END_SRC
 
 - При необходимости добавить =ruby= в =PATH= (понадобилось в =Arch=; в вашем случае версия =ruby= может отличаться!):
@@ -45,6 +44,14 @@ export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
 #+END_SRC
 
   Чтобы добавить перманентно, прописываем данную команду в конец =~/.bashrc= и делаем =source ~/.bashrc=.
+
+- Установить =ceedling= (как =gem=):
+
+#+BEGIN_SRC bash
+sudo gem install ceedling
+#+END_SRC
+
+- При необходимости добавить =ceedling= в =PATH= выше упомянутым способом. Путь к =ceedling= может отличаться. Пример одного из возможных вариантов на macOS - =/usr/local/lib/ruby/gems/2.7.0/gems/ceedling-0.30.0/bin=
 
 После этого шага из корня проекта запускаем =ceedling= без аргументов, и система прогоняет тесты. Не забудьте предварительно скомпилировать библиотеки проекта (с помощью =make -C ft_printf=), иначе будет ошибка.
 
