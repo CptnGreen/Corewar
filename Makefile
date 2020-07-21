@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slisandr <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/02/26 12:34:10 by slisandr         ###   ########.fr        #
+#    Updated: 2020/07/21 20:05:22 by aimelda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,25 +20,22 @@ CFLAGS = -Wall -Werror -Wextra
 EXEC_ASM = asm.out
 
 SRC_DIR_ASM = src/asm
-SRC_RAW_ASM = \
-		get_magic_header.c \
-		chars_to_bytes.c \
-		get_zeroes.c \
-		get_byte_code.c
+SRC_RAW_ASM =	main.c				\
+				get_magic_header.c 	\
+				chars_to_bytes.c	\
+				get_zeroes.c		\
+				get_byte_code.c
 SRC_ASM = $(addprefix $(SRC_DIR_ASM)/,$(SRC_RAW_ASM))
 
 OBJ_DIR = obj
 OBJ_ASM = $(addprefix $(OBJ_DIR)/,$(SRC_RAW_ASM:.c=.o))
-
-MAIN_RAW_ASM = main.c
-MAIN_ASM = $(addprefix $(SRC_DIR_ASM)/,$(MAIN_RAW_ASM))
 
 # --------------- ASSEMBLER: COMPILATION --------------------
 
 all: asm
 
 asm: libftprintf $(OBJ_DIR) $(OBJ_ASM)
-	$(CC) $(CFLAGS) -o $(EXEC_ASM) $(OBJ_ASM) $(MAIN_ASM) \
+	$(CC) $(CFLAGS) -o $(EXEC_ASM) $(OBJ_ASM) \
 		-I "includes/" \
 		-I "ft_printf/includes/" \
 		-I "ft_printf/libft/includes/" \
