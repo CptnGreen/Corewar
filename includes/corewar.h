@@ -8,18 +8,17 @@
 ** Assembly part
 */
 
-typedef struct	s_bot
-{
-    unsigned char	bot_name[PROG_NAME_LENGTH + 1];
+typedef struct		s_bot{
+	unsigned char	bot_name[PROG_NAME_LENGTH + 1];
 	unsigned char	comment[COMMENT_LENGTH + 1];
-    unsigned int	exec_size;
-    unsigned char	exec_code[CHAMP_MAX_SIZE + 1];
-}				t_bot;
-
+	unsigned int	exec_size;
+	unsigned char	exec_code[CHAMP_MAX_SIZE + 1];
+}					t_bot;
 
 char	*get_magic_header(void);
 char	*chars_to_bytes(char const *str);
 char	*get_zeroes(unsigned int n_zeroes);
 char	*get_byte_code(char const *asm_code);
+int		get_name_and_comment(char *src, char *dst, size_t max_len);
 
 #endif
