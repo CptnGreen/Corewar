@@ -4,19 +4,17 @@
 # include "libftprintf.h"
 # include "op.h"
 
-# define MAGIC
-
 /*
 ** Assembly part
 */
 
-typedef struct  s_bot
+typedef struct	s_bot
 {
-    unsigned int	magic;
-    char            prog_name[PROG_NAME_LENGTH + 1];
-    unsigned int	prog_size;
-    char            comment[COMMENT_LENGTH + 1];
-}               t_bot;
+    unsigned char	bot_name[PROG_NAME_LENGTH + 1];
+	unsigned char	comment[COMMENT_LENGTH + 1];
+    unsigned int	exec_size;
+    unsigned char	exec_code[CHAMP_MAX_SIZE + 1];
+}				t_bot;
 
 
 char	*get_magic_header(void);
