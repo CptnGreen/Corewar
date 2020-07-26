@@ -24,7 +24,7 @@ void test_only_name(void)
     get_next_line(fd, &line);
     bot = init_bot();
     get_name_and_comment(bot, line, fd);
-    TEST_ASSERT_EQUAL_STRING("ololo", bot->name);
+    TEST_ASSERT_EQUAL_STRING("Sauce\nLisandra", bot->name);
     TEST_ASSERT_EQUAL_STRING("ururu", bot->comment);
     close(fd);
 }
