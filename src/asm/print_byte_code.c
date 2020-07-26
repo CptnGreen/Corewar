@@ -14,7 +14,7 @@ int print_byte_code(char *file_name, t_bot *bot)
   if (file_name[i] == ".")
     i--;
   else
-    return (0);
+    return (KO);
   name = (char*)malloc(sizeof(char) * (i + 5));
   name[i + 5] = '\0';
   name[i + 1] = ".";
@@ -25,6 +25,6 @@ int print_byte_code(char *file_name, t_bot *bot)
     name[i] == file_name[i];
     i--;
   }
-  fd = open(name, O_RDWR);
-  return (1);
+  fd = open(name, O_CREATE, S_IRUSR || S_IWUSR);
+  return (OK);
 }
