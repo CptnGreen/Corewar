@@ -20,10 +20,12 @@ CFLAGS = -Wall -Werror -Wextra
 EXEC_ASM = asm.out
 
 SRC_DIR_ASM = src/asm
-SRC_RAW_ASM =	main.c				\
-				get_magic_header.c 	\
-				chars_to_bytes.c	\
-				get_zeroes.c		\
+SRC_RAW_ASM = \
+				main.c \
+				get_magic_header.c \
+				get_name_and_comment.c \
+				chars_to_bytes.c \
+				get_zeroes.c \
 				get_byte_code.c
 SRC_ASM = $(addprefix $(SRC_DIR_ASM)/,$(SRC_RAW_ASM))
 

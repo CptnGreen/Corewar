@@ -18,6 +18,25 @@ git clone git@github.com:CptnGreen/Corewar.git --recursive
 git checkout -b concise-feature-branch-name
 #+END_SRC
 
+Находясь в своей ветке, можно смело делать коммиты:
+
+#+BEGIN_SRC bash
+git commit -m "some nice comment"
+#+END_SRC
+
+После того, как работа с веткой завершена (фича реализована), нужно прогнать тесты (см. ниже) и запушить ветку на =gihub=:
+
+#+BEGIN_SRC bash
+git push -u origin concise-feature-branch-name
+#+END_SRC
+
+Чтобы вернуться в =master= нужно выполнить следующую команду:
+
+#+BEGIN_SRC bash
+git checkout master
+#+END_SRC
+
+
 *** Unit-tests
 
 Проект настроен (скоро будет, нужно обкатать) на работу с unit-тестами через фреймворк [[https://github.com/ThrowTheSwitch/Ceedling/blob/master/docs/CeedlingPacket.md][ceedling]].
