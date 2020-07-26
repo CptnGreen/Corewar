@@ -1,4 +1,8 @@
-%compile_commands.json
+clang
 -I/var/lib/gems/2.7.0/gems/ceedling-0.30.0/vendor/unity/src
 -Itest/includes/asm
--Itest/asm
+-Ift_printf/libft/includes
+-Ift_printf/includes
+-Iincludes
+-Lft_printf
+-Lft_printf/libft

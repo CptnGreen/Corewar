@@ -1,24 +1,35 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include "libftprintf.h"
 # include "op.h"
+# include "libftprintf.h"
+
+/*
+** Useful defines:
+*/
+
+# define OK 1
+# define KO 0
 
 /*
 ** Assembly part
 */
 
 typedef struct		s_bot{
-	unsigned char	bot_name[PROG_NAME_LENGTH + 1];
-	unsigned char	comment[COMMENT_LENGTH + 1];
-	unsigned int	exec_size;
-	unsigned char	exec_code[CHAMP_MAX_SIZE + 1];
+	char			name[PROG_NAME_LENGTH + 1];
+	char			comment[COMMENT_LENGTH + 1];
+	size_t			exec_code_size;
+	char			exec_code[CHAMP_MAX_SIZE + 1];
 }					t_bot;
 
-char	*get_magic_header(void);
+t_bot	*init_bot(void);
+
 char	*chars_to_bytes(char const *str);
-char	*get_zeroes(unsigned int n_zeroes);
 char	*get_byte_code(char const *asm_code);
-int		get_name_and_comment(char *src, char *dst, size_t max_len);
+
+char	*get_magic_header(void);
+
+char	*get_name_or_comment(char *field, char *line, size_t fd);
+int		get_name_and_comment(t_bot *bot, char *line, size_t fd);
 
 #endif
