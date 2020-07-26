@@ -26,6 +26,7 @@ t_bot	*init_bot(void);
 
 char	*chars_to_bytes(char const *str);
 char	*get_byte_code(char const *asm_code);
+int   print_byte_code(char *file_name, t_bot *bot);
 
 char	*get_magic_header(void);
 
