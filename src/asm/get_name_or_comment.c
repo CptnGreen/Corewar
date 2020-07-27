@@ -16,9 +16,9 @@
 ** TODO: fix leaks
 */
 
-int		get_name_or_comment(char *field, char *line, size_t fd)
+int		get_name_or_comment(char *field, size_t max_len, char *line, size_t fd)
 {
-	int		l;
+	size_t		l;
 
 	if (!(line = ft_strchr(line, '"')))
 		return (KO);
@@ -30,12 +30,12 @@ int		get_name_or_comment(char *field, char *line, size_t fd)
 			line = ft_strtrim(line);
 			l = ft_strlen(line);
 			line[l - 1] = '\0';
-			if (ft_strlen(field) + (l - 1) > PROG_NAME_LENGTH)
+			if (ft_strlen(field) + (l - 1) > max_len)
 				return (KO);
 			ft_strcat(field, line);
 			break ;
 		}
-		if (ft_strlen(field) + (ft_strlen(line) + 1) > PROG_NAME_LENGTH)
+		if (ft_strlen(field) + (ft_strlen(line) + 1) > max_len)
 			return (KO);
 		ft_strcat(field, line);
 		field[ft_strlen(field)] = '\n';

@@ -18,7 +18,7 @@ void test_name_oneline(void)
     char	line[] = ".name\t\"ololo\"";
 
     bot = init_bot();
-    TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, line, 0));
+    TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, 0));
     TEST_ASSERT_EQUAL_STRING("ololo", bot->name);
     TEST_ASSERT_EQUAL_STRING("", bot->comment);
 }
@@ -29,7 +29,7 @@ void test_comment_oneline(void)
     char	line[] = ".comment\t\"ururu\"";
 
     bot = init_bot();
-    TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->comment, line, 0));
+    TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->comment, COMMENT_LENGTH, line, 0));
     TEST_ASSERT_EQUAL_STRING("ururu", bot->comment);
     TEST_ASSERT_EQUAL_STRING("", bot->name);
 }
@@ -45,7 +45,7 @@ void test_name_multiline(void)
     lseek(fd, 0, SEEK_SET);
     get_next_line(fd, &line);
     bot = init_bot();
-    TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, line, fd));
+    TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, fd));
     TEST_ASSERT_EQUAL_STRING("Sauce\nLisandra", bot->name);
     TEST_ASSERT_EQUAL_STRING("", bot->comment);
     ft_strdel(&line);
@@ -63,7 +63,7 @@ void test_name_too_ololong(void)
     char	line[] = ".name\t\"ololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololo\"";
 
     bot = init_bot();
-    TEST_ASSERT_EQUAL_INT(KO, get_name_or_comment(bot->name, line, 0));
+    TEST_ASSERT_EQUAL_INT(KO, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, 0));
     TEST_ASSERT_EQUAL_STRING("", bot->name);
     TEST_ASSERT_EQUAL_STRING("", bot->comment);
 }
@@ -85,7 +85,7 @@ void test_name_too_ololong_multiline(void)
     lseek(fd, 0, SEEK_SET);
     get_next_line(fd, &line);
     bot = init_bot();
-    TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, line, fd));
+    TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, fd));
     TEST_ASSERT_EQUAL_STRING("ololololo\nlolololololololololololo\nlolololololololololololololololololololololololololololololololololololo\nlololololololo\nlolol", bot->name);
     TEST_ASSERT_EQUAL_STRING("", bot->comment);
     ft_strdel(&line);
