@@ -10,8 +10,21 @@ void tearDown(void)
 {
 }
 
-void test_print_byte_code_NeedToImplement(void)
+void test_print_byte_code_valid(void)
 {
   TEST_ASSERT_EQUAL_INT(OK, print_byte_code("test.s", NULL));
-  //TEST_IGNORE_MESSAGE("Need to Implement print_byte_code");
+}
+
+void test_print_byte_code_invalid(void)
+{
+  TEST_ASSERT_EQUAL_INT(KO, print_byte_code("test.v", NULL));
+  TEST_ASSERT_EQUAL_INT(KO, print_byte_code("test.", NULL));
+  TEST_ASSERT_EQUAL_INT(KO, print_byte_code("test", NULL));
+  TEST_ASSERT_EQUAL_INT(KO, print_byte_code("t.es.t", NULL));
+  TEST_ASSERT_EQUAL_INT(KO, print_byte_code("te.s.st", NULL));
+  TEST_ASSERT_EQUAL_INT(KO, print_byte_code("te.s.st.cor", NULL));
+}
+
+void test_print_byte_code_NeedToImplement_3(void)
+{
 }
