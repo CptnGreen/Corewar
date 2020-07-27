@@ -2,6 +2,9 @@
 #include "corewar.h"
 #include "print_byte_code.h"
 
+TEST_FILE("check_extension.c")
+TEST_FILE("create_and_open_file_cor.c")
+
 void setUp(void)
 {
 }
