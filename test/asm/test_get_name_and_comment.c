@@ -13,18 +13,19 @@ void tearDown(void)
 {
 }
 
-void test_only_name(void)
+void test_only_name_multiline(void)
 {
     size_t	fd;
     t_bot	*bot;
     char	*line;
 
-    fd = open("test/asm/bot_test_valid.s", O_RDONLY);
-    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
+    fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    ft_putstr_fd(".name\t\"Sauce\nLisandra\"\n", fd);
+    lseek(fd, 0, SEEK_SET);
     get_next_line(fd, &line);
     bot = init_bot();
-    get_name_and_comment(bot, line, fd);
-    TEST_ASSERT_EQUAL_STRING("Sauce\nLisandra", bot->name);
-    TEST_ASSERT_EQUAL_STRING("ururu", bot->comment);
+    TEST_ASSERT_EQUAL_INT(KO, get_name_and_comment(bot, line, fd));
+    ft_strdel(&line);
     close(fd);
+    remove("test/asm/bot_test.s");
 }
