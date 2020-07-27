@@ -19,7 +19,7 @@ void test_only_name(void)
     t_bot	*bot;
     char	*line;
 
-    fd = open("test/asm/bot_test1.s", O_RDONLY);
+    fd = open("test/asm/bot_test_valid.s", O_RDONLY);
     TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     get_next_line(fd, &line);
     bot = init_bot();

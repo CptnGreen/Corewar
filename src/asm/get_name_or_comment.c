@@ -16,23 +16,30 @@
 ** TODO: fix leaks
 */
 
-char	*get_name_or_comment(char *field, char *line, size_t fd)
+int		get_name_or_comment(char *field, char *line, size_t fd)
 {
-	char	*ptr;
+	int		l;
 
-	line = ft_strchr(line, '"') + 1;
+	if (!(line = ft_strchr(line, '"')))
+		return (KO);
+	line += 1;
 	while (1)
 	{
-		if ((ptr = ft_strrchr(line, '"')))
+		if ((ft_strrchr(line, '"')))
 		{
 			line = ft_strtrim(line);
-			line[ft_strlen(line) - 1] = '\0';
-			ft_strcat(field, ft_strtrim(line));
+			l = ft_strlen(line);
+			line[l - 1] = '\0';
+			if (ft_strlen(field) + (l - 1) > PROG_NAME_LENGTH)
+				return (KO);
+			ft_strcat(field, line);
 			break ;
 		}
-		ft_strcat(field, ft_strtrim(line));
+		if (ft_strlen(field) + (ft_strlen(line) + 1) > PROG_NAME_LENGTH)
+			return (KO);
+		ft_strcat(field, line);
 		field[ft_strlen(field)] = '\n';
 		get_next_line(fd, &line);
 	}
-	return (0);
+	return (OK);
 }
