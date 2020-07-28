@@ -25,6 +25,8 @@ void test_print_byte_code_valid(void)
   bot = init_bot();
   ft_strcat(bot->name, "Batman");
   bot->exec_code_size = 0;
+  ft_strcat(bot->comment, "This city needs me");
+  ft_strcat(bot->exec_code, "\x0b\x68");
   TEST_ASSERT_EQUAL_INT(OK, print_byte_code("test.s", bot));
 }
 
