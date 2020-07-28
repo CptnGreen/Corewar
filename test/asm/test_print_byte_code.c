@@ -6,7 +6,9 @@ TEST_FILE("check_extension.c")
 TEST_FILE("create_and_open_file_cor.c")
 TEST_FILE("get_magic_header.c")
 TEST_FILE("init_bot.c")
-TEST_FILE("ft_strcat.c")
+TEST_FILE("put_in_cor_magic_header_and_botName.c")
+TEST_FILE("ft_putnbr_fd.c")
+TEST_FILE("put_exec_codeSize_in_cor.c")
 
 void setUp(void)
 {
@@ -22,6 +24,7 @@ void test_print_byte_code_valid(void)
 
   bot = init_bot();
   ft_strcat(bot->name, "Batman");
+  bot->exec_code_size = 0;
   TEST_ASSERT_EQUAL_INT(OK, print_byte_code("test.s", bot));
 }
 

@@ -6,24 +6,15 @@ int		print_byte_code(char *file_name, t_bot *bot)
 	int   i;
 	char  *name;
 
-	//check file
 	i = check_extension(file_name);
-		//create and open file
 	if ((i = check_extension(file_name)) == -2)
 		return (KO);
-	//create and open file
 	if ((fd = create_and_open_file_cor(i, name, file_name)) == -1)
 		return (KO);
-	//etc
-    lseek(fd, 0, SEEK_END);
-    ft_putstr_fd(get_magic_header(), fd);
-    ft_putstr_fd(bot->name, fd);
-	i = PROG_NAME_LENGTH - ft_strlen(bot->name) + 4;
-	while (i >= 0)
-	{
-		ft_putchar_fd('\0', fd);
-		i--;
-	}
-	close(fd);
+	put_in_cor_magic_header_and_botName(fd, bot);
+	i = put_exec_codeSize_in_cor(bot, fd); //needs to be checked
+	if (i == KO)
+		return (KO);
+	close(fd);//move in func that call print_byte_code
 	return (OK);
 }

@@ -30,6 +30,9 @@ char	*get_byte_code(char const *asm_code);
 int		print_byte_code(char *file_name, t_bot *bot);
 int		check_extension(char *file_name);
 int		create_and_open_file_cor(int i, char *name, char *file_name);
+void  put_in_cor_magic_header_and_botName(int fd, t_bot *bot);
+int   put_exec_codeSize_in_cor(t_bot *bot, int fd);
+
 
 char	*get_magic_header(void);
 
