@@ -15,7 +15,7 @@ void tearDown(void)
 void test_name_oneline(void)
 {
     t_bot	*bot;
-    char	line[] = ".name\t\"ololo\"";
+    char	line[] = "\"ololo\"";
 
     bot = init_bot();
     TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, 0));
@@ -26,7 +26,7 @@ void test_name_oneline(void)
 void test_comment_oneline(void)
 {
     t_bot	*bot;
-    char	line[] = ".comment\t\"ururu\"";
+    char	line[] = "\"ururu\"";
 
     bot = init_bot();
     TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->comment, COMMENT_LENGTH, line, 0));
@@ -41,7 +41,7 @@ void test_name_multiline(void)
     char	*line;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-    ft_putstr_fd(".name\t\"Sauce\nLisandra\"\n", fd);
+    ft_putstr_fd("\"Sauce\nLisandra\"\n", fd);
     lseek(fd, 0, SEEK_SET);
     get_next_line(fd, &line);
     bot = init_bot();
@@ -60,7 +60,7 @@ void test_name_multiline(void)
 void test_name_too_ololong(void)
 {
     t_bot	*bot;
-    char	line[] = ".name\t\"ololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololo\"";
+    char	line[] = "\"ololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololololo\"";
 
     bot = init_bot();
     TEST_ASSERT_EQUAL_INT(KO, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, 0));
@@ -81,7 +81,7 @@ void test_name_too_ololong_multiline(void)
     ** hence you get 132 - 4 = 128 real symbols (including newlines)
     ** so function mast return OK
     */
-    ft_putstr_fd(".name\t\"ololololo\nlolololololololololololo\nlolololololololololololololololololololololololololololololololololololo\nlololololololo\nlolol\"", fd);
+    ft_putstr_fd("\"ololololo\nlolololololololololololo\nlolololololololololololololololololololololololololololololololololololo\nlololololololo\nlolol\"", fd);
     lseek(fd, 0, SEEK_SET);
     get_next_line(fd, &line);
     bot = init_bot();

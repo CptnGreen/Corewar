@@ -13,6 +13,59 @@ void tearDown(void)
 {
 }
 
+void test_valid_name_oneline_comment_oneline(void)
+{
+    size_t	fd;
+    t_bot	*bot;
+    char	*line;
+
+    fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    ft_putstr_fd(".name\t\"Sauce\"\n.comment\t\"Lisandra\"\nSOME TEXT\n", fd);
+    lseek(fd, 0, SEEK_SET);
+    get_next_line(fd, &line);
+    bot = init_bot();
+    TEST_ASSERT_EQUAL_INT(OK, get_name_and_comment(bot, line, fd));
+    TEST_ASSERT_EQUAL_STRING("Sauce", bot->name);
+    TEST_ASSERT_EQUAL_STRING("Lisandra", bot->comment);
+    ft_strdel(&line);
+    close(fd);
+    remove("test/asm/bot_test.s");
+}
+
+void test_name_garbage_after(void)
+{
+    size_t	fd;
+    t_bot	*bot;
+    char	*line;
+
+    fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    ft_putstr_fd(".name\t\"Sauce\" GARBAGE\n.comment\t\"Lisandra\"\nSOME TEXT\n", fd);
+    lseek(fd, 0, SEEK_SET);
+    get_next_line(fd, &line);
+    bot = init_bot();
+    TEST_ASSERT_EQUAL_INT(KO, get_name_and_comment(bot, line, fd));
+    ft_strdel(&line);
+    close(fd);
+    remove("test/asm/bot_test.s");
+}
+
+void test_name_garbage_between(void)
+{
+    size_t	fd;
+    t_bot	*bot;
+    char	*line;
+
+    fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    ft_putstr_fd(".name\tGARBAGE\t\"Sauce\"\n.comment\t\"Lisandra\"\nSOME TEXT\n", fd);
+    lseek(fd, 0, SEEK_SET);
+    get_next_line(fd, &line);
+    bot = init_bot();
+    TEST_ASSERT_EQUAL_INT(KO, get_name_and_comment(bot, line, fd));
+    ft_strdel(&line);
+    close(fd);
+    remove("test/asm/bot_test.s");
+}
+
 void test_only_name_multiline(void)
 {
     size_t	fd;
