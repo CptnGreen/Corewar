@@ -5,7 +5,7 @@
 ** It is included as a separate module in order to be easily
 ** tested.
 **
-** It is supposed to receive line containg starting with quotation mark.
+** It is supposed to receive line starting with quotation mark.
 **
 ** Purpose of this function is to fill bot->name or bot->comment
 ** depending on the contents of the received line.
