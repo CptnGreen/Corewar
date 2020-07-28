@@ -8,11 +8,11 @@ int		print_byte_code(char *file_name, t_bot *bot)
 
 	//check file
 	i = check_extension(file_name);
-	if (i == -2)
+		//create and open file
+	if ((i = check_extension(file_name)) == -2)
 		return (KO);
 	//create and open file
-	fd = create_and_open_file_cor(i, name, file_name);
-	if (fd == -1)
+	if ((fd = create_and_open_file_cor(i, name, file_name)) == -1)
 		return (KO);
 	//etc
     lseek(fd, 0, SEEK_END);
