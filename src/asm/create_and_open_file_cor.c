@@ -14,6 +14,6 @@ int   create_and_open_file_cor(int i, char *name, char *file_name)
         name[i] = file_name[i];
         i--;
     }
-    fd = open(name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    fd = open(name, O_RDWR | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
     return (fd);
 }
