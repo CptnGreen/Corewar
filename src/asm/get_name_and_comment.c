@@ -1,7 +1,19 @@
 #include "corewar.h"
 
 /*
-** TODO: write concise comment here
+** This one is called from main()
+**
+** Purpose of this function is to fill BOTH name and comment
+** fields in bot structure, or shoot error if:
+** - there is no name or no comment
+** - there is more than just one name or comment
+** - there is nothing after name and comment lines
+** - get_next_line() returns (-1)
+**
+** This function DOESN'T read the next line after it
+** finds the last quotation mark!
+**
+**  TODO: add more tests?
 */
 
 int		get_name_and_comment(t_bot *bot, char *line, size_t fd)

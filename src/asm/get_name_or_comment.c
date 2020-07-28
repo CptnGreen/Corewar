@@ -11,7 +11,7 @@
 ** Purpose of this function is to fill bot->name or bot->comment
 ** depending on the contents of the received line.
 **
-** TODO: add more elaborate tests!
+** TODO: add more tests!
 **
 ** TODO: fix leaks
 */
