@@ -1,6 +1,7 @@
 .ccls-cache
 build
 asm.out
+valgrind-out.txt
 
 # Prerequisites
 *.d

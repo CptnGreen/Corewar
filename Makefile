@@ -23,9 +23,8 @@ SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
 				main.c \
 				get_magic_header.c \
+				get_name_or_comment.c \
 				get_name_and_comment.c \
-				chars_to_bytes.c \
-				get_zeroes.c \
 				get_byte_code.c
 SRC_ASM = $(addprefix $(SRC_DIR_ASM)/,$(SRC_RAW_ASM))
 
@@ -73,3 +72,6 @@ norm: fclean
 	@ norminette includes/ src/
 test: all
 	@ ceedling
+memcheck: asm
+	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./$(EXEC_ASM)
+	@ vim valgrind-out.txt
