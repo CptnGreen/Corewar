@@ -23,6 +23,7 @@ typedef struct		s_bot{
 }					t_bot;
 
 t_bot	*init_bot(void);
+int		destroy_bot(t_bot *bot);
 
 char	*chars_to_bytes(char const *str);
 char	*get_byte_code(char const *asm_code);
@@ -30,6 +31,6 @@ char	*get_byte_code(char const *asm_code);
 char	*get_magic_header(void);
 
 int		get_name_or_comment(char *field, size_t max_len, char *line, size_t fd);
-int		get_name_and_comment(t_bot *bot, char *line, size_t fd);
+int		get_name_and_comment(t_bot *bot, size_t fd);
 
 #endif
