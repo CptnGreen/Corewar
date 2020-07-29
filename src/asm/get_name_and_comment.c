@@ -12,6 +12,9 @@
 
 #include "corewar.h"
 
+#define NAME 0
+#define COMMENT 1
+
 /*
 ** Simpler version of ft_strtrim() which trims only the front
 ** part of the line but not the back one.
@@ -47,6 +50,33 @@ char	*skip_to_actual_data(size_t fd)
 	return (NULL);
 }
 
+int		read_data(t_bot *bot, char *line, int *found, size_t fd)
+{
+	if (!ft_strncmp(line, ".name", 5))
+	{
+		if (!(get_name_or_comment(\
+				bot->name,\
+				PROG_NAME_LENGTH,\
+				skip_whitespaces(line + 5),\
+				fd)))
+			return (KO);
+		found[NAME] += 1;
+		return (OK);
+	}
+	else if (!ft_strncmp(line, ".comment", 8))
+	{
+		if (!(get_name_or_comment(\
+				bot->comment,\
+				COMMENT_LENGTH,\
+				skip_whitespaces(line + 8),\
+				fd)))
+			return (KO);
+		found[COMMENT] += 1;
+		return (OK);
+	}
+	return (KO);
+}
+
 /*
 ** This one is called from main()
 **
@@ -70,27 +100,19 @@ char	*skip_to_actual_data(size_t fd)
 
 int		get_name_and_comment(t_bot *bot, size_t fd)
 {
-	int		found_name;
-	int		found_comment;
+	int		found[2];
 	char	*line;
 
 	if (!bot)
 		return (KO);
-	found_name = 0;
-	found_comment = 0;
-	while (!found_name || !found_comment)
+	found[NAME] = 0;
+	found[COMMENT] = 0;
+	while (found[NAME] < 1 || found[COMMENT] < 1)
 	{
-		if (!(line = skip_to_actual_data(fd)))
-			break ;
-		if (!ft_strncmp(line, ".name", 5) && get_name_or_comment(\
-				bot->name, PROG_NAME_LENGTH, skip_whitespaces(line + 5), fd))
-			found_name += 1;
-		else if (!ft_strncmp(line, ".comment", 8) && get_name_or_comment(\
-				bot->comment, COMMENT_LENGTH, skip_whitespaces(line + 8), fd))
-			found_comment += 1;
-		if (found_name > 1 || found_comment > 1)
+		if (!(line = skip_to_actual_data(fd)) || \
+			!read_data(bot, line, found, fd))
 			break ;
 	}
 	ft_strdel(&line);
-	return ((found_name == 1 && found_comment == 1) ? OK : KO);
+	return ((found[NAME] == 1 && found[COMMENT] == 1) ? OK : KO);
 }
