@@ -11,10 +11,9 @@ int	main(int ac, char **av)
 		return(KO);
 	while (++i != ac)
 	{
-
 		if (!(check_extension(av[i])))
 			continue;
-		fd = open(av[i],O_RDONLY);
+		fd = open(av[i], O_RDONLY);
 		if (fd < 0)
 			return(KO);
 		if ((!(get_name_and_comment(bot,fd))))
