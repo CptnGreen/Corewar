@@ -19,13 +19,23 @@
 # define T_REG_OR_T_IND 5
 # define T_DIR_OR_T_IND 6
 # define T_REG_OR_T_DIR_OR_T_IND 7
+# define INSTRUCTION_MAX_SIZE 14
 
-typedef struct		s_bot{
-	char			name[PROG_NAME_LENGTH + 1];
-	char			comment[COMMENT_LENGTH + 1];
-	size_t			exec_code_size;
-	char			exec_code[CHAMP_MAX_SIZE + 1];
-}					t_bot;
+typedef struct	s_bot
+{
+	char	name[PROG_NAME_LENGTH + 1];
+	char	comment[COMMENT_LENGTH + 1];
+	long	exec_code_size;
+	char	exec_code[CHAMP_MAX_SIZE + INSTRUCTION_MAX_SIZE];
+}				t_bot;
+
+typedef struct	s_label
+{
+	char	*name;
+	long	addr;
+	t_list	*queue;
+}				t_label;
+
 
 t_bot	*init_bot(void);
 

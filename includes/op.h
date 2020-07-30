@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/07/28 17:48:47 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/07/30 10:51:43 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct	s_op
 }				t_op;
 
 
-t_op    g_op_tab[17] =
+t_op    *g_op_tab[17] =
 {
 	{"live", 4, 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, 2, {T_DIR + T_IND, T_REG}, 2, 5, "load", 1, 0},
