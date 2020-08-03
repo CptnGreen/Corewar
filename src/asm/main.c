@@ -6,12 +6,11 @@
 /*   By: rfrieda <rfrieda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 15:59:50 by rfrieda           #+#    #+#             */
-/*   Updated: 2020/08/03 15:59:58 by rfrieda          ###   ########.fr       */
+/*   Updated: 2020/08/03 16:02:03 by rfrieda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 
 int	main(int ac, char **av)
 {
