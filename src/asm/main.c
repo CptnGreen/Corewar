@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	int		fd;
 
 	i = 0;
-	if (!bot = init_bot())
+	if (!(bot = init_bot()))
 		return (KO);
 	while (++i != ac)
 	{
