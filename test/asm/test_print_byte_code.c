@@ -6,9 +6,9 @@ TEST_FILE("check_extension.c")
 TEST_FILE("create_and_open_file_cor.c")
 TEST_FILE("get_magic_header.c")
 TEST_FILE("init_bot.c")
-TEST_FILE("put_in_cor_magic_header_and_botName.c")
+TEST_FILE("put_in_cor_magic_header_and_bot_name.c")
 TEST_FILE("ft_putnbr_fd.c")
-TEST_FILE("put_exec_codeSize_in_cor.c")
+TEST_FILE("put_exec_code_size_in_cor.c")
 
 void setUp(void)
 {
