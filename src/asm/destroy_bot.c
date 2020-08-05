@@ -8,11 +8,11 @@
 
 int	destroy_bot(t_bot *bot)
 {
-    if (bot)
-    {
-        free(bot);
-        bot = NULL;
-        return (OK);
-    }
-    return (KO);
+	if (bot)
+	{
+		free(bot);
+		bot = NULL;
+		return (OK);
+	}
+	return (KO);
 }

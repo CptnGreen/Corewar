@@ -67,9 +67,7 @@ fclean: clean
 re: fclean all
 
 norm: fclean
-	@ make -C ft_printf/ norm
-	@ make -C ft_printf/libft/ norm
-	@ norminette includes/ src/
+	@ norminette includes/corewar.h src/asm
 test: all
 	@ ceedling
 memcheck: asm

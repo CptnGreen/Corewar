@@ -1,10 +1,10 @@
 #include "corewar.h"
 
-int  check_extension(char *file_name)
+int		check_extension(char *file_name)
 {
-  int   i;
+	int	i;
 
-  i = ft_strlen(file_name);
+	i = ft_strlen(file_name);
 	i--;
 	if (file_name[i] == 's')
 		i--;
@@ -14,5 +14,5 @@ int  check_extension(char *file_name)
 		i--;
 	else
 		return (-2);
-  return (i);
+	return (i);
 }
