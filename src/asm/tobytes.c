@@ -27,5 +27,5 @@ void	tobytes(char *dest, int nbr, char size)
 		nbr_bytes = (char*)&short_nbr;
 	}
 	while (size--)
-		*dest++ = nbr_bytes[size];
+		*dest++ = nbr_bytes[(int)size];
 }

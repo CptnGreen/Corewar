@@ -30,10 +30,10 @@ int			main(int ac, char **av)
 			continue ;
 		if (!get_name_and_comment(bot, fd))
 			continue ;
-		if (!get_exec_code())
+		if (!get_exec_code(bot, fd))
 			continue ;
 		close(fd);
-		if (!print_byte_code(fd, bot))
+		if (!print_byte_code(av[i], bot))
 			continue ;
 	}
 	free(bot);

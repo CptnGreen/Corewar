@@ -3,6 +3,7 @@
 #include "get_name_and_comment.h"
 
 TEST_FILE("init_bot.c")
+TEST_FILE("skip_whitespaces.c")
 TEST_FILE("get_name_or_comment.c")
 
 void setUp(void)

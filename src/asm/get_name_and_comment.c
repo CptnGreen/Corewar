@@ -16,21 +16,6 @@
 #define COMMENT 1
 
 /*
-** Simpler version of ft_strtrim() which trims only the front
-** part of the line but not the back one.
-*/
-
-char	*skip_whitespaces(char *line)
-{
-	int		i;
-
-	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i += 1;
-	return (line + i);
-}
-
-/*
 ** This function skips
 ** - comments
 ** - empty lines
@@ -43,7 +28,7 @@ char	*skip_to_actual_data(size_t fd)
 
 	while (get_next_line(fd, &line))
 	{
-		line = skip_whitespaces(line);
+		skip_whitespaces(&line);
 		if (line[0] != '#' && line[0] != ';' && line[0] != '\0')
 			return (line);
 	}
@@ -54,10 +39,12 @@ int		read_data(t_bot *bot, char *line, int *found, size_t fd)
 {
 	if (!ft_strncmp(line, ".name", 5))
 	{
+		line += 5;
+		skip_whitespaces(&line);
 		if (!(get_name_or_comment(\
 				bot->name,\
 				PROG_NAME_LENGTH,\
-				skip_whitespaces(line + 5),\
+				line,
 				fd)))
 			return (KO);
 		found[NAME] += 1;
@@ -65,10 +52,12 @@ int		read_data(t_bot *bot, char *line, int *found, size_t fd)
 	}
 	else if (!ft_strncmp(line, ".comment", 8))
 	{
+		line += 8;
+		skip_whitespaces(&line);
 		if (!(get_name_or_comment(\
 				bot->comment,\
 				COMMENT_LENGTH,\
-				skip_whitespaces(line + 8),\
+				line,
 				fd)))
 			return (KO);
 		found[COMMENT] += 1;

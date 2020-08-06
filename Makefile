@@ -21,11 +21,25 @@ EXEC_ASM = asm.out
 
 SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
-				main.c \
-				get_magic_header.c \
-				get_name_or_comment.c \
-				get_name_and_comment.c \
-				get_byte_code.c
+		main.c \
+		init_bot.c \
+		get_byte_code.c \
+		print_byte_code.c \
+		check_extension.c \
+		create_and_open_file_cor.c \
+		put_in_cor_magic_header_and_bot_name.c \
+		put_exec_code_size_in_cor.c \
+		get_magic_header.c \
+		get_name_or_comment.c \
+		get_name_and_comment.c \
+		get_exec_code.c \
+		get_instruction.c \
+		new_label.c \
+		tobytes.c \
+		skip_whitespaces.c \
+		get_number.c \
+		op.c
+
 SRC_ASM = $(addprefix $(SRC_DIR_ASM)/,$(SRC_RAW_ASM))
 
 OBJ_DIR = obj

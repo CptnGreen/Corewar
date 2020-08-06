@@ -4,10 +4,10 @@
 
 TEST_FILE("init_bot.c")
 TEST_FILE("get_instruction.c")
-TEST_FILE("get_bytes_from_number.c")
+TEST_FILE("tobytes.c")
 TEST_FILE("skip_whitespaces.c")
 TEST_FILE("new_label.c")
-TEST_FILE("atoi_for_asm.c")
+TEST_FILE("get_number.c")
 TEST_FILE("op.c")
 
 void setUp(void)

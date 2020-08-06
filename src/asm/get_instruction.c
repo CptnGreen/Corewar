@@ -60,7 +60,7 @@ static int		get_arg_type(t_bot *bot, char **line, t_op *ins, char permitted)
 	return (KO);
 }
 
-static t_label	*check_label(char **line, t_bot *bot, t_list **labels)
+static t_label	*check_label(char **line, t_list **labels)
 {
 	char	*label;
 
@@ -105,7 +105,7 @@ int				get_instruction(t_bot *bot, char *line, t_list **labels
 					, t_op *ins)
 {
 	int		instr_addr;
-	char	i;
+	int		i;
 	char	argtype;
 
 	instr_addr = bot->exec_code_size;
@@ -116,12 +116,12 @@ int				get_instruction(t_bot *bot, char *line, t_list **labels
 	while (i < ins->arg_number)
 	{
 		skip_whitespaces(&line);
-		if (!(argtype = get_arg_type(bot, &line, ins, ins->arg_types[i++]))
+		if (!(argtype = get_arg_type(bot, &line, ins, (ins->arg_types)[i++]))
 		|| ((argtype & T_LAB) &&
-		!get_value(check_label(&line, bot, labels), bot, &argtype, instr_addr)))
+		!get_value(check_label(&line, labels), bot, &argtype, instr_addr)))
 			return (KO);
 		if (ins->have_arg_type_code)
-			bot->exec_code[instr_addr + 1] |= g_codes_of_arg_type[argtype][i];
+			bot->exec_code[instr_addr + 1] |= g_codes_of_arg_type[(int)argtype][i];
 		skip_whitespaces(&line);
 		if (*line == SEPARATOR_CHAR && i < ins->arg_number)
 			++line;
