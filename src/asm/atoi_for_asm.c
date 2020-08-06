@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 16:18:48 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/06 07:11:30 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/06 10:01:41 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	det_sign(char **line)
 int			get_number(char **line)
 {
 	long long	res;
-	char		sign;	
+	char		sign;
 
 	res = 0;
 	sign = det_sign(line);

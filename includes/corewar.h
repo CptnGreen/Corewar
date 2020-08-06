@@ -3,7 +3,6 @@
 
 # include "op.h"
 # include "libftprintf.h"
-# include "stdio.h" // delete
 
 /*
 ** Useful defines:
@@ -61,5 +60,6 @@ int		get_instruction(t_bot *bot, char *line, t_list **labels, t_op *ins);
 t_label	*new_label(t_list **label, char *line, size_t len, int addr);
 int		get_number(char **line);
 void	tobytes(char *src, int nbr, char size);
+void	skip_whitespaces(char **line);
 
 #endif

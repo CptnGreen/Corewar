@@ -5,6 +5,7 @@
 TEST_FILE("init_bot.c")
 TEST_FILE("get_instruction.c")
 TEST_FILE("get_bytes_from_number.c")
+TEST_FILE("skip_whitespaces.c")
 TEST_FILE("new_label.c")
 TEST_FILE("atoi_for_asm.c")
 TEST_FILE("op.c")
@@ -167,6 +168,20 @@ void test_invalid_missed_number(void)
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     ft_putstr_fd("fork:	 fork  %:forka #fork\nforka:      sti r1, %, %5\nsti r1, %:fork, %5\n", fd);
+    lseek(fd, 0, SEEK_SET);
+    bot = init_bot();
+    TEST_ASSERT_EQUAL_INT(KO, get_exec_code(bot, fd));
+    close(fd);
+    remove("test/asm/bot_test.s");
+}
+
+void test_invalid_separator_char_at_the_end_of_instruction(void)
+{
+    size_t	fd;
+    t_bot	*bot;
+
+    fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    ft_putstr_fd("tir:	sti	r1,%:tirb,%1\n\tld	%123 ,r10\n\tld	%1   ,  r1,\n\n\n \t  tirb:\n\n\n\tld	%0,r11\n\n\n\ntirb:	live	%1\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = init_bot();
     TEST_ASSERT_EQUAL_INT(KO, get_exec_code(bot, fd));

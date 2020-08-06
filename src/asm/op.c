@@ -6,13 +6,13 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 03:59:47 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/06 08:06:52 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/06 08:52:13 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_op	g_op_tab[17] =
+const t_op	g_op_tab[17] =
 {
 	{"live", 4, 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -39,7 +39,9 @@ t_op	g_op_tab[17] =
 	{0, 0, 0, 0, 0, 0, 0, 0}
 };
 
-char	g_codes_of_arg_type[4][4] =
+const int	g_next_op_tab_elem = sizeof(t_op) / sizeof(t_op*);
+
+const char	g_codes_of_arg_type[4][4] =
 {
 	{0, 0, 0, 0},
 	{0, 64, 16, 4},

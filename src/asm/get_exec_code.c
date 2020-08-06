@@ -6,13 +6,14 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:49:32 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/06 08:31:45 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/06 10:21:12 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 extern t_op		*g_op_tab[17];
+extern int		g_next_op_tab_elem;
 
 static void	del_label(void *node)
 {
@@ -51,7 +52,7 @@ static int	check_and_clear_labels(t_list *labels, char *code, int return_value)
 	return (return_value);
 }
 
-int		set_new_label(t_list **labels, char *line, int addr)
+int			set_new_label(t_list **labels, char *line, int addr)
 {
 	size_t	len;
 
@@ -63,38 +64,35 @@ int		set_new_label(t_list **labels, char *line, int addr)
 	if (!len || line[len] != LABEL_CHAR || !new_label(labels, line, len, addr))
 		return (KO);
 	while (line[++len] != '\0')
-		if (line[len] != ' ' && line[len] != '\t') // what about other whitespaces?
+		if (line[len] != ' ' && line[len] != '\t')
 			return (KO);
 	return (OK);
 }
 
 static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 {
-    char	*tmp;
 	char	*instr;
 	int		addr;
 	int		i;
 
-    while (*line == ' ' || *line == '\t') // what about other whitespaces?
-        ++line;
-    if ((tmp = ft_strchr(line, '#')))
-        *tmp = '\0';
+	skip_whitespaces(&line);
+	if ((instr = ft_strchr(line, '#')))
+		*instr = '\0';
 	addr = bot->exec_code_size;
 	i = 0;
 	while (((t_op*)&g_op_tab[i])->name_len)
 	{
 		instr = line - 1;
 		while ((instr = ft_strstr(instr + 1, ((t_op*)&g_op_tab[i])->name)))
-		{
 			if (get_instruction(bot, instr + ((t_op*)&g_op_tab[i])->name_len
 			, labels, (t_op*)&g_op_tab[i]))
 			{
 				*instr = '\0';
 				return (set_new_label(labels, line, addr));
 			}
-			bot->exec_code_size = addr;
-		}
-		i += sizeof(t_op) / sizeof(t_op*); //define
+			else
+				bot->exec_code_size = addr;
+		i += g_next_op_tab_elem;
 	}
 	return (set_new_label(labels, line, addr));
 }

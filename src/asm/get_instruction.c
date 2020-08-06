@@ -6,13 +6,13 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 22:17:43 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/06 08:32:28 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/06 10:50:18 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-extern char	g_codes_of_arg_type[4][4];
+extern char		g_codes_of_arg_type[4][4];
 
 static long		get_dir_or_ind(char **line, t_bot *bot, t_op *ins, char type)
 {
@@ -101,11 +101,12 @@ static int		get_value(t_label *label, t_bot *bot, char *arg_type, int addr)
 	return ((*arg_type = IND_CODE));
 }
 
-int				get_instruction(t_bot *bot, char *line, t_list **labels, t_op *ins)
+int				get_instruction(t_bot *bot, char *line, t_list **labels
+					, t_op *ins)
 {
 	int		instr_addr;
 	char	i;
-	char	arg_type;
+	char	argtype;
 
 	instr_addr = bot->exec_code_size;
 	bot->exec_code[bot->exec_code_size++] = ins->order;
@@ -114,25 +115,18 @@ int				get_instruction(t_bot *bot, char *line, t_list **labels, t_op *ins)
 	i = 0;
 	while (i < ins->arg_number)
 	{
-		while (*line == ' ' || *line == '\t') // what about other whitespaces?
-        	++line;
-		if ((arg_type = get_arg_type(bot, &line, ins, ins->arg_types[i])) == KO)
+		skip_whitespaces(&line);
+		if (!(argtype = get_arg_type(bot, &line, ins, ins->arg_types[i++]))
+		|| ((argtype & T_LAB) &&
+		!get_value(check_label(&line, bot, labels), bot, &argtype, instr_addr)))
 			return (KO);
-		if ((arg_type & T_LAB)
-		&& !get_value(check_label(&line, bot, labels), bot, &arg_type, instr_addr))
-			return (KO);
-		++i;
 		if (ins->have_arg_type_code)
-			bot->exec_code[instr_addr + 1] |= g_codes_of_arg_type[arg_type][i];
-		while (*line != SEPARATOR_CHAR && *line != '\0')
-			if (*line != ' ' && *line != '\t') // what about other whitespaces?
-				return (KO);
-			else
-				++line;
-		if (*line == SEPARATOR_CHAR)
+			bot->exec_code[instr_addr + 1] |= g_codes_of_arg_type[argtype][i];
+		skip_whitespaces(&line);
+		if (*line == SEPARATOR_CHAR && i < ins->arg_number)
 			++line;
+		else if (*line != '\0')
+			return (KO);
 	}
-	if (bot->exec_code_size > CHAMP_MAX_SIZE || *line == SEPARATOR_CHAR)
-		return (KO);
-	return (OK);
+	return (bot->exec_code_size <= CHAMP_MAX_SIZE);
 }
