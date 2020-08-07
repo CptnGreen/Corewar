@@ -2,17 +2,13 @@
 
 int		check_extension(char *file_name)
 {
-	int	i;
+	int		l;
 
-	i = ft_strlen(file_name);
-	i--;
-	if (file_name[i] == 's')
-		i--;
+	l = ft_strlen(file_name);
+	if (l < 3 || \
+		file_name[l - 1] != 's' || \
+		file_name[l - 2] != '.')
+		return (BAD_EXT);
 	else
-		return (-2);
-	if (file_name[i] == '.')
-		i--;
-	else
-		return (-2);
-	return (i);
+		return (l - 2);
 }

@@ -23,6 +23,7 @@ SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
 		main.c \
 		init_bot.c \
+		destroy_bot.c \
 		get_byte_code.c \
 		print_byte_code.c \
 		check_extension.c \
@@ -84,6 +85,8 @@ norm: fclean
 	@ norminette includes/corewar.h src/asm
 test: all
 	@ ceedling
+test_asm: all
+	@ ./$(EXEC_ASM) resources/vm_champs/champs/42.s && cat log_asm.txt
 memcheck: asm
 	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./$(EXEC_ASM)
 	@ vim valgrind-out.txt

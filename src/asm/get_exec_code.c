@@ -52,7 +52,7 @@ static int	check_and_clear_labels(t_list *labels, char *code, int return_value)
 	return (return_value);
 }
 
-int			set_new_label(t_list **labels, char *line, int addr)
+int			set_new_label(t_list **labels, char *line, int addr, int log_fd)
 {
 	size_t	len;
 
@@ -62,14 +62,22 @@ int			set_new_label(t_list **labels, char *line, int addr)
 	while (*(line + len) && ft_strchr(LABEL_CHARS, *(line + len)))
 		++len;
 	if (!len || line[len] != LABEL_CHAR || !new_label(labels, line, len, addr))
+	{
+		ft_putstr_fd("set_new_label(): 1\n", log_fd);
 		return (KO);
+	}
 	while (line[++len] != '\0')
+	{
 		if (line[len] != ' ' && line[len] != '\t')
+		{
+			ft_putstr_fd("set_new_label(): 2\n", log_fd);
 			return (KO);
+		}
+	}
 	return (OK);
 }
 
-static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
+static int	parse_exec_code(t_bot *bot, char *line, t_list **labels, int log_fd)
 {
 	char	*instr;
 	int		addr;
@@ -88,16 +96,16 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 			, labels, (t_op*)&g_op_tab[i]))
 			{
 				*instr = '\0';
-				return (set_new_label(labels, line, addr));
+				return (set_new_label(labels, line, addr, log_fd));
 			}
 			else
 				bot->exec_code_size = addr;
 		i += g_next_op_tab_elem;
 	}
-	return (set_new_label(labels, line, addr));
+	return (set_new_label(labels, line, addr, log_fd));
 }
 
-int			get_exec_code(t_bot *bot, size_t fd)
+int			get_exec_code(t_bot *bot, size_t fd, int log_fd)
 {
 	char	*line;
 	t_list	*labels;
@@ -106,7 +114,7 @@ int			get_exec_code(t_bot *bot, size_t fd)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (*line && *line != '#')
-			if (parse_exec_code(bot, line, &labels) == KO)
+			if (parse_exec_code(bot, line, &labels, log_fd) == KO)
 				return (check_and_clear_labels(labels, bot->exec_code, KO));
 		free(line);
 	}

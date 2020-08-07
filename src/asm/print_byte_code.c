@@ -7,9 +7,8 @@ int		print_byte_code(char *file_name, t_bot *bot)
 	int		fd;
 	int		i;
 
-	if ((i = check_extension(file_name)) == -2)
-		return (KO);
-	if (((fd = create_and_open_file_cor(i, file_name)) == -1))
+	if ((i = check_extension(file_name)) == BAD_EXT || \
+		(fd = create_and_open_file_cor(i, file_name)) == -1)
 		return (KO);
 	put_in_cor_magic_header_and_bot_name(fd, bot);
 	i = put_exec_code_size_in_cor(bot, fd);

@@ -87,13 +87,20 @@ int		read_data(t_bot *bot, char *line, int *found, size_t fd)
 ** TODO: fix leaks?
 */
 
-int		get_name_and_comment(t_bot *bot, size_t fd)
+#define ERR_BOT_NULL "get_name_and_comment(): bot is NULL\n"
+#define ERR_NOT_FOUND "get_name_and_comment(): Couldn't find name or comment\n"
+#define SUCCESS_FOUND "get_name_and_comment(): Found both name and comment\n"
+
+int		get_name_and_comment(t_bot *bot, size_t fd, int log_fd)
 {
 	int		found[2];
 	char	*line;
 
 	if (!bot)
+	{
+		ft_putstr_fd(ERR_BOT_NULL, log_fd);
 		return (KO);
+	}
 	found[NAME] = 0;
 	found[COMMENT] = 0;
 	while (found[NAME] < 1 || found[COMMENT] < 1)
@@ -103,5 +110,11 @@ int		get_name_and_comment(t_bot *bot, size_t fd)
 			break ;
 	}
 	ft_strdel(&line);
-	return ((found[NAME] == 1 && found[COMMENT] == 1) ? OK : KO);
+	if (found[NAME] == 1 && found[COMMENT] == 1)
+	{
+		ft_putstr_fd(SUCCESS_FOUND, log_fd);
+		return (OK);
+	}
+	ft_putstr_fd(ERR_NOT_FOUND, log_fd);
+	return (KO);
 }

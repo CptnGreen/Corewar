@@ -14,6 +14,12 @@
 # define KO 0
 
 /*
+** Error codes:
+*/
+
+# define BAD_EXT -2
+
+/*
 ** Assembly part
 */
 
@@ -42,6 +48,7 @@ typedef struct	s_deferred
 }				t_deferred;
 
 t_bot	*init_bot(void);
+int		destroy_bot(t_bot *bot);
 
 char	*get_byte_code(char const *asm_code);
 
@@ -54,11 +61,11 @@ int		put_exec_code_size_in_cor(t_bot *bot, int fd);
 char	*get_magic_header(void);
 
 int		get_name_or_comment(char *field, size_t max_len, char *line, size_t fd);
-int		get_name_and_comment(t_bot *bot, size_t fd);
+int		get_name_and_comment(t_bot *bot, size_t fd, int log_fd);
 
 int		get_number(char **line);
 void	tobytes(char *dest, int nbr, char size);
-int		get_exec_code(t_bot *bot, size_t fd);
+int		get_exec_code(t_bot *bot, size_t fd, int log_fd);
 int		get_instruction(t_bot *bot, char *line, t_list **labels, t_op *ins);
 t_label	*new_label(t_list **label, char *line, size_t len, int addr);
 void	skip_whitespaces(char **line);
