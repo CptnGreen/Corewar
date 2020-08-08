@@ -3,7 +3,7 @@
 #include "get_name_or_comment.h"
 
 TEST_FILE("init_bot.c")
-TEST_FILE("destroy_bot.c")
+TEST_FILE("free.c")
 
 void setUp(void)
 {
@@ -22,7 +22,7 @@ void test_name_oneline(void)
 	TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, 0));
 	TEST_ASSERT_EQUAL_STRING("ololo", bot->name);
 	TEST_ASSERT_EQUAL_STRING("", bot->comment);
-	destroy_bot(bot);
+	free(bot);
 }
 
 void test_name_oneline_endline_whitespaces(void)
@@ -34,7 +34,7 @@ void test_name_oneline_endline_whitespaces(void)
 	TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, 0));
 	TEST_ASSERT_EQUAL_STRING("ololo", bot->name);
 	TEST_ASSERT_EQUAL_STRING("", bot->comment);
-	destroy_bot(bot);
+	free(bot);
 }
 
 void test_name_oneline_endline_comment(void)
@@ -46,7 +46,7 @@ void test_name_oneline_endline_comment(void)
 	TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, 0));
 	TEST_ASSERT_EQUAL_STRING("ololo", bot->name);
 	TEST_ASSERT_EQUAL_STRING("", bot->comment);
-	destroy_bot(bot);
+	free(bot);
 }
 
 void test_comment_oneline(void)
@@ -58,7 +58,7 @@ void test_comment_oneline(void)
 	TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->comment, COMMENT_LENGTH, line, 0));
 	TEST_ASSERT_EQUAL_STRING("ururu", bot->comment);
 	TEST_ASSERT_EQUAL_STRING("", bot->name);
-	destroy_bot(bot);
+	free(bot);
 }
 
 void test_name_multiline(void)
@@ -75,7 +75,7 @@ void test_name_multiline(void)
 	TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, fd));
 	TEST_ASSERT_EQUAL_STRING("Sauce\nLisandra", bot->name);
 	TEST_ASSERT_EQUAL_STRING("", bot->comment);
-	destroy_bot(bot);
+	free(bot);
 	ft_strdel(&line);
 	close(fd);
 	remove("test/asm/bot_test.s");
@@ -94,7 +94,7 @@ void test_name_too_ololong(void)
 	TEST_ASSERT_EQUAL_INT(KO, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, 0));
 	TEST_ASSERT_EQUAL_STRING("", bot->name);
 	TEST_ASSERT_EQUAL_STRING("", bot->comment);
-	destroy_bot(bot);
+	free(bot);
 }
 
 void test_name_too_ololong_multiline(void)
@@ -117,7 +117,7 @@ void test_name_too_ololong_multiline(void)
 	TEST_ASSERT_EQUAL_INT(OK, get_name_or_comment(bot->name, PROG_NAME_LENGTH, line, fd));
 	TEST_ASSERT_EQUAL_STRING("ololololo\nlolololololololololololo\nlolololololololololololololololololololololololololololololololololololo\nlololololololo\nlolol", bot->name);
 	TEST_ASSERT_EQUAL_STRING("", bot->comment);
-	destroy_bot(bot);
+	free(bot);
 	ft_strdel(&line);
 	close(fd);
 	remove("test/asm/bot_test.s");

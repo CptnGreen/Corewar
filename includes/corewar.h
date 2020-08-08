@@ -24,6 +24,8 @@
 */
 
 # define INSTRUCTION_MAX_SIZE 14
+# define MAGIC_HEADER "\x00\xea\x83\xf3"
+# define DIV_ZEROES "\x00\x00\x00\x00"
 
 typedef struct	s_bot
 {
@@ -47,25 +49,16 @@ typedef struct	s_deferred
 	char	size;
 }				t_deferred;
 
-t_bot	*init_bot(void);
-int		destroy_bot(t_bot *bot);
-
 char	*get_byte_code(char const *asm_code);
 
-int		print_byte_code(char *file_name, t_bot *bot, int log_fd);
-int		check_extension(char *file_name, int log_fd);
-int		create_and_open_file_cor(int i, char *file_name, int log_fd);
-void	put_in_cor_magic_header_and_bot_name(int fd, t_bot *bot, int log_fd);
-int		put_exec_code_size_in_cor(t_bot *bot, int fd, int log_fd);
-
-char	*get_magic_header(void);
+int		print_byte_code(char *file_name, t_bot *bot);
 
 int		get_name_or_comment(char *field, size_t max_len, char *line, size_t fd);
-int		get_name_and_comment(t_bot *bot, size_t fd, int log_fd);
+int		get_name_and_comment(t_bot *bot, size_t fd);
 
 int		get_number(char **line);
 void	tobytes(char *dest, int nbr, char size);
-int		get_exec_code(t_bot *bot, size_t fd, int log_fd);
+int		get_exec_code(t_bot *bot, size_t fd);
 int		get_instruction(t_bot *bot, char *line, t_list **labels, t_op *ins);
 t_label	*new_label(t_list **label, char *line, size_t len, int addr);
 void	skip_whitespaces(char **line);

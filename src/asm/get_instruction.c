@@ -6,13 +6,13 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 22:17:43 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/08 13:55:32 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/09 01:53:43 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-extern char		g_codes_of_arg_type[4][4];
+extern char		g_arg_type_codes[4][4];
 
 static long		get_dir_or_ind(char **line, t_bot *bot, t_op *ins, char type)
 {
@@ -121,7 +121,7 @@ int				get_instruction(t_bot *bot, char *line, t_list **labels
 		!get_value(check_label(&line, labels), bot, &argtype, instr_addr)))
 			return (KO);
 		if (ins->have_arg_type_code)
-			bot->exec_code[instr_addr + 1] |= g_codes_of_arg_type[(int)argtype][i];
+			bot->exec_code[instr_addr + 1] |= g_arg_type_codes[(int)argtype][i];
 		skip_whitespaces(&line);
 		if (*line == SEPARATOR_CHAR && i < ins->arg_number)
 			++line;

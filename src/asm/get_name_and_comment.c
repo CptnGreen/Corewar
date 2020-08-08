@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 21:47:18 by slisandr          #+#    #+#             */
-/*   Updated: 2020/08/08 13:02:28 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/09 01:51:39 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** - whitespaces in the front part of non-empty line
 */
 
-char	*skip_to_actual_data(size_t fd)
+static char	*skip_to_actual_data(size_t fd)
 {
 	char	*line;
 
@@ -35,7 +35,7 @@ char	*skip_to_actual_data(size_t fd)
 	return (NULL);
 }
 
-int		read_data(t_bot *bot, char *line, int *found, size_t fd)
+static int	read_data(t_bot *bot, char *line, int *found, size_t fd)
 {
 	if (!ft_strncmp(line, ".name", 5))
 	{
@@ -44,8 +44,7 @@ int		read_data(t_bot *bot, char *line, int *found, size_t fd)
 		if (!(get_name_or_comment(\
 				bot->name,\
 				PROG_NAME_LENGTH,\
-				line,
-				fd)))
+				line, fd)))
 			return (KO);
 		found[NAME] += 1;
 		return (OK);
@@ -57,8 +56,7 @@ int		read_data(t_bot *bot, char *line, int *found, size_t fd)
 		if (!(get_name_or_comment(\
 				bot->comment,\
 				COMMENT_LENGTH,\
-				line,
-				fd)))
+				line, fd)))
 			return (KO);
 		found[COMMENT] += 1;
 		return (OK);
@@ -87,20 +85,13 @@ int		read_data(t_bot *bot, char *line, int *found, size_t fd)
 ** TODO: fix leaks?
 */
 
-#define ERR_BOT_NULL "get_name_and_comment(): bot is NULL\n"
-#define ERR_NOT_FOUND "get_name_and_comment(): Couldn't find name or comment\n"
-#define SUCCESS_FOUND "get_name_and_comment(): Found both name and comment\n"
-
-int		get_name_and_comment(t_bot *bot, size_t fd, int log_fd)
+int			get_name_and_comment(t_bot *bot, size_t fd)
 {
 	int		found[2];
 	char	*line;
 
 	if (!bot)
-	{
-		ft_putstr_fd(ERR_BOT_NULL, log_fd);
 		return (KO);
-	}
 	found[NAME] = 0;
 	found[COMMENT] = 0;
 	while (found[NAME] < 1 || found[COMMENT] < 1)
@@ -111,10 +102,6 @@ int		get_name_and_comment(t_bot *bot, size_t fd, int log_fd)
 	}
 	ft_strdel(&line);
 	if (found[NAME] == 1 && found[COMMENT] == 1)
-	{
-		ft_putstr_fd(SUCCESS_FOUND, log_fd);
 		return (OK);
-	}
-	ft_putstr_fd(ERR_NOT_FOUND, log_fd);
 	return (KO);
 }
