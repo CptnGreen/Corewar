@@ -86,7 +86,7 @@ norm: fclean
 test: all
 	@ ceedling
 test_asm: all
-	@ ./$(EXEC_ASM) resources/vm_champs/champs/42.s && cat log_asm.txt
+	@ ./$(EXEC_ASM) resources/vm_champs/champs/championships/2014/bguy/sam_2.0.s && cat log_asm.txt
 memcheck: asm
 	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./$(EXEC_ASM)
 	@ vim valgrind-out.txt

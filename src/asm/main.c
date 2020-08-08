@@ -37,8 +37,9 @@ int			main(int ac, char **av)
 			ft_putstr_fd("main(): Something is wrong\n", log_fd);
 			continue ;
 		}
+		ft_putstr_fd("main(): get_exec_code() returned OK\n", log_fd);
 		close(fd);
-		if (!print_byte_code(av[i], bot))
+		if (!print_byte_code(av[i], bot, log_fd))
 			continue ;
 	}
 	destroy_bot(bot);

@@ -2,7 +2,11 @@
 
 #define N_DIV_ZEROES 3
 
-void		put_in_cor_magic_header_and_bot_name(int fd, t_bot *bot)
+/*
+** Called from print_byte_code()
+*/
+
+void		put_in_cor_magic_header_and_bot_name(int fd, t_bot *bot, int log_fd)
 {
 	int		i;
 
@@ -14,4 +18,6 @@ void		put_in_cor_magic_header_and_bot_name(int fd, t_bot *bot)
 		ft_putchar_fd('\0', fd);
 		i--;
 	}
+	ft_putstr_fd("put_in_cor_magic_header_and_bot_name(): finished\n", log_fd);
+	return ;
 }

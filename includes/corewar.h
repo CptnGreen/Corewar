@@ -52,11 +52,11 @@ int		destroy_bot(t_bot *bot);
 
 char	*get_byte_code(char const *asm_code);
 
-int		print_byte_code(char *file_name, t_bot *bot);
-int		check_extension(char *file_name);
-int		create_and_open_file_cor(int i, char *file_name);
-void	put_in_cor_magic_header_and_bot_name(int fd, t_bot *bot);
-int		put_exec_code_size_in_cor(t_bot *bot, int fd);
+int		print_byte_code(char *file_name, t_bot *bot, int log_fd);
+int		check_extension(char *file_name, int log_fd);
+int		create_and_open_file_cor(int i, char *file_name, int log_fd);
+void	put_in_cor_magic_header_and_bot_name(int fd, t_bot *bot, int log_fd);
+int		put_exec_code_size_in_cor(t_bot *bot, int fd, int log_fd);
 
 char	*get_magic_header(void);
 

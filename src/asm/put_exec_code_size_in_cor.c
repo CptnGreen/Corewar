@@ -1,6 +1,10 @@
 #include "corewar.h"
 
-int			put_exec_code_size_in_cor(t_bot *bot, int fd)
+/*
+** Called from print_byte_code()
+*/
+
+int			put_exec_code_size_in_cor(t_bot *bot, int fd, int log_fd)
 {
 	int		i;
 	char		*res;
@@ -12,5 +16,6 @@ int			put_exec_code_size_in_cor(t_bot *bot, int fd)
 		ft_putchar_fd(res[i], fd);
 		i--;
 	}
+	ft_putstr_fd("put_exec_code_size_in_cor(): Success\n", log_fd);
 	return (OK);
 }
