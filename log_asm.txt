@@ -1,0 +1,6 @@
+get_name_and_comment(): Found both name and comment
+
+set_new_label(): 1
+len = 6, line[len] = l
+set_new_label(): 2
+main(): Something is wrong

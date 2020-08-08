@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:49:32 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/06 10:21:12 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/08 13:58:58 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,8 @@ int			set_new_label(t_list **labels, char *line, int addr, int log_fd)
 	len = 0;
 	while (*(line + len) && ft_strchr(LABEL_CHARS, *(line + len)))
 		++len;
-	if (!len || line[len] != LABEL_CHAR || !new_label(labels, line, len, addr, log_fd))
+	if (!len || line[len] != LABEL_CHAR || !new_label(labels, line, len, addr))
 	{
-		ft_putstr_fd("len = ", log_fd);
-		ft_putnbr_fd(len , log_fd);
-		ft_putstr_fd(", line[len] = ", log_fd);
-		ft_putchar_fd(line[len] , log_fd);
 		ft_putstr_fd("\nset_new_label(): 1\n", log_fd);
 		return (KO);
 	}
@@ -74,7 +70,11 @@ int			set_new_label(t_list **labels, char *line, int addr, int log_fd)
 	{
 		if (line[len] != ' ' && line[len] != '\t')
 		{
-			ft_putstr_fd("set_new_label(): 2\n", log_fd);
+			ft_putstr_fd("len = ", log_fd);
+			ft_putnbr_fd(len , log_fd);
+			ft_putstr_fd(", line[len] = ", log_fd);
+			ft_putchar_fd(line[len] , log_fd);
+			ft_putstr_fd("\nset_new_label(): 2\n", log_fd);
 			return (KO);
 		}
 	}
@@ -96,14 +96,17 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels, int log_fd)
 	{
 		instr = line - 1;
 		while ((instr = ft_strstr(instr + 1, ((t_op*)&g_op_tab[i])->name)))
+		{
 			if (get_instruction(bot, instr + ((t_op*)&g_op_tab[i])->name_len
 			, labels, (t_op*)&g_op_tab[i]))
 			{
 				*instr = '\0';
-				return (set_new_label(labels, line, addr, log_fd));
+				if (set_new_label(labels, line, addr, log_fd))
+					return (OK);
+				*instr = ((t_op*)&g_op_tab[i])->name[0];
 			}
-			else
-				bot->exec_code_size = addr;
+			bot->exec_code_size = addr;
+		}
 		i += g_next_op_tab_elem;
 	}
 	return (set_new_label(labels, line, addr, log_fd));
