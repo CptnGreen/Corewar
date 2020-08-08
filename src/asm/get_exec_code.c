@@ -61,9 +61,13 @@ int			set_new_label(t_list **labels, char *line, int addr, int log_fd)
 	len = 0;
 	while (*(line + len) && ft_strchr(LABEL_CHARS, *(line + len)))
 		++len;
-	if (!len || line[len] != LABEL_CHAR || !new_label(labels, line, len, addr))
+	if (!len || line[len] != LABEL_CHAR || !new_label(labels, line, len, addr, log_fd))
 	{
-		ft_putstr_fd("set_new_label(): 1\n", log_fd);
+		ft_putstr_fd("len = ", log_fd);
+		ft_putnbr_fd(len , log_fd);
+		ft_putstr_fd(", line[len] = ", log_fd);
+		ft_putchar_fd(line[len] , log_fd);
+		ft_putstr_fd("\nset_new_label(): 1\n", log_fd);
 		return (KO);
 	}
 	while (line[++len] != '\0')

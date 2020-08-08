@@ -67,7 +67,7 @@ int		get_number(char **line);
 void	tobytes(char *dest, int nbr, char size);
 int		get_exec_code(t_bot *bot, size_t fd, int log_fd);
 int		get_instruction(t_bot *bot, char *line, t_list **labels, t_op *ins);
-t_label	*new_label(t_list **label, char *line, size_t len, int addr);
+t_label	*new_label(t_list **label, char *line, size_t len, int addr, int log_fd);
 void	skip_whitespaces(char **line);
 
 #endif
