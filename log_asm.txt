@@ -1,0 +1,7 @@
+get_name_and_comment(): Found both name and comment
+main(): get_exec_code() returned OK
+check_extension(): found ".s" at the end of file name
+create_and_open_file_cor(): Success
+put_in_cor_magic_header_and_bot_name(): finished
+put_exec_code_size_in_cor(): Success
+print_byte_code(): Success

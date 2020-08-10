@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfrieda <rfrieda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 15:59:50 by rfrieda           #+#    #+#             */
-/*   Updated: 2020/08/03 16:02:03 by rfrieda          ###   ########.fr       */
+/*   Updated: 2020/08/09 01:37:54 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+#define SUCCESS 0
+#define FAILURE 1
+
+static int	check_extension(char *file_name)
+{
+	int		l;
+
+	l = ft_strlen(file_name);
+	if (l < 3 || \
+		file_name[l - 1] != 's' || \
+		file_name[l - 2] != '.')
+		return (BAD_EXT);
+	return (OK);
+}
 
 int			main(int ac, char **av)
 {
@@ -19,23 +34,31 @@ int			main(int ac, char **av)
 	int		fd;
 
 	i = 0;
-	if (!(bot = init_bot()))
-		return (KO);
-	while (++i != ac)
+	if (!(bot = (t_bot *)malloc(sizeof(t_bot))))
+		return (FAILURE);
+	while (++i < ac)
 	{
-		if (!check_extension(av[i]))
+		ft_memset(bot, '\0', sizeof(t_bot));
+		if (check_extension(av[i]) == BAD_EXT
+		|| (fd = open(av[i], O_RDONLY)) == -1)
+		{//del
+			ft_putstr_fd("ERROR: Invalid extension or file can't opened\n", STDERR_FILENO);//del
 			continue ;
-		fd = open(av[i], O_RDONLY);
-		if (fd < 0)
+		}//del
+		if (!get_name_and_comment(bot, fd)
+		|| !get_exec_code(bot, fd))
+		{
+			ft_putstr_fd("ERROR: Error in get_name_and_comment() or in get_exec_code()\n", STDERR_FILENO);//del
+			close(fd);
 			continue ;
-		if (!get_name_and_comment(bot, fd))
-			continue ;
-		if (!get_exec_code(bot, fd))
-			continue ;
+		}
 		close(fd);
 		if (!print_byte_code(av[i], bot))
+		{//del
+			ft_putstr_fd("ERROR: Error in printing byte code\n", STDERR_FILENO);//del
 			continue ;
+		}//del
 	}
 	free(bot);
-	return (0);
+	return (SUCCESS);
 }

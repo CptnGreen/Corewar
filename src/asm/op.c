@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 03:59:47 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/06 08:52:13 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/09 01:53:16 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ const t_op	g_op_tab[17] =
 
 const int	g_next_op_tab_elem = sizeof(t_op) / sizeof(t_op*);
 
-const char	g_codes_of_arg_type[4][4] =
+const char	g_arg_type_codes[4][4] =
 {
 	{0, 0, 0, 0},
 	{0, 64, 16, 4},

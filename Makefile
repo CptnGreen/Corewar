@@ -6,7 +6,7 @@
 #    By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/07/21 20:05:22 by aimelda          ###   ########.fr        #
+#    Updated: 2020/08/09 01:38:04 by aimelda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,7 @@ SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
 		main.c \
 		init_bot.c \
-		get_byte_code.c \
 		print_byte_code.c \
-		check_extension.c \
-		create_and_open_file_cor.c \
-		put_in_cor_magic_header_and_bot_name.c \
-		put_exec_code_size_in_cor.c \
-		get_magic_header.c \
 		get_name_or_comment.c \
 		get_name_and_comment.c \
 		get_exec_code.c \
@@ -84,6 +78,8 @@ norm: fclean
 	@ norminette includes/corewar.h src/asm
 test: all
 	@ ceedling
+test_asm: all
+	@ ./$(EXEC_ASM) resources/vm_champs/champs/championships/2014/bguy/sam_2.0.s
 memcheck: asm
 	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./$(EXEC_ASM)
 	@ vim valgrind-out.txt

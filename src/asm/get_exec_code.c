@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:49:32 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/06 10:21:12 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/09 01:45:25 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	check_and_clear_labels(t_list *labels, char *code, int return_value)
 	return (return_value);
 }
 
-int			set_new_label(t_list **labels, char *line, int addr)
+static int	set_new_label(t_list **labels, char *line, int addr)
 {
 	size_t	len;
 
@@ -64,8 +64,10 @@ int			set_new_label(t_list **labels, char *line, int addr)
 	if (!len || line[len] != LABEL_CHAR || !new_label(labels, line, len, addr))
 		return (KO);
 	while (line[++len] != '\0')
+	{
 		if (line[len] != ' ' && line[len] != '\t')
 			return (KO);
+	}
 	return (OK);
 }
 
@@ -76,22 +78,23 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 	int		i;
 
 	skip_whitespaces(&line);
-	if ((instr = ft_strchr(line, '#')))
-		*instr = '\0';
 	addr = bot->exec_code_size;
 	i = 0;
 	while (((t_op*)&g_op_tab[i])->name_len)
 	{
 		instr = line - 1;
 		while ((instr = ft_strstr(instr + 1, ((t_op*)&g_op_tab[i])->name)))
+		{
 			if (get_instruction(bot, instr + ((t_op*)&g_op_tab[i])->name_len
 			, labels, (t_op*)&g_op_tab[i]))
 			{
 				*instr = '\0';
-				return (set_new_label(labels, line, addr));
+				if (set_new_label(labels, line, addr))
+					return (OK);
+				*instr = ((t_op*)&g_op_tab[i])->name[0];
 			}
-			else
-				bot->exec_code_size = addr;
+			bot->exec_code_size = addr;
+		}
 		i += g_next_op_tab_elem;
 	}
 	return (set_new_label(labels, line, addr));
@@ -100,12 +103,15 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 int			get_exec_code(t_bot *bot, size_t fd)
 {
 	char	*line;
+	char	*tmp;
 	t_list	*labels;
 
 	labels = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (*line && *line != '#')
+		if ((tmp = ft_strchr(line, '#')))
+			*tmp = '\0';
+		if (*line)
 			if (parse_exec_code(bot, line, &labels) == KO)
 				return (check_and_clear_labels(labels, bot->exec_code, KO));
 		free(line);
