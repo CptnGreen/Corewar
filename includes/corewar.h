@@ -63,4 +63,50 @@ int		get_instruction(t_bot *bot, char *line, t_list **labels, t_op *ins);
 t_label	*new_label(t_list **label, char *line, size_t len, int addr);
 void	skip_whitespaces(char **line);
 
+t_bot	*init_bot(void);
+
+/*
+** VM part
+**
+** struct s_process:
+** pc			- is a register that stores the address of the next instruction;
+** timer		- countdown cycles before executing an instruction (see op_tab);
+** registries	- registries to store data;
+** carry		- flag, if the latest operation was successful;
+** alive		- flag, if the process reported 'alive' since last checkup;
+**
+** struct s_vm:
+** processes	 - the list of alive processes;
+** players		 - array with all players' information;
+** num_cycle	 - the number of current cycle;
+** cycles_to_die - countdown cycles before checkup;
+** num_live		 - the number of executed 'live' instruction since last checkup;
+** num_check	 - the number of checkups since last decrement cycles_to_die;
+** survivor		 - the player whose process was the last to execute 'live';
+** arena		 - arena, according to the subject;
+*/
+
+typedef struct	s_process
+{
+	int		pc;
+	int		timer;
+	char	registries[REG_NUMBER][REG_SIZE];
+	char	carry;
+	char	alive;
+}				t_process;
+
+typedef struct	s_vm
+{
+	t_list	*processes;
+	t_bot	*players[MAX_PLAYERS];
+	size_t	num_cycle;
+	int		cycles_to_die;
+	int		num_live;
+	int		num_check;
+	int		survivor;
+	char	arena[MEM_SIZE];
+}				t_vm;
+
+int		init_arena(t_vm *vm, int num_players);
+
 #endif
