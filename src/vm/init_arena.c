@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:53:12 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/21 13:12:09 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/27 23:23:44 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ static int	add_process(t_list **players, int address, int num_player)
 ** The function:
 ** - distributes the execution codes of the players in the arena;
 ** - initializes the list of original processes;
+** - saves the order numbers of the players in the first register of processes;
 ** - sets initial value of cycles_to_die equal to CYCLE_TO_DIE;
-**
-** note 1: struct vm must be initialized with ft_memalloc() in main();
-** note 2: vm->players must be filled earlier (within validation); 
 */
 
 int			init_arena(t_vm *vm, int num_players)
