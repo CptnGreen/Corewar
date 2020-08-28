@@ -26,7 +26,7 @@ void test_valid_name_oneline_comment_oneline(void)
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     ft_putstr_fd(".name\t\"Sauce\"\n.comment\t\"Lisandra\"\nSOME TEXT\n", fd);
     lseek(fd, 0, SEEK_SET);
-    bot = init_bot();
+    bot = (t_bot *)ft_memalloc(sizeof(t_bot));
     TEST_ASSERT_EQUAL_INT(OK, get_name_and_comment(bot, fd));
     TEST_ASSERT_EQUAL_STRING("Sauce", bot->name);
     TEST_ASSERT_EQUAL_STRING("Lisandra", bot->comment);
@@ -42,7 +42,7 @@ void test_valid_empty_lines_between_name_and_comment(void)
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     ft_putstr_fd(".name\t\"Sauce\"\n\n\n\n.comment\t\"Lisandra\"\nSOME TEXT\n", fd);
     lseek(fd, 0, SEEK_SET);
-    bot = init_bot();
+    bot = (t_bot *)ft_memalloc(sizeof(t_bot));
     TEST_ASSERT_EQUAL_INT(OK, get_name_and_comment(bot, fd));
     TEST_ASSERT_EQUAL_STRING("Sauce", bot->name);
     TEST_ASSERT_EQUAL_STRING("Lisandra", bot->comment);
@@ -62,7 +62,7 @@ void test_name_garbage_after(void)
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     ft_putstr_fd(".name\t\"Sauce\" GARBAGE\n.comment\t\"Lisandra\"\nSOME TEXT\n", fd);
     lseek(fd, 0, SEEK_SET);
-    bot = init_bot();
+    bot = (t_bot *)ft_memalloc(sizeof(t_bot));
     TEST_ASSERT_EQUAL_INT(KO, get_name_and_comment(bot, fd));
     close(fd);
     remove("test/asm/bot_test.s");
@@ -76,7 +76,7 @@ void test_name_garbage_between(void)
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     ft_putstr_fd(".name\tGARBAGE\t\"Sauce\"\n.comment\t\"Lisandra\"\nSOME TEXT\n", fd);
     lseek(fd, 0, SEEK_SET);
-    bot = init_bot();
+    bot = (t_bot *)ft_memalloc(sizeof(t_bot));
     TEST_ASSERT_EQUAL_INT(KO, get_name_and_comment(bot, fd));
     close(fd);
     remove("test/asm/bot_test.s");
@@ -90,7 +90,7 @@ void test_only_name_multiline(void)
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     ft_putstr_fd(".name\t\"Sauce\nLisandra\"\n", fd);
     lseek(fd, 0, SEEK_SET);
-    bot = init_bot();
+    bot = (t_bot *)ft_memalloc(sizeof(t_bot));
     TEST_ASSERT_EQUAL_INT(KO, get_name_and_comment(bot, fd));
     close(fd);
     remove("test/asm/bot_test.s");
