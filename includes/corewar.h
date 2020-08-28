@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/27 23:16:45 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/28 21:46:43 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int				get_instruction(t_bot *bot, char *line, t_list **labels,
 					t_op *ins);
 t_label			*new_label(t_list **label, char *line, size_t len, int addr);
 void			skip_whitespaces(char **line);
-
-t_bot			*init_bot(void);
 
 /*
 ** VM part
