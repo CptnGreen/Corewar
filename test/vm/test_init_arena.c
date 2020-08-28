@@ -26,10 +26,10 @@ void test_valid_two_players(void)
     TEST_ASSERT_EQUAL_INT(OK, init_arena(vm, num_players));
     TEST_ASSERT_EQUAL_INT(2, (int)(((t_process*)vm->processes->content)->registries[0][0]));
 	TEST_ASSERT_EQUAL_INT(1, (int)(((t_process*)vm->processes->next->content)->registries[0][0]));
-    TEST_ASSERT_EQUAL_INT8_ARRAY("\x0b\x68\x01\x00\x07\x00\x01\x01\x00\x00\x00\x00\x02\x90\x00\x00\x00\x00\x02\x09\xff\xed", vm->arena, vm->players[0]->exec_code_size);
+    TEST_ASSERT_EQUAL_INT8_ARRAY(vm->players[0]->exec_code, vm->arena, vm->players[0]->exec_code_size);
 	for (int i = vm->players[0]->exec_code_size; i < delta; i++)
 		TEST_ASSERT_EACH_EQUAL_INT8('\x00', vm->arena + vm->players[0]->exec_code_size, delta - vm->players[0]->exec_code_size);
-	TEST_ASSERT_EQUAL_INT8_ARRAY("\x0b\x68\x01\x00\x1c\x00\x01\x02\x90\x00\x00\x00\x7b\x0a\x02\x90\x00\x00\x00\x01\x01\x02\x90\x00\x00\x00\x00\x0b\x01\x00\x00\x00\x01", vm->arena + delta, vm->players[1]->exec_code_size);
+	TEST_ASSERT_EQUAL_INT8_ARRAY(vm->players[1]->exec_code, vm->arena + delta, vm->players[1]->exec_code_size);
 	for (int i = delta + vm->players[1]->exec_code_size; i < MEM_SIZE; i++)
-		TEST_ASSERT_EACH_EQUAL_INT8('\x00', vm->arena + delta + vm->players[1]->exec_code_size, MEM_SIZE - vm->players[1]->exec_code_size);
+		TEST_ASSERT_EACH_EQUAL_INT8('\x00', vm->arena + delta + vm->players[1]->exec_code_size, delta - vm->players[1]->exec_code_size);
 }
