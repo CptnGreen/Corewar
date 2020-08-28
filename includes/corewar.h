@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/28 21:46:43 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/28 22:42:44 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "op.h"
 # include "libftprintf.h"
+
+# include <stdint.h> // delete before push to vogsphere
 
 /*
 ** Useful defines:
