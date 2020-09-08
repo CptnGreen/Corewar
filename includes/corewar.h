@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/28 22:42:44 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/08 20:19:37 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ void			skip_whitespaces(char **line);
 ** survivor		 - the player whose process was the last to execute 'live';
 ** arena		 - arena, according to the subject;
 */
+
+# define INSTRUCTION_NUM 16
+# define DUMP_32 32
 
 typedef struct	s_process
 {
