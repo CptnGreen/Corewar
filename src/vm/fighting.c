@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:15:23 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/08 20:34:50 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/08 20:51:26 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	introduce_players(t_bot **players)
 		players[i]->exec_code_size, players[i]->name, players[i]->comment);
 		++i;
 	}
-	
 }
 
 static int	processes_acts(char *arena, t_list *process)
@@ -42,12 +41,12 @@ static int	processes_acts(char *arena, t_list *process)
 			if (cur->instruction > 0 && cur->instruction <= INSTRUCTION_NUM)
 				cur->timer = g_op_tab[cur->instruction - 1]->cool_down;
 		}
-		--(cur->timer);
+		if (cur->timer > 0)
+			--(cur->timer);
 		if (cur->timer == 0)
 			return (OK); // execute the instruction pointed by the current process
 		process = process->next;
 	}
-	
 }
 
 static int	dump(char *arena)
