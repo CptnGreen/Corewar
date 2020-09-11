@@ -38,6 +38,7 @@
 # define INSTRUCTION_MAX_SIZE 14
 # define MAGIC_HEADER "\x00\xea\x83\xf3"
 # define DIV_ZEROES "\x00\x00\x00\x00"
+# define EXEC_CODE_INT 4
 
 typedef struct	s_bot
 {

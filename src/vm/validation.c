@@ -78,7 +78,7 @@ int valid(t_vm *vm, int argc, char *argv[])
 					ft_lstadd(&players_without_n, temp_list);
 
 					// передать в функцию ниже адрес содержимого созданного элемента списка
-					if (proccessing_bot(players_without_n->content) == KO)
+					if (proccessing_bot(&(players_without_n->content)) == KO)
 						error("errrs");
 				}
 					// элемент массива players* структуры t_vm* с порядковым
