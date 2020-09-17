@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:15:23 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/08 20:51:26 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/17 20:22:58 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int			fighting(t_vm *vm)
 		while (countdown)
 		{
 			if (vm->num_cycle == vm->dump)
-				return (OK); // dump
+				return (dump(vm->arena));
 			++(vm->num_cycle);
 			processes_acts(vm->arena, vm->processes);
 			--countdown;
