@@ -2,29 +2,33 @@
 
 static int	check_extension(char *file_name)
 {
-	int		l;
+	int		len;
+	int		extension_len;
 
-	l = ft_strlen(file_name);
-	if (l < 5 || \
-		file_name[l - 1] != 'r' || \
-		file_name[l - 2] != 'o' || \
-		file_name[l - 3] != 'c' || \
-		file_name[l - 4] != '.' )
+	len = ft_strlen(file_name);
+	extension_len = ft_strlen(".cor");
+	if (len <= extension_len
+	|| ft_strcmp(file_name + len - extension_len, ".cor"))
 		return (BAD_EXT);
 	return (OK);
 }
-void	flag_dump(char *str,t_vm *vm)
+
+static int	free_players(t_list *players)
+{
+	ft_lstdel(players, free);
+	return (KO);
+}
+
+void	flag_dump(char *str, t_vm *vm)
 {
 	int		num; //size_t ???
 	char	*num_as_string;
 
-// следующую строку привести в тип int
 	num = ft_atoi(str);
 	num_as_string = ft_itoa(num);
-	// полученное значение укладывается в тип int / size_t?
 	if (!ft_strcmp(str, num_as_string))
-	// присвоить значение в переменную dump структуры t_vm*
 		vm->dump = num;
+	free(num_as_string);
 }
 
 int flag_n(char *str)
@@ -33,116 +37,68 @@ int flag_n(char *str)
 
 	num = ft_atoi(str);
 	if(num < 0 && num > MAX_PLAYERS)
-		error("flag -n");
+		error("flag -n"); // error
 	return num - 1;
 }
-int valid(t_vm *vm, int argc, char *argv[])
+
+int	valid(t_vm *vm, int argc, char *argv[])
 {
-	// инициализи
-	// ровать переменную (список) для хранения ботов,
-	//  чьи порядковые номера не определены флагом "-n"
     t_list *players_without_n;
-	t_list *temp_list;
-
+	t_list *temp_list;//?
     int col_players;
-
-    int serial_number;
+    int cur_serial_number;
     int max_serial_number;
 	int i;
 
 	col_players = 0;
-	serial_number = 0;
+	cur_serial_number = 0;
 	max_serial_number = 0;
 	i = 0;
 	players_without_n = NULL;
-	// ft_bzero(players_without_n,sizeof(t_list));
-
 	while(i < argc)
-	{
 		if (check_extension(argv[i]) == OK)
 		{
-			col_players++;
-			if (col_players > MAX_PLAYERS)
-				{
-					error("wrong col_players");
-					ft_lstdel(players_without_n,free);
-				}
-
-			 // значение переменной порядкового номера больше нуля?
-				else if (!serial_number)
-				{
-					// создать и добавить новый элемент в начало списка для хранения ботов;
-					// успешно?
-					if (!(temp_list = ft_lstnew(NULL)))
-						error("the element didn't add");
-					ft_lstadd(&players_without_n, temp_list);
-
-					// передать в функцию ниже адрес содержимого созданного элемента списка
-					if (proccessing_bot(&(players_without_n->content)) == KO)
-						error("errrs");
-				}
-					// элемент массива players* структуры t_vm* с порядковым
-					// номером равным значению переменной порядкового
-					// номера равен NULL?(  есть повторение номера?)
-				else if(!vm->players[serial_number] == NULL)
-				{
-					error("null");
-					ft_lstdel(players_without_n,free);
-					// сообщить об ошибке
-					// очистить список и содержимое.
-					// вернуть код ошибки
-					if (proccessing_bot(&(vm->players[serial_number])) == KO)
-						error("errr");
-						ft_lstdel(players_without_n,free);
-				}
-				else
-					error("err");
-					// обнулить переменную порядкового номера
-				serial_number = 0;
+			if (++col_players > MAX_PLAYERS)
+				return (free_players(players_without_n)); // "error: too many players, max = MAX_PLAYERS."
+			if (!cur_serial_number)
+			{
+				if (!(temp_list = ft_lstnew(NULL)))
+					return (free_players(players_without_n)); // "error: cannot allocate memory."
+				ft_lstadd(&players_without_n, temp_list);
+				if (proccessing_bot(&(players_without_n->content)) == KO) // check function
+					return (free_players(players_without_n)); // without message
+			}
+			else if(vm->players[cur_serial_number] == NULL)
+			{
+				if (proccessing_bot(&(vm->players[cur_serial_number])) == KO) // check function
+					return (free_players(players_without_n)); // without message
+			}
+			else
+				return (free_players(players_without_n)); // "error: two or more players are assigned the same number."
+			cur_serial_number = 0;
+		}
+		else if (cur_serial_number > 0)
+			return (free_players(players_without_n)); // "error: invalid sequence of parameters."
+		else if (!ft_strcmp(argv[i], "-dump"))
+			flag_dump(argv[++i], vm);
+		else if (!ft_strcmp(argv[i], "-n"))
+		{
+			cur_serial_number = flag_n(argv[++i]);
+			if (cur_serial_number > max_serial_number)
+				max_serial_number = cur_serial_number;
 		}
 		else
-		{
-			if (serial_number > 0)
-			{
-				error(error);
-				ft_lstdel(players_without_n,free);
-			}
-			// сообщить об ошибке
-			// очистить список и содержимое
-			// вернуть код ошибки
-			if (!ft_strcmp(argv[i], "-dump"))
-				flag_dump(argv[++i], vm);
-			else if (!ft_strcmp(argv[i], "-n"))
-			{
-				// присвоить полученное значение в переменную порядкового номера
-				serial_number = flag_n(argv[++i]);
-				if(serial_number > max_serial_number)
-				// ное значение порядкового номера больше чем значение максимального порядкового номера?
-					max_serial_number = serial_number;
-				// сообщить об ошибке
-				// очистить список и содержимое
-				// вернуть код ошибки
-			}
-		}
-	}
-	if(max_serial_number > col_players)
-		{
-			error("err");
-			ft_lstdel(players_without_n,free);
-		}
+			return (free_players(players_without_n)); // "error: illegal option: argv[i]."
+	if (max_serial_number > col_players)
+		return (free_players(players_without_n)); // "error: the order number is greater than the total number of players."
 	i = 0;
-	// для каждого элемента списка ботов (с начала)
-	while(players_without_n)
+	while (players_without_n)
 	{
 		while (vm->players[i] != NULL)
 			i++;
 		vm->players[i++] = players_without_n->content;
-		// free(node);
+		temp_list = players_without_n;
 		players_without_n = players_without_n->next;
+		free(temp_list);
 	}
-}
-
-int main()
-{
-	return(0);
 }
