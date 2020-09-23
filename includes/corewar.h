@@ -6,13 +6,14 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/28 22:42:44 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/23 19:25:54 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
+# include <stdio.h>
 # include "op.h"
 # include "libftprintf.h"
 
@@ -101,6 +102,8 @@ void			skip_whitespaces(char **line);
 ** arena		 - arena, according to the subject;
 */
 
+# define USAGE "usage: corewar [-dump] cycle_nbr [[-n] player_order file.cor]"
+
 typedef struct	s_process
 {
 	int		pc;
@@ -124,6 +127,9 @@ typedef struct	s_vm
 	char	arena[MEM_SIZE];
 }				t_vm;
 
+int				validation(t_vm *vm, int argc, char **argv);
+int				bot_processing(t_vm *vm, t_list **players, int order,
+					char *file);
 int				init_arena(t_vm *vm, int num_players);
 
 #endif
