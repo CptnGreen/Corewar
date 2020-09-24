@@ -2,6 +2,7 @@
 build
 asm
 valgrind-out.txt
+.vscode
 
 # Prerequisites
 *.d
