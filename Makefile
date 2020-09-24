@@ -6,7 +6,7 @@
 #    By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/08/09 01:38:04 by aimelda          ###   ########.fr        #
+#    Updated: 2020/08/28 21:49:46 by aimelda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,17 @@
 
 CC = clang
 CFLAGS = -Wall -Werror -Wextra
+INC	=	-I "includes/" \
+		-I "ft_printf/includes/" \
+		-I "ft_printf/libft/includes/"
 
 # --------------- ASSEMBLER: PREREQUISITES ------------------
 
-EXEC_ASM = asm.out
+EXEC_ASM = asm
 
 SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
 		main.c \
-		init_bot.c \
 		print_byte_code.c \
 		get_name_or_comment.c \
 		get_name_and_comment.c \
@@ -44,17 +46,9 @@ OBJ_ASM = $(addprefix $(OBJ_DIR)/,$(SRC_RAW_ASM:.c=.o))
 all: asm
 
 asm: libftprintf $(OBJ_DIR) $(OBJ_ASM)
-	$(CC) $(CFLAGS) -o $(EXEC_ASM) $(OBJ_ASM) \
-		-I "includes/" \
-		-I "ft_printf/includes/" \
-		-I "ft_printf/libft/includes/" \
-		-L "ft_printf/" -lftprintf \
-		-L "ft_printf/libft/" -lft
+	$(CC) $(CFLAGS) -o $(EXEC_ASM) $(OBJ_ASM) $(INC) -L "ft_printf/" -lftprintf
 $(OBJ_DIR)/%.o: $(SRC_DIR_ASM)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@ \
-		-I "includes/" \
-		-I "ft_printf/includes/" \
-		-I "ft_printf/libft/includes/" 
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 libftprintf:
@@ -75,7 +69,7 @@ fclean: clean
 re: fclean all
 
 norm: fclean
-	@ norminette includes/corewar.h src/asm
+	@ norminette includes/* src/*
 test: all
 	@ ceedling
 test_asm: all

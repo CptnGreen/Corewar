@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:49:32 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/09 01:45:25 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/08/28 21:47:50 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	del_label(void *node)
 	{
 		free(((t_label*)node)->name);
 		ft_lstdel(&(((t_label*)node)->queue), free);
+		free(node);
 	}
 }
 
@@ -89,7 +90,7 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 			, labels, (t_op*)&g_op_tab[i]))
 			{
 				*instr = '\0';
-				if (set_new_label(labels, line, addr))
+				if (set_new_label(labels, line, addr) == OK)
 					return (OK);
 				*instr = ((t_op*)&g_op_tab[i])->name[0];
 			}
@@ -113,7 +114,10 @@ int			get_exec_code(t_bot *bot, size_t fd)
 			*tmp = '\0';
 		if (*line)
 			if (parse_exec_code(bot, line, &labels) == KO)
+			{
+				free(line);
 				return (check_and_clear_labels(labels, bot->exec_code, KO));
+			}
 		free(line);
 	}
 	if (bot->exec_code_size == 0)
