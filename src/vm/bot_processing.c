@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:29:39 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/23 18:12:24 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/24 18:28:01 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #define MAGIC_HEADER_SIZE 4
 #define DIV_ZEROES_SIZE 4
 #define EXEC_CODE_SIZE_SIZE 4
-#define BUFFER_SIZE MAGIC_HEADER_SIZE + PROG_NAME_LENGTH + DIV_ZEROES_SIZE \
-		+ EXEC_CODE_SIZE_SIZE + COMMENT_LENGTH + DIV_ZEROES_SIZE
+#define BUFFER_SIZE MAGIC_HEADER_SIZE + PROG_NAME_LENGTH + DIV_ZEROES_SIZE + EXEC_CODE_SIZE_SIZE + COMMENT_LENGTH + DIV_ZEROES_SIZE
 
 static int	error(char *str)
 {
@@ -37,8 +36,7 @@ static int	is_correct(char *file_name, int actual_size, int declared_size)
 	if (actual_size > CHAMP_MAX_SIZE)
 		return (error(ft_strjoin(file_name, " has too large code size.")));
 	if (actual_size != declared_size)
-		return error(ft_strjoin(file_name,
-		": actual execution code size doesn't match with the declared size."));
+		return (error(ft_strjoin(file_name, ": actual execution code size doesn't match with the declared size.")));
 	return (OK);
 }
 
@@ -52,7 +50,7 @@ static int	parse_bot(t_bot **bot, char *file_name)
 	|| (fd = open(file_name, O_RDONLY) == -1))
 		return (error(NULL));
 	if (read(fd, &buffer, BUFFER_SIZE) < BUFFER_SIZE)
-		return (error(ft_strjoin(file_name, " is invalid file.")));
+		return (error(ft_strjoin(file_name, " is too small.")));
 	buf_ptr = buffer;
 	if (ft_strncmp(buf_ptr, MAGIC_HEADER, MAGIC_HEADER_SIZE) != 0)
 		return (error(ft_strjoin(file_name, " has incorrect magic header.")));
@@ -81,7 +79,7 @@ int			bot_processing(t_vm *vm, t_list **players, int order, char *file)
 		ft_lstadd(players, tmp);
 		return (parse_bot(&((*players)->content), file));
 	}
-	else if(vm->players[order] == NULL)
+	else if (vm->players[order] == NULL)
 		return (parse_bot(&(vm->players[order]), file));
 	ft_printf("error: two or more players are assigned the same number.");
 	return (KO);
