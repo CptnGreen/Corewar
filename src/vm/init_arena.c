@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:53:12 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/27 23:23:44 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/08 18:43:33 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@ static int	add_process(t_list **players, int address, int num_player)
 	if (!(player = ft_lstnew(NULL)))
 		return (KO);
 	ft_lstadd(players, player);
-	if (!(player->content = malloc(sizeof(t_process))))
+	if (!(player->content = ft_memalloc(sizeof(t_process))))
 		return (KO);
 	((t_process*)player->content)->pc = address;
-	((t_process*)player->content)->carry = 0;
-	((t_process*)player->content)->alive = 0;
-	((t_process*)player->content)->timer = 0;
 	**(((t_process*)player->content)->registries) = num_player; // BIG ENDIAN!!! 4 bytes int!!!
 	return (OK);
 }

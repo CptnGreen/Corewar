@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/23 19:25:54 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/08 20:19:37 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void			skip_whitespaces(char **line);
 */
 
 # define USAGE "usage: corewar [-dump] cycle_nbr [[-n] player_order file.cor]"
+# define INSTRUCTION_NUM 16
+# define DUMP_32 32
 
 typedef struct	s_process
 {
