@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:21:18 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/24 13:39:45 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/27 20:56:30 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_extension(char *file_name)
 
 static int	error(char *err_description)
 {
-	ft_lstdel(g_unordered_players, free);
+	ft_lstdel(&g_unordered_players, free);
 	if (err_description)
 		ft_printf(err_description);
 	return (KO);

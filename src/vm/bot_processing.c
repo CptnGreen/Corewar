@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:29:39 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/24 18:28:01 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/27 20:03:29 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	parse_bot(t_bot **bot, char *file_name)
 	buf_ptr += MAGIC_HEADER_SIZE;
 	ft_memcpy((*bot)->name, buf_ptr, PROG_NAME_LENGTH);
 	buf_ptr += PROG_NAME_LENGTH + DIV_ZEROES_SIZE;
-	ft_memcpy((*bot)->exec_code_size, buf_ptr, EXEC_CODE_SIZE_SIZE);
+	ft_memcpy(&((*bot)->exec_code_size), buf_ptr, EXEC_CODE_SIZE_SIZE);
 	buf_ptr += EXEC_CODE_SIZE_SIZE;
 	ft_memcpy((*bot)->comment, buf_ptr, COMMENT_LENGTH);
 	if (is_correct(file_name, read(fd, &buffer, CHAMP_MAX_SIZE + 1)
@@ -70,14 +70,16 @@ static int	parse_bot(t_bot **bot, char *file_name)
 
 int			bot_processing(t_vm *vm, t_list **players, int order, char *file)
 {
-	t_list	*tmp;
+	t_list	*tmp_lst;
+	t_bot	*tmp_bot;
 
 	if (order == 0)
 	{
-		if (!(tmp = ft_lstnew(NULL)))
+		if (!(tmp_lst = ft_lstnew(NULL)))
 			return (error(NULL));
-		ft_lstadd(players, tmp);
-		return (parse_bot(&((*players)->content), file));
+		ft_lstadd(players, tmp_lst);
+		tmp_bot = (t_bot*)tmp_lst->content;
+		return (parse_bot(&tmp_bot, file));
 	}
 	else if (vm->players[order] == NULL)
 		return (parse_bot(&(vm->players[order]), file));
