@@ -13,6 +13,7 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
+# include <stdio.h>
 # include "op.h"
 # include "libftprintf.h"
 
@@ -38,6 +39,7 @@
 # define INSTRUCTION_MAX_SIZE 14
 # define MAGIC_HEADER "\x00\xea\x83\xf3"
 # define DIV_ZEROES "\x00\x00\x00\x00"
+# define EXEC_CODE_INT 4
 
 typedef struct	s_bot
 {
@@ -100,6 +102,7 @@ void			skip_whitespaces(char **line);
 ** arena		 - arena, according to the subject;
 */
 
+# define USAGE "usage: corewar [-dump] cycle_nbr [[-n] player_order file.cor]"
 # define INSTRUCTION_NUM 16
 # define DUMP_32 32
 
@@ -126,6 +129,9 @@ typedef struct	s_vm
 	char	arena[MEM_SIZE];
 }				t_vm;
 
+int				validation(t_vm *vm, int argc, char **argv);
+int				bot_processing(t_vm *vm, t_list **players, int order,
+					char *file);
 int				init_arena(t_vm *vm, int num_players);
 
 #endif
