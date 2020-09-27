@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/08 20:19:37 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/27 22:51:44 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,6 @@ int				validation(t_vm *vm, int argc, char **argv);
 int				bot_processing(t_vm *vm, t_list **players, int order,
 					char *file);
 int				init_arena(t_vm *vm, int num_players);
+int				fighting(t_vm *vm);
 
 #endif
