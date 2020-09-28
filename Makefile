@@ -6,7 +6,7 @@
 #    By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/08/28 21:49:46 by aimelda          ###   ########.fr        #
+#    Updated: 2020/09/28 13:50:04 by aimelda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ clean:
 	@ make -C ft_printf/libft/ clean
 fclean: clean
 	@ rm -f $(EXEC_ASM)
+	@ make -C ft_printf/ fclean
 	@ make -C ft_printf/libft/ fclean
 
 # --------------- OTHER -------------------------------------

@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 22:40:51 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/27 23:01:51 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 14:00:35 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	free_vm(t_vm *vm)
 	free(vm);
 }
 
-static int	init_vm(void)
+static t_vm	*init_vm()
 {
 	t_vm	*vm;
 
@@ -29,10 +29,10 @@ static int	init_vm(void)
 	if (!vm)
 	{
 		perror("error");
-		return (KO);
+		return (NULL);
 	}
 	vm->dump = -1;
-	return (OK);
+	return (vm);
 }
 
 int			main(int argc, char **argv)

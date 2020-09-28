@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:15:23 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/28 12:51:49 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 15:57:27 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	processes_acts(char *arena, t_list *process)
 			return (OK); // execute the instruction pointed by the current process
 		process = process->next;
 	}
+	return (OK);
 }
 
 static int	dump(char *arena)
@@ -119,7 +120,7 @@ int			fighting(t_vm *vm)
 		}
 		check_up(vm);
 	}
-	ft_printf("Player %d (%s) won",
+	ft_printf("Player %d (%s) won\n",
 		vm->survivor + 1, vm->players[vm->survivor]->name);
 	return (OK);
 }

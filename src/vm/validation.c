@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:21:18 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/27 20:56:30 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 16:00:57 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	error(char *err_description)
 {
 	ft_lstdel(&g_unordered_players, free);
 	if (err_description)
-		ft_printf(err_description);
+		ft_printf("%s\n", err_description);
 	return (KO);
 }
 
@@ -50,12 +50,12 @@ static int	handle_flag(t_vm *vm, char *flag, char *param)
 	num_as_string = ft_itoa(num);
 	if (!ft_strcmp(flag, FLAG_N))
 	{
-		if (ft_strcmp(param, num_as_string) || (num < 1 && num > MAX_PLAYERS))
+		if (ft_strcmp(param, num_as_string) || num < 1 || num > MAX_PLAYERS)
 		{
 			free(num_as_string);
 			return (error("error: invalid player number."));
 		}
-		g_cur_order_num = num - 1;
+		g_cur_order_num = num;
 		if (g_cur_order_num > g_max_order_num)
 			g_max_order_num = g_cur_order_num;
 	}
@@ -73,11 +73,10 @@ static int	arrange_players(t_vm *vm)
 	t_list	*tmp;
 	int		i;
 
-	if (g_max_order_num >= g_num_players)
-		return (error("error: \
-		the order number is greater than the total number of players."));
 	if (g_num_players == 0)
 		return (error(USAGE));
+	if (g_max_order_num > g_num_players)
+		return (error("error: incorrect order number."));
 	i = 0;
 	while (g_unordered_players)
 	{
@@ -110,11 +109,12 @@ int			validation(t_vm *vm, int argc, char **argv)
 			return (error("error: invalid sequence of parameters."));
 		else if (!ft_strcmp(argv[i], FLAG_N) || !ft_strcmp(argv[i], FLAG_DUMP))
 		{
-			if (handle_flag(vm, argv[i], argv[i + 1]) == KO)
+			if (++i == argc)
+				return (error(USAGE));
+			if (handle_flag(vm, argv[i - 1], argv[i]) == KO)
 				return (KO);
-			++i;
 		}
 		else
-			return (error("error: illegal option: argv[i]."));
+			return (error(USAGE));
 	return (arrange_players(vm));
 }
