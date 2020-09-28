@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:15:23 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/17 20:22:58 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 12:51:49 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ int			fighting(t_vm *vm)
 		}
 		check_up(vm);
 	}
+	ft_printf("Player %d (%s) won",
+		vm->survivor + 1, vm->players[vm->survivor]->name);
 	return (OK);
 }
