@@ -6,14 +6,11 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:49:32 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/28 21:47:50 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 16:51:25 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-extern t_op		*g_op_tab[17];
-extern int		g_next_op_tab_elem;
 
 static void	del_label(void *node)
 {

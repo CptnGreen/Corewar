@@ -6,14 +6,11 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 22:40:51 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/28 14:00:35 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 16:56:41 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-#define SUCCESS 0
-#define FAILURE 1
 
 static void	free_vm(t_vm *vm)
 {
@@ -43,9 +40,9 @@ int			main(int argc, char **argv)
 	if ((vm = init_vm()) == KO
 	|| validation(vm, argc, argv) == KO
 	|| fighting(vm) == KO)
-		return_value = FAILURE;
+		return_value = EXIT_FAILURE;
 	else
-		return_value = SUCCESS;
+		return_value = EXIT_SUCCESS;
 	free_vm(vm);
 	return (return_value);
 }

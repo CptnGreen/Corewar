@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/27 22:51:44 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 19:55:08 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include "libftprintf.h"
 
 # include <stdint.h> // delete before push to vogsphere
+
+extern t_op		*g_op_tab[17];
+extern char		g_arg_type_codes[4][4];
+extern int		g_next_op_tab_elem;
 
 /*
 ** Useful defines:
@@ -128,6 +132,8 @@ typedef struct	s_vm
 	int		survivor;
 	char	arena[MEM_SIZE];
 }				t_vm;
+
+extern int		(*g_instructions[INSTRUCTION_NUM])(t_vm *, t_process *);
 
 int				validation(t_vm *vm, int argc, char **argv);
 int				bot_processing(t_vm *vm, t_list **players, int order,

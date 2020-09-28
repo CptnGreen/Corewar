@@ -6,13 +6,11 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 22:17:43 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/28 21:48:50 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 16:52:28 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-extern char		g_arg_type_codes[4][4];
 
 static long		get_dir_or_ind(char **line, t_bot *bot, t_op *ins, char type)
 {

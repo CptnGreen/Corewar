@@ -6,7 +6,7 @@
 #    By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/09/28 13:50:04 by aimelda          ###   ########.fr        #
+#    Updated: 2020/09/28 16:51:01 by aimelda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,7 @@ SRC_RAW_ASM = \
 		new_label.c \
 		tobytes.c \
 		skip_whitespaces.c \
-		get_number.c \
-		op.c
+		get_number.c
 
 SRC_ASM = $(addprefix $(SRC_DIR_ASM)/,$(SRC_RAW_ASM))
 
