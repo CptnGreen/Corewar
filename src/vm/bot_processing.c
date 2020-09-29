@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:29:39 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/28 15:55:26 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/29 19:19:39 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	parse_bot(t_bot **bot, char *file_name)
 	|| (fd = open(file_name, O_RDONLY)) == -1)
 		return (error(NULL));
 	if (read(fd, &buffer, BUFFER_SIZE) < BUFFER_SIZE)
-		return (error(ft_strjoin(file_name, " is too small to be a champion")));	
+		return (error(ft_strjoin(file_name, " is too small to be a champion")));
 	buf_ptr = buffer;
 	if (ft_strncmp(buf_ptr, MAGIC_HEADER, MAGIC_HEADER_SIZE) != 0)
 		return (error(ft_strjoin(file_name, " has incorrect magic header.")));

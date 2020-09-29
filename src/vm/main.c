@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 22:40:51 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/28 16:56:41 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/29 19:21:44 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	free_vm(t_vm *vm)
 	free(vm);
 }
 
-static t_vm	*init_vm()
+static t_vm	*init_vm(void)
 {
 	t_vm	*vm;
 

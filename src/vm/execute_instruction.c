@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:31:04 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/28 19:41:25 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/29 20:29:52 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,77 +19,83 @@ static int	get_position(int pos)
 	return (pos);
 }
 
-static char	get_arg_type(char code)
+static int	get_dir_size(const t_op *instruction)
+{
+	if (instruction->is_dir_like_ind)
+		return (IND_SIZE);
+	return (DIR_SIZE);
+}
+
+static char	get_arg_type(const t_op *instruction, int *size, char code)
 {
 	const char	mask = 3;
 
 	code &= mask;
-	if (code == REG_CODE)
-		return (T_REG);
-	else if (code == DIR_CODE)
-		return (T_DIR);
-	else if (code == IND_CODE)
-		return (T_IND);
-	return (0);
-}
-
-static void	move_process(t_process *process, char *arena)
-{
-	int		dir_size;
-
-	if (g_op_tab[process->instruction - 1]->is_dir_like_ind)
-		dir_size = IND_SIZE;
-	else
-		dir_size = DIR_SIZE;
-	if (g_op_tab[process->instruction - 1]->have_arg_type_code)
+	if (code == IND_CODE)
 	{
-		
+		*size += IND_SIZE;
+		return (T_IND);
 	}
-	else
-		process->pc += 1 + dir_size;
+	else if (code == DIR_CODE)
+	{
+		*size += get_dir_size(instruction);
+		return (T_DIR);
+	}
+	return (T_REG);
 }
 
-static int	code_is_correct(t_op *instruction, char code)
+static int	code_is_correct(const t_op *instruction, char *arena,
+			int *instruction_size, int pc)
 {
-	int		n;
+	int		ret_val;
 	int		i;
+	char	code;
 	char	cur_type;
 
-	n = instruction->arg_number;
-	code >>= (MAX_ARGS_NUMBER - n) * 2;
+	ret_val = 1;
+	code = arena[get_position(pc + 1)];
+	code >>= (MAX_ARGS_NUMBER - instruction->arg_number) * 2;
 	i = 0;
-	while (i < n)
+	while (i < instruction->arg_number)
 	{
-		cur_type = get_arg_type(code);
-		if (instruction->arg_types[i] & cur_type != cur_type)
-			return (0);
+		cur_type = get_arg_type(instruction, instruction_size, code);
+		if (ret_val && (instruction->arg_types[i] & cur_type) != cur_type)
+			ret_val = 0;
+		if (cur_type == T_REG)
+		{
+			if (ret_val && (arena[get_position(pc + *instruction_size)] < 1
+			|| arena[get_position(pc + *instruction_size)] > REG_NUMBER))
+				ret_val = 0;
+			++(*instruction_size);
+		}
 		++i;
 		code >>= 2;
 	}
-	return (1);
+	return (ret_val);
 }
 
 int			execute_instruction(t_vm *vm, t_process *process)
 {
-	const char	type_code = vm->arena[get_position(process->pc + 1)];
-	const char	dir_size = g_op_tab[process->instruction - 1]->is_dir_like_ind ? IND_SIZE : DIR_SIZE;
+	int		instruction_size;
 
-	if (process->instruction <= 0 || process->instruction > INSTRUCTION_NUM)
+	if (process->instruction < 0 || process->instruction >= INSTRUCTION_NUM)
 		process->pc += 1;
 	else
 	{
-		// type_code = vm->arena[get_position(process->pc + 1)];
-		if (g_op_tab[process->instruction - 1]->have_arg_type_code)
+		instruction_size = 1;
+		if (g_op_tab[process->instruction].have_arg_type_code)
 		{
-			if (code_is_correct(g_op_tab[process->instruction - 1], type_code)
-			&& valid_reg())
-			{
-				//if execute successfully;
-			}
+			++instruction_size;
+			if (code_is_correct(&g_op_tab[process->instruction], vm->arena,
+			&instruction_size, process->pc))
+				;//execute;
 		}
 		else
-			;//exec
-		//move
+		{
+			instruction_size += get_dir_size(&g_op_tab[process->instruction]);
+			//execute;
+		}
+		process->pc += instruction_size;
 	}
 	process->pc = get_position(process->pc);
 	return (OK);
