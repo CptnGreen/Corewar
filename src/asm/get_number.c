@@ -6,13 +6,11 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 16:18:48 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/28 21:49:16 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 16:52:50 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-extern char	g_codes_of_arg_type[4][4];
 
 static char	det_sign(char **line)
 {

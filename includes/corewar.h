@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/27 22:51:44 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/29 20:29:32 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include "libftprintf.h"
 
 # include <stdint.h> // delete before push to vogsphere
+
+extern const t_op		g_op_tab[17];
+extern const char		g_arg_type_codes[4][4];
+extern const int		g_next_op_tab_elem;
 
 /*
 ** Useful defines:
@@ -108,12 +112,12 @@ void			skip_whitespaces(char **line);
 
 typedef struct	s_process
 {
-	int		pc;
-	int		timer;
-	char	registries[REG_NUMBER][REG_SIZE];
-	char	instruction;
-	char	carry;
-	char	alive;
+	int				pc;
+	int				timer;
+	char			registries[REG_NUMBER][REG_SIZE];
+	unsigned char	instruction;
+	char			carry;
+	char			alive;
 }				t_process;
 
 typedef struct	s_vm
@@ -129,10 +133,41 @@ typedef struct	s_vm
 	char	arena[MEM_SIZE];
 }				t_vm;
 
+// extern int		(*g_instructions[INSTRUCTION_NUM])(t_vm *, t_process *);
+
 int				validation(t_vm *vm, int argc, char **argv);
 int				bot_processing(t_vm *vm, t_list **players, int order,
 					char *file);
 int				init_arena(t_vm *vm, int num_players);
 int				fighting(t_vm *vm);
+int				execute_instruction(t_vm *vm, t_process *process);
+
+/*
+** Instructions
+*/
+/*
+int				live(t_vm *vm, t_process *process);
+int				ld(t_vm *vm, t_process *process);
+int				st(t_vm *vm, t_process *process);
+int				add(t_vm *vm, t_process *process);
+int				sub(t_vm *vm, t_process *process);
+int				and(t_vm *vm, t_process *process);
+int				or(t_vm *vm, t_process *process);
+int				xor(t_vm *vm, t_process *process);
+int				zjmp(t_vm *vm, t_process *process);
+int				ldi(t_vm *vm, t_process *process);
+int				sti(t_vm *vm, t_process *process);
+int				fork__(t_vm *vm, t_process *process); //test
+int				lld(t_vm *vm, t_process *process);
+int				lldi(t_vm *vm, t_process *process);
+int				lfork(t_vm *vm, t_process *process);
+int				aff(t_vm *vm, t_process *process);
+
+int				(*g_instructions[INSTRUCTION_NUM])(t_vm*, t_process*) =
+{
+	live, ld, st, add, sub, and, or, xor,
+	zjmp, ldi, sti, fork__, lld, lldi, lfork, aff
+};
+*/
 
 #endif
