@@ -6,13 +6,14 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/08 20:19:37 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/01 21:46:39 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
+# include <stdio.h>
 # include "op.h"
 # include "libftprintf.h"
 

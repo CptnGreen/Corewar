@@ -1,7 +1,8 @@
 #include "corewar.h"
 
-void  zjmp(t_vm *vm, t_process *process)
+int		zjmp(t_vm *vm, t_process *process)
 {
-  if (process->carry == 1)
-      process->pc = (int)(process) + (((int)process + 1) % IDX_MOD);
+	if (process->carry == 1)
+		process->pc += *(short*)(vm->arena + process->pc + 1) % IDX_MOD;
+	return (OK);
 }
