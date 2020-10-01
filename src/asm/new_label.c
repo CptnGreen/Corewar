@@ -6,13 +6,11 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 00:19:18 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/28 21:49:25 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 16:53:54 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-extern char	g_codes_of_arg_type[4][4];
 
 static t_list	*is_exist(t_list *node, char *name, size_t len, int addr)
 {
