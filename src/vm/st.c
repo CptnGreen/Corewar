@@ -6,25 +6,39 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 22:40:02 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/01 22:40:03 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/02 16:04:10 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+/*
+** SUBJECT:
+** take a registry and a registry or an indirect and store the value of the
+** registry toward a second argument. Its opcode is 0x03. For example,
+** st r1, 42 store the value of r1 at the address (PC + (42 % IDX_MOD))
+*/
+
 int		st(t_vm *vm, t_process *process)
 {
-	char	type;
-	char	reg_number;
-	void	*arg_value;
+	char			type;
+	unsigned char	reg_number;
+	short			ind;
+	unsigned char	reg2;
 
-	type = vm->arena[process->pc + 1];
-	reg_number = vm->arena[process->pc + 2] - 1;
-	arg_value = vm->arena + process->pc + 2;
+	type = vm->arena[get_position(process->pc + 1)];
+	reg_number = vm->arena[get_position(process->pc + 2)] - 1;
 	if (type >> 4 & T_IND)
-		arg_value = vm->arena + process->pc + *(short*)arg_value % IDX_MOD;
+	{
+		copy_from_arena(vm->arena, &ind, process->pc + 3, IND_SIZE);
+		copy_to_arena(vm->arena, process->registries[reg_number],
+		process->pc + ind % IDX_MOD, REG_SIZE);
+	}
 	else
-		arg_value = process->registries[*(char*)arg_value];
-	ft_memcpy(arg_value, process->registries[reg_number], REG_SIZE);
+	{
+		reg2 = vm->arena[get_position(process->pc + 3)] - 1;
+		ft_memcpy(process->registries[reg2],
+		process->registries[reg_number], REG_SIZE);
+	}
 	return (OK);
 }

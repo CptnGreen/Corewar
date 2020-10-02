@@ -6,19 +6,27 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 22:06:38 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/01 22:06:40 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/02 16:11:24 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+/*
+** SUBJECT:
+** The opcode is 10 in the hexadecimal. There is an argument’s coding byte,
+** even if it’s a bit silly because there is only 1 argument that is a registry,
+** which is a registry, and its content is interpreted by the character’s ASCII
+** value to display on the standard output. The code is modulo 256.
+*/
+
 int		aff(t_vm *vm, t_process *process)
 {
-	char	reg_number;
-	int		*arg_value;
+	unsigned char	reg_number;
+	int				*arg_value;
 
-	reg_number = vm->arena[process->pc + 2] - 1;
-	arg_value = process->registries[reg_number];
+	reg_number = vm->arena[get_position(process->pc + 2)] - 1;
+	arg_value = (int*)process->registries[reg_number];
 	ft_printf("Aff: %c\n", (char)*arg_value);
 	return (OK);
 }

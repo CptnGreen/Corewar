@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/01 21:46:39 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/02 16:48:49 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct	s_vm
 	char	arena[MEM_SIZE];
 }				t_vm;
 
-// extern int		(*g_instructions[INSTRUCTION_NUM])(t_vm *, t_process *);
+extern int		(*g_instructions[INSTRUCTION_NUM])(t_vm *, t_process *);
 
 int				validation(t_vm *vm, int argc, char **argv);
 int				bot_processing(t_vm *vm, t_list **players, int order,
@@ -141,11 +141,14 @@ int				bot_processing(t_vm *vm, t_list **players, int order,
 int				init_arena(t_vm *vm, int num_players);
 int				fighting(t_vm *vm);
 int				execute_instruction(t_vm *vm, t_process *process);
+int				get_position(int pos);
+void			copy_to_arena(char *arena, void *src, int pos, int size);
+void			copy_from_arena(char *arena, void *dst, int pos, int size);
 
 /*
 ** Instructions
 */
-/*
+
 int				live(t_vm *vm, t_process *process);
 int				ld(t_vm *vm, t_process *process);
 int				st(t_vm *vm, t_process *process);
@@ -157,17 +160,10 @@ int				xor(t_vm *vm, t_process *process);
 int				zjmp(t_vm *vm, t_process *process);
 int				ldi(t_vm *vm, t_process *process);
 int				sti(t_vm *vm, t_process *process);
-int				fork__(t_vm *vm, t_process *process); //test
+int				fork__(t_vm *vm, t_process *process);
 int				lld(t_vm *vm, t_process *process);
 int				lldi(t_vm *vm, t_process *process);
 int				lfork(t_vm *vm, t_process *process);
 int				aff(t_vm *vm, t_process *process);
-
-int				(*g_instructions[INSTRUCTION_NUM])(t_vm*, t_process*) =
-{
-	live, ld, st, add, sub, and, or, xor,
-	zjmp, ldi, sti, fork__, lld, lldi, lfork, aff
-};
-*/
 
 #endif

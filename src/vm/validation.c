@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:21:18 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/28 16:00:57 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/02 16:47:22 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ static int	arrange_players(t_vm *vm)
 		return (error(USAGE));
 	if (g_max_order_num > g_num_players)
 		return (error("error: incorrect order number."));
-	i = 0;
+	i = g_num_players - 1;
 	while (g_unordered_players)
 	{
 		while (vm->players[i] != NULL)
-			i++;
-		vm->players[i++] = g_unordered_players->content;
+			--i;
+		vm->players[i--] = g_unordered_players->content;
 		tmp = g_unordered_players;
 		g_unordered_players = g_unordered_players->next;
 		free(tmp);

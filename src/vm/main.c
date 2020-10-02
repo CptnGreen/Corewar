@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 22:40:51 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/29 19:21:44 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/02 17:11:26 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 static void	free_vm(t_vm *vm)
 {
+	int		i;
+
+	i = MAX_PLAYERS;
+	while (i--)
+		free(vm->players[i]);
 	ft_lstdel(&(vm->processes), free);
 	free(vm);
 }
