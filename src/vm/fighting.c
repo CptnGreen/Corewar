@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:15:23 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/29 20:29:42 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/06 18:31:51 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	dump(char *arena)
 		j = 0;
 		while (j++ < DUMP_32)
 		{
-			ft_printf("%0.2x ", arena[i]);
+			ft_printf("%02x ", (unsigned char)arena[i]);
 			++i;
 		}
 		ft_printf("\n");

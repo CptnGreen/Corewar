@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 22:40:51 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 17:11:26 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/06 17:47:28 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,25 @@ static void	free_vm(t_vm *vm)
 	while (i--)
 		free(vm->players[i]);
 	ft_lstdel(&(vm->processes), free);
-	free(vm);
 }
 
-static t_vm	*init_vm(void)
+static void	init_vm(t_vm *vm)
 {
-	t_vm	*vm;
-
-	vm = (t_vm*)ft_memalloc(sizeof(t_vm));
-	if (!vm)
-	{
-		perror("error");
-		return (NULL);
-	}
+	ft_bzero(vm, sizeof(t_vm));
 	vm->dump = -1;
-	return (vm);
 }
 
 int			main(int argc, char **argv)
 {
-	t_vm	*vm;
+	t_vm	vm;
 	int		return_value;
 
-	if ((vm = init_vm()) == KO
-	|| validation(vm, argc, argv) == KO
-	|| fighting(vm) == KO)
+	init_vm(&vm);
+	if (validation(&vm, argc, argv) == KO
+	|| fighting(&vm) == KO)
 		return_value = EXIT_FAILURE;
 	else
 		return_value = EXIT_SUCCESS;
-	free_vm(vm);
+	free_vm(&vm);
 	return (return_value);
 }

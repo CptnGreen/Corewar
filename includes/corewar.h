@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 16:48:49 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/06 18:29:20 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			skip_whitespaces(char **line);
 ** arena		 - arena, according to the subject;
 */
 
-# define USAGE "usage: corewar [-dump] cycle_nbr [[-n] player_order file.cor]"
+# define USAGE "usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor]"
 # define INSTRUCTION_NUM 16
 # define DUMP_32 32
 
