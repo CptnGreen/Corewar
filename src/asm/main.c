@@ -6,14 +6,11 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 15:59:50 by rfrieda           #+#    #+#             */
-/*   Updated: 2020/08/09 01:37:54 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/28 16:53:44 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-#define SUCCESS 0
-#define FAILURE 1
 
 static int	check_extension(char *file_name)
 {
@@ -34,8 +31,13 @@ int			main(int ac, char **av)
 	int		fd;
 
 	i = 0;
+<<<<<<< HEAD
 	if (!(bot = (t_bot *)ft_memalloc(sizeof(t_bot))))
 		return (FAILURE);
+=======
+	if (!(bot = (t_bot *)malloc(sizeof(t_bot))))
+		return (EXIT_FAILURE);
+>>>>>>> 00cb53e4f8f6b75f18a73f5bb14369d573328e4c
 	while (++i < ac)
 	{
 		ft_memset(bot, '\0', sizeof(t_bot));
@@ -60,5 +62,5 @@ int			main(int ac, char **av)
 		}//del
 	}
 	free(bot);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

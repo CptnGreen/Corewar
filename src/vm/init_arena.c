@@ -6,7 +6,7 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:53:12 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/08 18:43:33 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/29 18:56:16 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	add_process(t_list **players, int address, int num_player)
 ** - initializes the list of original processes;
 ** - saves the order numbers of the players in the first register of processes;
 ** - sets initial value of cycles_to_die equal to CYCLE_TO_DIE;
+** - sets initial value of survivor equal to the latest player's number;
 */
 
 int			init_arena(t_vm *vm, int num_players)
@@ -52,5 +53,6 @@ int			init_arena(t_vm *vm, int num_players)
 		offset += delta;
 	}
 	vm->cycles_to_die = CYCLE_TO_DIE;
+	vm->survivor = num_players - 1;
 	return (OK);
 }

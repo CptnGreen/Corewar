@@ -6,13 +6,15 @@
 /*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 00:19:18 by aimelda           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/24 22:19:32 by slisandr         ###   ########.fr       */
+=======
+/*   Updated: 2020/09/28 16:53:54 by aimelda          ###   ########.fr       */
+>>>>>>> 00cb53e4f8f6b75f18a73f5bb14369d573328e4c
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-extern char	g_codes_of_arg_type[4][4];
 
 static t_list	*is_exist(t_list *node, char *name, size_t len, int addr)
 {

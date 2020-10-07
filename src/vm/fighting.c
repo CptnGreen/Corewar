@@ -6,13 +6,11 @@
 /*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:15:23 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/17 20:22:58 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/06 18:31:51 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-extern t_op		*g_op_tab[17];
 
 static void	introduce_players(t_bot **players)
 {
@@ -28,7 +26,7 @@ static void	introduce_players(t_bot **players)
 	}
 }
 
-static int	processes_acts(char *arena, t_list *process)
+static int	processes_acts(t_vm *vm, t_list *process)
 {
 	t_process	*cur;
 
@@ -37,16 +35,17 @@ static int	processes_acts(char *arena, t_list *process)
 		cur = (t_process*)process->content;
 		if (cur->timer == 0)
 		{
-			cur->instruction = arena[cur->pc];
-			if (cur->instruction > 0 && cur->instruction <= INSTRUCTION_NUM)
-				cur->timer = g_op_tab[cur->instruction - 1]->cool_down;
+			cur->instruction = vm->arena[cur->pc] - 1;
+			if (cur->instruction >= 0 && cur->instruction < INSTRUCTION_NUM)
+				cur->timer = g_op_tab[cur->instruction].cool_down;
 		}
 		if (cur->timer > 0)
 			--(cur->timer);
-		if (cur->timer == 0)
-			return (OK); // execute the instruction pointed by the current process
+		if (cur->timer == 0 && execute_instruction(vm, cur) == KO)
+			return (KO);
 		process = process->next;
 	}
+	return (OK);
 }
 
 static int	dump(char *arena)
@@ -61,7 +60,7 @@ static int	dump(char *arena)
 		j = 0;
 		while (j++ < DUMP_32)
 		{
-			ft_printf("%0.2x ", arena[i]);
+			ft_printf("%02x ", (unsigned char)arena[i]);
 			++i;
 		}
 		ft_printf("\n");
@@ -114,10 +113,13 @@ int			fighting(t_vm *vm)
 			if (vm->num_cycle == vm->dump)
 				return (dump(vm->arena));
 			++(vm->num_cycle);
-			processes_acts(vm->arena, vm->processes);
+			if (processes_acts(vm, vm->processes) == KO)
+				return (KO);
 			--countdown;
 		}
 		check_up(vm);
 	}
+	ft_printf("Player %d (%s) won\n",
+		vm->survivor + 1, vm->players[vm->survivor]->name);
 	return (OK);
 }

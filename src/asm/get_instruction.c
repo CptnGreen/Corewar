@@ -6,13 +6,15 @@
 /*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 22:17:43 by aimelda           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/24 22:32:51 by slisandr         ###   ########.fr       */
+=======
+/*   Updated: 2020/09/28 16:52:28 by aimelda          ###   ########.fr       */
+>>>>>>> 00cb53e4f8f6b75f18a73f5bb14369d573328e4c
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-extern char		g_arg_type_codes[4][4];
 
 static long		get_dir_or_ind(char **line, t_bot *bot, t_op *ins, char type)
 {
