@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_instruction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 22:17:43 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/28 21:48:50 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/09/24 22:32:51 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int		get_arg_type(t_bot *bot, char **line, t_op *ins, char permitted)
 	if (**line == 'r')
 	{
 		++(*line);
-		if ((permitted & T_REG)
-		&& (bot->exec_code[bot->exec_code_size] = (char)get_number(line)) > 0
-		&& bot->exec_code[bot->exec_code_size++] <= REG_NUMBER)
+		if ((permitted & T_REG) &&
+			(bot->exec_code[bot->exec_code_size] = (char)get_number(line)) > 0 &&
+			bot->exec_code[bot->exec_code_size++] <= REG_NUMBER)
 			return (REG_CODE);
 	}
 	else if (**line == '%')
@@ -52,11 +52,8 @@ static int		get_arg_type(t_bot *bot, char **line, t_op *ins, char permitted)
 		if (permitted & T_DIR)
 			return (get_dir_or_ind(line, bot, ins, T_DIR));
 	}
-	else
-	{
-		if (permitted & T_IND)
-			return (get_dir_or_ind(line, bot, ins, T_IND));
-	}
+	else if (permitted & T_IND)
+		return (get_dir_or_ind(line, bot, ins, T_IND));
 	return (KO);
 }
 
@@ -87,8 +84,8 @@ static int		get_value(t_label *label, t_bot *bot, char *arg_type, int addr)
 		tobytes(bot->exec_code + bot->exec_code_size, label->addr - addr, size);
 	else
 	{
-		if (!(value = ft_lstnew(NULL))
-		|| !(value->content = malloc(sizeof(t_deferred))))
+		if (!(value = ft_lstnew(NULL)) ||
+			!(value->content = malloc(sizeof(t_deferred))))
 			return (KO);
 		ft_lstadd(&(label->queue), value);
 		((t_deferred*)value->content)->dest_addr = bot->exec_code_size;
@@ -101,8 +98,8 @@ static int		get_value(t_label *label, t_bot *bot, char *arg_type, int addr)
 	return ((*arg_type = IND_CODE));
 }
 
-int				get_instruction(t_bot *bot, char *line, t_list **labels
-					, t_op *ins)
+int				get_instruction(
+					t_bot *bot, char *line, t_list **labels, t_op *ins)
 {
 	int		instr_addr;
 	int		i;
@@ -116,9 +113,9 @@ int				get_instruction(t_bot *bot, char *line, t_list **labels
 	while (i < ins->arg_number)
 	{
 		skip_whitespaces(&line);
-		if (!(argtype = get_arg_type(bot, &line, ins, (ins->arg_types)[i++]))
-		|| ((argtype & T_LAB) &&
-		!get_value(check_label(&line, labels), bot, &argtype, instr_addr)))
+		if (!(argtype = get_arg_type(bot, &line, ins, (ins->arg_types)[i++])) ||
+			((argtype & T_LAB) &&
+			!get_value(check_label(&line, labels), bot, &argtype, instr_addr)))
 			return (KO);
 		if (ins->have_arg_type_code)
 			bot->exec_code[instr_addr + 1] |= g_arg_type_codes[(int)argtype][i];

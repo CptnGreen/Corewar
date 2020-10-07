@@ -107,6 +107,7 @@
     - stdout_pretty_tests_report
     - module_generator
     - compile_commands_json
+    - xml_tests_report
 
 :module_generator:
   :inc_root: test/includes/

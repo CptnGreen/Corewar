@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_get_exec_code.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/24 12:52:04 by slisandr          #+#    #+#             */
+/*   Updated: 2020/09/24 13:18:09 by slisandr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unity.h"
 
 #include "get_exec_code.h"
+#include "sys/stat.h"
 
 TEST_FILE("init_bot.c")
 TEST_FILE("get_instruction.c")

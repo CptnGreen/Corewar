@@ -34,7 +34,7 @@ int			main(int ac, char **av)
 	int		fd;
 
 	i = 0;
-	if (!(bot = (t_bot *)malloc(sizeof(t_bot))))
+	if (!(bot = (t_bot *)ft_memalloc(sizeof(t_bot))))
 		return (FAILURE);
 	while (++i < ac)
 	{

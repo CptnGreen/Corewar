@@ -1,4 +1,5 @@
 #include "unity.h"
+#include "sys/stat.h"
 
 #include "get_name_and_comment.h"
 
@@ -15,7 +16,7 @@ void tearDown(void)
 }
 
 /*
-** In tests below function must return OK:
+** In tests below function must return OK
 */
 
 void test_valid_name_oneline_comment_oneline(void)
