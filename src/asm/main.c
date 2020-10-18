@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 15:59:50 by rfrieda           #+#    #+#             */
-/*   Updated: 2020/09/28 16:53:44 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/19 00:1 :31y slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+#define NOT_VALID 0
+#define VALID 1
+
+/*
+** Files to be passed to asm must end with ".s"
+*/
 
 static int	check_extension(char *file_name)
 {
@@ -24,6 +31,32 @@ static int	check_extension(char *file_name)
 	return (OK);
 }
 
+/*
+** Called from main() on every filename passed to asm as an command line
+** argument. Corresponding files are to be opened, read from, processed
+** and validated.
+*/
+
+int			validate_and_process_file(char *file_name, t_bot *bot, int fd)
+{
+	ft_memset(bot, '\0', sizeof(t_bot));
+	if (check_extension(file_name) == BAD_EXT ||
+		(fd = open(file_name, O_RDONLY) == -1))
+	{
+		return (NOT_VALID);
+	}
+	if (!get_name_and_comment(bot, fd) ||
+		!get_exec_code(bot, fd))
+	{
+		close(fd);
+		return (NOT_VALID);
+	}
+	close(fd);
+	if (!print_byte_code(file_name, bot))
+		return (NOT_VALID);
+	return (VALID);
+}
+
 int			main(int ac, char **av)
 {
 	t_bot	*bot;
@@ -31,36 +64,14 @@ int			main(int ac, char **av)
 	int		fd;
 
 	i = 0;
-<<<<<<< HEAD
 	if (!(bot = (t_bot *)ft_memalloc(sizeof(t_bot))))
-		return (FAILURE);
-=======
-	if (!(bot = (t_bot *)malloc(sizeof(t_bot))))
 		return (EXIT_FAILURE);
->>>>>>> 00cb53e4f8f6b75f18a73f5bb14369d573328e4c
 	while (++i < ac)
 	{
-		ft_memset(bot, '\0', sizeof(t_bot));
-		if (check_extension(av[i]) == BAD_EXT
-		|| (fd = open(av[i], O_RDONLY)) == -1)
-		{//del
-			ft_putstr_fd("ERROR: Invalid extension or file can't opened\n", STDERR_FILENO);//del
+		if (validate_and_process_file(av[i], bot, fd) == NOT_VALID)
 			continue ;
-		}//del
-		if (!get_name_and_comment(bot, fd)
-		|| !get_exec_code(bot, fd))
-		{
-			ft_putstr_fd("ERROR: Error in get_name_and_comment() or in get_exec_code()\n", STDERR_FILENO);//del
-			close(fd);
-			continue ;
-		}
-		close(fd);
-		if (!print_byte_code(av[i], bot))
-		{//del
-			ft_putstr_fd("ERROR: Error in printing byte code\n", STDERR_FILENO);//del
-			continue ;
-		}//del
 	}
 	free(bot);
+	bot = NULL;
 	return (EXIT_SUCCESS);
 }
