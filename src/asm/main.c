@@ -37,8 +37,10 @@ static int	check_extension(char *file_name)
 ** and validated.
 */
 
-int			validate_and_process_file(char *file_name, t_bot *bot, int fd)
+int			validate_and_process_file(char *file_name, t_bot *bot)
 {
+	int		fd;
+
 	ft_memset(bot, '\0', sizeof(t_bot));
 	if (check_extension(file_name) == BAD_EXT ||
 		(fd = open(file_name, O_RDONLY) == -1))
@@ -61,14 +63,13 @@ int			main(int ac, char **av)
 {
 	t_bot	*bot;
 	int		i;
-	int		fd;
 
 	i = 0;
 	if (!(bot = (t_bot *)ft_memalloc(sizeof(t_bot))))
 		return (EXIT_FAILURE);
 	while (++i < ac)
 	{
-		if (validate_and_process_file(av[i], bot, fd) == NOT_VALID)
+		if (validate_and_process_file(av[i], bot) == NOT_VALID)
 			continue ;
 	}
 	free(bot);
