@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 03:59:47 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/09 01:53:16 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/20 00:32:00 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef OP_C
+# define OP_C
 
 #include "corewar.h"
 
@@ -48,3 +51,5 @@ const char	g_arg_type_codes[4][4] =
 	{0, 128, 32, 8},
 	{0, 192, 48, 12}
 };
+
+#endif
