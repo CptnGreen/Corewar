@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+         #
+#    By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/09/28 16:51:01 by aimelda          ###   ########.fr        #
+#    Updated: 2020/10/20 23:28:46 by slisandr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all clean fclean re libftprintf norm asm test
 
-CC = clang
+CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 INC	=	-I "includes/" \
 		-I "ft_printf/includes/" \

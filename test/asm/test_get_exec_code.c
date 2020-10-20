@@ -6,7 +6,7 @@
 /*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 12:52:04 by slisandr          #+#    #+#             */
-/*   Updated: 2020/09/24 13:18:09 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/10/20 23:20:19 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void test_valid_from_brazhnik(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("loop:\n\t\tsti r1, %:live, %1\nlive:\n\t\tlive %0\n\t\tld %0, r2\n\t\tzjmp %:loop\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -57,6 +58,7 @@ void test_valid_more_whitespaces(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("tir:	sti	r1,%:tirb,%1\n\tld	%123 ,r10#comment\n\tld	%1   ,  r1\n  #so  \n\tld	%0,r11\n\n\n\ntirb:	live	%1\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -73,6 +75,7 @@ void test_valid_label_points_two_addresses(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("tir:	sti	r1,%:tirb,%1\n\tld	%123 ,r10\n\tld	%1   ,  r1\n\n\n \t  tirb:\n\n\n\tld	%0,r11\n\n\n\ntirb:	live	%1\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -89,6 +92,7 @@ void test_valid_big_numbers_and_same_names(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("fork:	 fork  %:forka #fork\nforka:      sti r1, %:fork, %-10000000000000000000000\nsti r1, %:fork, %543546576345767642342345625\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -105,6 +109,7 @@ void test_valid_bot_car_from_champs(void)
     t_bot	*bot;
 
     fd = open("test/asm/Car.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
 	get_exec_code(bot, fd);
@@ -124,6 +129,7 @@ void test_invalid_nonexistent_label(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("tir:	sti	r1,%:tirb,%1\n\tld	%123 ,r10\n\tld	%1   ,  r1\n\tld	%0,r11\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -138,6 +144,7 @@ void test_invalid_extra_symbol(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("tir:	sti	r1,%:tirb,%1    s\n\ntirb:	live	%1", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -152,6 +159,7 @@ void test_invalid_no_instruction(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -166,6 +174,7 @@ void test_invalid_no_instruction_only_comment(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd(" #comment\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -180,6 +189,7 @@ void test_invalid_missed_number(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("fork:	 fork  %:forka #fork\nforka:      sti r1, %, %5\nsti r1, %:fork, %5\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
@@ -194,6 +204,7 @@ void test_invalid_separator_char_at_the_end_of_instruction(void)
     t_bot	*bot;
 
     fd = open("test/asm/bot_test.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     ft_putstr_fd("tir:	sti	r1,%:tirb,%1\n\tld	%123 ,r10\n\tld	%1   ,  r1,\n\n\n \t  tirb:\n\n\n\tld	%0,r11\n\n\n\ntirb:	live	%1\n", fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));

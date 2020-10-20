@@ -6,7 +6,7 @@
 /*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 22:17:43 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/19 00:50:42 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/10/21 00:12:46 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ static int		get_value(t_label *label, t_bot *bot, char *arg_type, int addr)
 		return ((*arg_type = DIR_CODE));
 	return ((*arg_type = IND_CODE));
 }
+
+/*
+** Called from get_exec_code()
+*/
 
 int				get_instruction(
 					t_bot *bot, char *line, t_list **labels, t_op *ins)
