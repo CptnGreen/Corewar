@@ -18,7 +18,7 @@ jobs:
     - name: install ceedling
       run: sudo gem install ceedling
     - name: add ceedling to path
-      run: export PATH="$PATH:~/.gem/ruby/2.7.0/bin"
+      run: export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
     - name: make libs
       run: make -C ft_printf
     - name: run tests
