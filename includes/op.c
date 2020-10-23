@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 03:59:47 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/20 00:32:00 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/10/23 22:27:31 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ const t_op	g_op_tab[17] =
 	{"aff", 3, 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{0, 0, 0, {0}, 0, 0, 0, 0, 0}
 };
-
-const int	g_next_op_tab_elem = sizeof(t_op) / sizeof(t_op*);
 
 const char	g_arg_type_codes[4][4] =
 {

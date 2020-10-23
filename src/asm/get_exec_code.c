@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_exec_code.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:49:32 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/21 00:20:19 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/10/23 22:28:06 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,22 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 	skip_whitespaces(&line);
 	addr = bot->exec_code_size;
 	i = 0;
-	while (((t_op*)&g_op_tab[i])->name_len)
+	while (g_op_tab[i].name_len)
 	{
 		instr = line - 1;
-		while ((instr = ft_strstr(instr + 1, ((t_op*)&g_op_tab[i])->name)))
+		while ((instr = ft_strstr(instr + 1, g_op_tab[i].name)))
 		{
-			if (get_instruction(bot, instr + ((t_op *)&g_op_tab[i])->name_len,
+			if (get_instruction(bot, instr + g_op_tab[i].name_len,
 								labels, (t_op *)&g_op_tab[i]))
 			{
 				*instr = '\0';
 				if (set_new_label(labels, line, addr) == OK)
 					return (OK);
-				*instr = ((t_op*)&g_op_tab[i])->name[0];
+				*instr = g_op_tab[i].name[0];
 			}
 			bot->exec_code_size = addr;
 		}
-		i += g_next_op_tab_elem;
+		++i;
 	}
 	return (set_new_label(labels, line, addr));
 }
