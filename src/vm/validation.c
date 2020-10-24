@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:21:18 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 16:47:22 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/25 02:05:21 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	check_extension(char *file_name)
 
 	len = ft_strlen(file_name);
 	extension_len = ft_strlen(".cor");
-	if (len <= extension_len
-	|| ft_strcmp(file_name + len - extension_len, ".cor"))
+	if (len <= extension_len ||
+		ft_strcmp(file_name + len - extension_len, ".cor"))
 		return (BAD_EXT);
 	return (OK);
 }
@@ -100,8 +100,8 @@ int			validation(t_vm *vm, int argc, char **argv)
 		{
 			if (++g_num_players > MAX_PLAYERS)
 				return (error("error: too many players."));
-			if (bot_processing(vm, &g_unordered_players
-			, g_cur_order_num, argv[i]) == KO)
+			if (bot_processing(vm, &g_unordered_players,
+							   g_cur_order_num, argv[i]) == KO)
 				return (error(NULL));
 			g_cur_order_num = 0;
 		}
