@@ -6,7 +6,7 @@
 /*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 12:52:04 by slisandr          #+#    #+#             */
-/*   Updated: 2020/10/24 14:19:35 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:28:27 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void test_valid_bot_car_from_champs(void)
     size_t	fd;
     t_bot	*bot;
 
-    TEST_IGNORE_MESSAGE("Skip for now");
-    fd = open("test/asm/Car.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    // TEST_IGNORE_MESSAGE("Skip for now");
+    fd = open("resources/vm_champs/champs/Car.s", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     TEST_ASSERT_NOT_EQUAL_INT(-1, fd);
     lseek(fd, 0, SEEK_SET);
     bot = (t_bot *)ft_memalloc(sizeof(t_bot));
