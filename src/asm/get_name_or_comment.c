@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_name_or_comment.c                           :+:      :+:    :+:   */
+/*   get_name_or_comment.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slisandr <slisandr@student.21-sc...>       +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 21:47:18 by slisandr          #+#    #+#             */
-/*   Updated: 2020/07/25 20:31:12 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/10/25 01:23:07 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		trim_rest_of_line(char *line)
 }
 
 /*
-** This function is called from get_name_and_comment().
+** This function is called from [get_name_and_comment()]->read_data().
 ** It is included as a separate module in order to be easily
 ** tested.
 **
