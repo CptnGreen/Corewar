@@ -14,6 +14,10 @@
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64"
+            "compilerArgs": [
+                "-Wall",
+                "-Werror",
+                "-Wextra"
         }
     ],
     "version": 4

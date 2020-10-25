@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:15:23 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/06 18:31:51 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/25 11:09:56 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	processes_acts(t_vm *vm, t_list *process)
 		if (cur->timer == 0)
 		{
 			cur->instruction = vm->arena[cur->pc] - 1;
-			if (cur->instruction >= 0 && cur->instruction < INSTRUCTION_NUM)
+			if (cur->instruction < INSTRUCTION_NUM)
 				cur->timer = g_op_tab[cur->instruction].cool_down;
 		}
 		if (cur->timer > 0)
