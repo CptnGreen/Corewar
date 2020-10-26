@@ -44,7 +44,7 @@ int			validate_and_process_file(char *file_name, t_bot *bot)
 
 	ft_memset(bot, '\0', sizeof(t_bot));
 	if (check_extension(file_name) == BAD_EXT ||
-		(fd = open(file_name, O_RDONLY) == -1))
+		(fd = open(file_name, O_RDONLY)) == -1)
 	{
 		return (NOT_VALID);
 	}
@@ -62,18 +62,16 @@ int			validate_and_process_file(char *file_name, t_bot *bot)
 
 int			main(int ac, char **av)
 {
-	t_bot	*bot;
+	t_bot	bot;
 	int		i;
 
 	i = 0;
-	if (!(bot = (t_bot *)ft_memalloc(sizeof(t_bot))))
-		return (EXIT_FAILURE);
 	while (++i < ac)
 	{
-		if (validate_and_process_file(av[i], bot) == NOT_VALID)
-			continue ;
+		if (validate_and_process_file(av[i], &bot) == NOT_VALID)
+			ft_printf("%s cannot be converted to bytecode.\n", av[i]);
+		else
+			ft_printf("%s was successfully converted to bytecode.\n", av[i]);
 	}
-	free(bot);
-	bot = NULL;
 	return (EXIT_SUCCESS);
 }
