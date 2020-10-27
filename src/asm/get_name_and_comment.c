@@ -16,6 +16,8 @@
 #define COMMENT 1
 
 /*
+** Called from get_name_and_comment()
+**
 ** This function skips
 ** - comments
 ** - empty lines

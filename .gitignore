@@ -3,8 +3,6 @@ build
 asm
 vm
 valgrind-out.txt
-.vscode
-.vscode/c_cpp_properties.json
 .DS_Store
 
 # Prerequisites
