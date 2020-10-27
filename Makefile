@@ -122,6 +122,3 @@ unit-test: all
 func-test: all
 	./$(EXEC_ASM) resources/vm_champs/champs/championships/2014/bguy/sam_2.0.s
 	./$(EXEC_VM) resources/vm_champs/champs/championships/2014/bguy/sam_2.0.cor
-memcheck: asm
-	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./$(EXEC_ASM)
-	@ vim valgrind-out.txt
