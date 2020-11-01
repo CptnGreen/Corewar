@@ -22,7 +22,9 @@ jobs:
     - name: "Make libs"
       run: make -C ft_printf
     - name: "Run Ceedling unit-tests"
-      run: ceedling test
+      run: |
+        pwd
+        ceedling test
     - name: "Install norminette"
       run: |
         sudo apt-get install ruby ruby-bundler ruby-dev build-essential
