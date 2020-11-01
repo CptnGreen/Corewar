@@ -25,8 +25,6 @@ jobs:
         git clone https://github.com/42Paris/norminette.git ~/.norminette/
         cd ~/.norminette/
         bundle
-        echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.bashrc
-        source ~/.bashrc
     - name: "Make libs"
       run: make -C ft_printf
     - name: "Run Ceedling unit-tests"
@@ -34,6 +32,6 @@ jobs:
     - name: "Run norminette tests"
       run: |
         cd ~/work/Corewar/Corewar
-        norminette src/* includes/* 
-        norminette ft_printf/src* ft_printf/includes/*   
-        norminette ft_printf/libft/src* ft_printf/libft/includes/*
+        ~/.norminette/norminette.rb src/* includes/* 
+        ~/.norminette/norminette.rb ft_printf/src* ft_printf/includes/*   
+        ~/.norminette/norminette.rb ft_printf/libft/src* ft_printf/libft/includes/*
