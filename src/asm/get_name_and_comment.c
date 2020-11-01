@@ -6,7 +6,7 @@
 /*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 21:47:18 by slisandr          #+#    #+#             */
-/*   Updated: 2020/10/25 01:23:38 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/11/01 08:15:17 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int			get_name_and_comment(t_bot *bot, size_t fd)
 		if (!(line = skip_to_actual_data(fd)) ||
 			!read_data(bot, line, found, fd))
 			break;
+		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	if (found[NAME] == 1 && found[COMMENT] == 1)

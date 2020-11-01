@@ -2,7 +2,7 @@
 
 declare bot_dir="${PWD}/resources/vm_champs/champs"
 
-declare -i check_leacks=0
+declare -i check_leaks=0
 
 # Specify bots here:
 
