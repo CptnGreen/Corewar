@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:21:18 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/25 02:05:21 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/11/01 21:56:19 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	error(char *err_description)
 
 static int	handle_flag(t_vm *vm, char *flag, char *param)
 {
-	int		num; //size_t ???
+	int		num;
 	char	*num_as_string;
 
 	num = ft_atoi(param);
@@ -101,7 +101,7 @@ int			validation(t_vm *vm, int argc, char **argv)
 			if (++g_num_players > MAX_PLAYERS)
 				return (error("error: too many players."));
 			if (bot_processing(vm, &g_unordered_players,
-							   g_cur_order_num, argv[i]) == KO)
+							g_cur_order_num, argv[i]) == KO)
 				return (error(NULL));
 			g_cur_order_num = 0;
 		}

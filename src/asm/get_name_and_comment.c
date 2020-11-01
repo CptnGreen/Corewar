@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_name_and_comment.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 21:47:18 by slisandr          #+#    #+#             */
-/*   Updated: 2020/11/01 13:34:27 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/11/01 21:42:08 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	read_data(t_bot *bot, char *line, int *found, size_t fd)
 ** - get_next_line() returns (-1)
 ** - bot is NULL
 **
-** This function DOESN'T read the next line after 
+** This function DOESN'T read the next line after
 ** it finds the last quotation mark!
 **
 ** TODO: add more tests!

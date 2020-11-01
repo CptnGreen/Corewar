@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ldi_lldi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 15:14:04 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 16:10:58 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:55:10 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int			lldi(t_vm *vm, t_process *process)
 	copy_from_arena(vm->arena, &result,
 	process->pc + args[0] + args[1], REG_SIZE);
 	ft_memcpy(process->registries[reg], &result, REG_SIZE);
-	process->carry = result ? 0 : 1; // condition acc.to Subject
+	process->carry = result ? 0 : 1;
 	return (OK);
 }

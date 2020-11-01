@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_instruction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 22:17:43 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/21 00:12:46 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/11/01 21:44:19 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int		get_arg_type(t_bot *bot, char **line, t_op *ins, char permitted)
 	{
 		++(*line);
 		if ((permitted & T_REG) &&
-			(bot->exec_code[bot->exec_code_size] = (char)get_number(line)) > 0 &&
+			(bot->exec_code[bot->exec_code_size] =
+				(char)get_number(line)) > 0 &&
 			bot->exec_code[bot->exec_code_size++] <= REG_NUMBER)
 			return (REG_CODE);
 	}

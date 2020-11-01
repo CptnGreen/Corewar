@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 11:39:11 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 16:07:46 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:52:04 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int			sub(t_vm *vm, t_process *process)
 	reg3 = vm->arena[get_position(process->pc + 4)] - 1;
 	diff = subtraction(process->registries[reg1], process->registries[reg2]);
 	ft_memcpy(process->registries[reg3], &diff, REG_SIZE);
-	process->carry = diff ? 0 : 1; // condition acc.to Brazhnik
+	process->carry = diff ? 0 : 1;
 	return (OK);
 }

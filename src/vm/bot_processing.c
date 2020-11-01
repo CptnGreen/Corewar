@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bot_processing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:29:39 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/29 19:19:39 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:54:58 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define MAGIC_HEADER_SIZE 4
 #define DIV_ZEROES_SIZE 4
 #define EXEC_CODE_SIZE_SIZE 4
-#define BUFFER_SIZE 4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4
+#define BUFFER_SIZE (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
 
 static int	error(char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lfork.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 22:07:15 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 17:30:12 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:56:42 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		lfork(t_vm *vm, t_process *process)
 	t_list		*new_node;
 	short		arg;
 
-	// ft_printf("----");//del
 	if ((new_node = ft_lstnew(NULL)))
 	{
 		ft_lstadd(&(vm->processes), new_node);

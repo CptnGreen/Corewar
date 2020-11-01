@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 03:59:47 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/23 22:27:31 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:59:33 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OP_C
 # define OP_C
 
-#include "corewar.h"
+# include "corewar.h"
 
 const t_op	g_op_tab[17] =
 {

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "op.c"
 
 #define NOT_VALID 0
 #define VALID 1

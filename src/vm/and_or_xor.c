@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   and_or_xor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 11:47:47 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 16:08:56 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:52:46 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			and(t_vm *vm, t_process *process)
 	reg = get_args(vm, process, args);
 	result = args[0] & args[1];
 	ft_memcpy(process->registries[reg], &result, REG_SIZE);
-	process->carry = result ? 0 : 1; // condition acc.to Brazhnik
+	process->carry = result ? 0 : 1;
 	return (OK);
 }
 
@@ -91,7 +91,7 @@ int			or(t_vm *vm, t_process *process)
 	reg = get_args(vm, process, args);
 	result = args[0] | args[1];
 	ft_memcpy(process->registries[reg], &result, REG_SIZE);
-	process->carry = result ? 0 : 1; // condition acc.to Brazhnik
+	process->carry = result ? 0 : 1;
 	return (OK);
 }
 
@@ -104,6 +104,6 @@ int			xor(t_vm *vm, t_process *process)
 	reg = get_args(vm, process, args);
 	result = args[0] ^ args[1];
 	ft_memcpy(process->registries[reg], &result, REG_SIZE);
-	process->carry = result ? 0 : 1; // condition acc.to Brazhnik
+	process->carry = result ? 0 : 1;
 	return (OK);
 }

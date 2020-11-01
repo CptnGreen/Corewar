@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lld.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 22:10:26 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 16:10:03 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:57:27 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int		lld(t_vm *vm, t_process *process)
 	else
 		copy_from_arena(vm->arena, &dir, process->pc + 2, DIR_SIZE);
 	ft_memcpy(process->registries[reg_number], &dir, REG_SIZE);
-	process->carry = dir ? 0 : 1; // condition acc.to Brazhnik
+	process->carry = dir ? 0 : 1;
 	return (OK);
 }

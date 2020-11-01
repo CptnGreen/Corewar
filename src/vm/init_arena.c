@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_arena.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:53:12 by aimelda           #+#    #+#             */
-/*   Updated: 2020/09/29 18:56:16 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:53:33 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	add_process(t_list **players, int address, int num_player)
 	if (!(player->content = ft_memalloc(sizeof(t_process))))
 		return (KO);
 	((t_process*)player->content)->pc = address;
-	**(((t_process*)player->content)->registries) = num_player; // BIG ENDIAN!!! 4 bytes int!!!
+	**(((t_process*)player->content)->registries) = num_player;
 	return (OK);
 }
 
