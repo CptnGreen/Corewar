@@ -6,7 +6,7 @@
 /*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:49:32 by aimelda           #+#    #+#             */
-/*   Updated: 2020/11/01 13:11:43 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/11/01 20:46:16 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 	}
 	return (set_new_label(labels, line, addr));
 }
+
+/*
+** TODO: fix leak?
+*/
 
 int			get_exec_code(t_bot *bot, size_t fd)
 {

@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: "C/C++ CI"
 
 on:
   push:
@@ -15,11 +15,25 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
-    - name: install ceedling
+    - name: "Install ceedling"
       run: sudo gem install ceedling
-    - name: add ceedling to path
+    - name: "Add ceedling to path"
       run: export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
-    - name: make libs
+    - name: "Make libs"
       run: make -C ft_printf
-    - name: run tests
-      run: ceedling
+    - name: "Run Ceedling unit-tests"
+      run: ceedling test all
+    - name: "Install norminette"
+      run: |
+        sudo apt-get install ruby ruby-bundler ruby-dev build-essential
+        git clone https://github.com/42Paris/norminette.git ~/.norminette/
+        cd ~/.norminette/
+        bundle
+        echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.bashrc
+        source ~/.bashrc
+        cd ~/Corewar
+    - name: "Run norminette tests"
+      run: |
+        norminette src/* includes/* 
+        ft_printf/src* ft_printf/includes/*   
+        ft_printf/libft/src* ft_printf/libft/includes/*
