@@ -6,7 +6,7 @@
 /*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 21:47:18 by slisandr          #+#    #+#             */
-/*   Updated: 2020/11/01 08:15:17 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/11/01 13:34:27 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ static char	*skip_to_actual_data(size_t fd)
 	while (get_next_line(fd, &line))
 	{
 		skip_whitespaces(&line);
-		if (line[0] != '#' && line[0] != ';' && line[0] != '\0')
+		if (line[0] != COMMENT_CHAR && line[0] != ';' && line[0] != '\0')
 			return (line);
+		ft_strdel(&line);
 	}
 	return (NULL);
 }
@@ -98,9 +99,10 @@ int			get_name_and_comment(t_bot *bot, size_t fd)
 	found[COMMENT] = 0;
 	while (found[NAME] < 1 || found[COMMENT] < 1)
 	{
-		if (!(line = skip_to_actual_data(fd)) ||
-			!read_data(bot, line, found, fd))
-			break;
+		if (!(line = skip_to_actual_data(fd)))
+			break ;
+		if (!read_data(bot, line, found, fd))
+			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
