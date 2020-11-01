@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_exec_code.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:49:32 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/23 22:28:06 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 13:11:43 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,25 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 
 int			get_exec_code(t_bot *bot, size_t fd)
 {
+	char	*old_line;
 	char	*line;
 	char	*tmp;
 	t_list	*labels;
 
 	labels = NULL;
-	while (get_next_line(fd, &line) > 0)
+	while (get_next_line(fd, &old_line))
 	{
-		if ((tmp = ft_strchr(line, '#')))
-			*tmp = '\0';
+		if ((tmp = ft_strchr(old_line, COMMENT_CHAR)))
+			line = ft_strsub(old_line, 0, ft_strlen(old_line) - ft_strlen(tmp));
+		else
+			line = ft_strdup(old_line);
+		ft_strdel(&old_line);
 		if (parse_exec_code(bot, line, &labels) == KO)
 		{
-			free(line);
+			ft_strdel(&line);
 			return (check_and_clear_labels(labels, bot->exec_code, KO));
 		}
-		free(line);
+		ft_strdel(&line);
 	}
 	if (bot->exec_code_size == 0)
 		return (check_and_clear_labels(labels, bot->exec_code, KO));
