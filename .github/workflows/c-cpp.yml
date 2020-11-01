@@ -19,12 +19,6 @@ jobs:
       run: sudo gem install ceedling
     - name: "Add ceedling to path"
       run: export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
-    - name: "Make libs"
-      run: make -C ft_printf
-    - name: "Run Ceedling unit-tests"
-      run: |
-        pwd
-        ceedling test
     - name: "Install norminette"
       run: |
         sudo apt-get install ruby ruby-bundler ruby-dev build-essential
@@ -33,9 +27,13 @@ jobs:
         bundle
         echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.bashrc
         source ~/.bashrc
-        cd ~/Corewar
+    - name: "Make libs"
+      run: make -C ft_printf
+    - name: "Run Ceedling unit-tests"
+      run: ceedling test
     - name: "Run norminette tests"
       run: |
+        cd ~/work/Corewar/Corewar
         norminette src/* includes/* 
-        ft_printf/src* ft_printf/includes/*   
-        ft_printf/libft/src* ft_printf/libft/includes/*
+        norminette ft_printf/src* ft_printf/includes/*   
+        norminette ft_printf/libft/src* ft_printf/libft/includes/*
