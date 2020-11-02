@@ -2,8 +2,11 @@
 build
 asm
 vm
-valgrind-out.txt
 .DS_Store
+*.txt
+*.json
+*.cor
+*.s
 
 # Prerequisites
 *.d

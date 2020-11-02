@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+         #
+#    By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/10/20 23:28:46 by slisandr         ###   ########.fr        #
+#    Updated: 2020/11/01 22:03:48 by slisandr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ EXEC_ASM = asm
 SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
 		main.c \
+		../../includes/op.c \
 		print_byte_code.c \
 		get_name_or_comment.c \
 		get_name_and_comment.c \
@@ -65,6 +66,7 @@ SRC_RAW_VM = \
 		main.c \
 		add.c \
 		aff.c \
+		../../includes/op.c \
 		and_or_xor.c \
 		bot_processing.c \
 		copy_from_arena.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_get_exec_code.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 12:52:04 by slisandr          #+#    #+#             */
-/*   Updated: 2020/10/25 01:42:52 by slisandr         ###   ########.fr       */
+/*   Updated: 2020/11/02 07:33:43 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
