@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+         #
+#    By: slisandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/11/01 22:03:48 by slisandr         ###   ########.fr        #
+#    Updated: 2020/11/21 15:48:24 by slisandr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re libftprintf norm asm unit-test func-test
+.PHONY: all clean fclean re libftprintf norm asm unit-test func-test memcheck test
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -24,6 +24,8 @@ all: libftprintf asm vm
 
 libftprintf:
 	@ make -C ft_printf/
+
+re: fclean all
 
 # --------------- ASSEMBLER: PREREQUISITES ------------------
 
@@ -113,14 +115,26 @@ fclean: clean
 	@ make -C ft_printf/ fclean
 	@ make -C ft_printf/libft/ fclean
 
-# --------------- OTHER -------------------------------------
-
-re: fclean all
+# --------------- TESTS -------------------------------------
 
 norm: fclean
-	@ norminette includes/* src/*
+	@ printf "\nNorminette check\n=============\n\n"
+	@ ~/.norminette/norminette.rb includes/* src/*
 unit-test: all
+	@ printf "\nUnit tests (ceedling)\n=============\n\n"
 	@ ceedling
 func-test: all
-	./$(EXEC_ASM) resources/vm_champs/champs/championships/2014/bguy/sam_2.0.s
-	./$(EXEC_VM) resources/vm_champs/champs/championships/2014/bguy/sam_2.0.cor
+	@ printf "\nFunctional tests (bash)\n=============\n"
+	@ printf "\nAssembler:\n-------------\n"
+	@ ./$(EXEC_ASM) \
+		resources/vm_champs/champs/championships/2014/bguy/sam_2.0.s \
+		resources/vm_champs/champs/championships/2017/adenis/Explosive_Kitty.s
+	@ printf "\nVirtual Machine:\n-------------\n"
+	@ ./$(EXEC_VM) \
+		resources/vm_champs/champs/championships/2014/bguy/sam_2.0.cor \
+		resources/vm_champs/champs/championships/2017/adenis/Explosive_Kitty.cor
+memcheck: all
+	@ printf "\nMemory leaks' check\n=============\n\n"
+	@ ./check_leaks.sh
+
+test: norm unit-test func-test
