@@ -27,6 +27,8 @@ jobs:
       run: make unit-test
 
       # Functional testing and leaks-check:
+    - name: "Install valgrind"
+      run: sudo apt-get install valgrind
     - name: "Run functional tests and check leaks"
       run: make memcheck
 

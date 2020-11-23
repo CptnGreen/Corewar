@@ -6,7 +6,7 @@
 #    By: slisandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/11/23 08:44:16 by slisandr         ###   ########.fr        #
+#    Updated: 2020/11/23 08:53:47 by slisandr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,7 +123,7 @@ unit-test: all
 	@ printf "\nUnit tests (ceedling)\n=============\n\n"
 	@ ceedling
 memcheck: all
-	@ printf "\nFunctional testing and memory leaks' check\n=============\n\n"
+	@ printf "\nFunctional testing and memory leaks' check\n=============\n"
 	@ ./check_leaks.sh -av
 
 test: unit-test memcheck norm

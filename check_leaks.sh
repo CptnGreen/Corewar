@@ -50,6 +50,7 @@ log_leaks()
         printf "%s Leaks report is saved to %s/%s_%s_leaks.log\n" "--->" "$logs_dir" "$program" "$bot_name"
     else
         echo -e "Failed to run memcheck, valgrind is not installed\n" >&2
+        exit 1
     fi
 }
 
