@@ -6,11 +6,11 @@
 #    By: slisandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/11/21 15:48:24 by slisandr         ###   ########.fr        #
+#    Updated: 2020/11/23 08:37:54 by slisandr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re libftprintf norm asm unit-test func-test memcheck test
+.PHONY: all clean fclean re libftprintf norm asm unit-test memcheck test
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -117,24 +117,13 @@ fclean: clean
 
 # --------------- TESTS -------------------------------------
 
-norm: fclean
-	@ printf "\nNorminette check\n=============\n\n"
-	@ ~/.norminette/norminette.rb includes/* src/*
+norm:
+	@ ./check_norm.sh
 unit-test: all
 	@ printf "\nUnit tests (ceedling)\n=============\n\n"
 	@ ceedling
-func-test: all
-	@ printf "\nFunctional tests (bash)\n=============\n"
-	@ printf "\nAssembler:\n-------------\n"
-	@ ./$(EXEC_ASM) \
-		resources/vm_champs/champs/championships/2014/bguy/sam_2.0.s \
-		resources/vm_champs/champs/championships/2017/adenis/Explosive_Kitty.s
-	@ printf "\nVirtual Machine:\n-------------\n"
-	@ ./$(EXEC_VM) \
-		resources/vm_champs/champs/championships/2014/bguy/sam_2.0.cor \
-		resources/vm_champs/champs/championships/2017/adenis/Explosive_Kitty.cor
 memcheck: all
-	@ printf "\nMemory leaks' check\n=============\n\n"
+	@ printf "\nFunctional testing and memory leaks' check\n=============\n\n"
 	@ ./check_leaks.sh
 
-test: norm unit-test func-test
+test: unit-test memcheck norm

@@ -8,30 +8,33 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+
+      # Library compilation:
+    - name: "Compile libftpribtf library"
+      run: make
+
+      # Unit-testing:
     - name: "Install ceedling"
       run: sudo gem install ceedling
-    - name: "Add ceedling to path"
+    - name: "Add Ceedling to PATH"
       run: export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
+    - name: "Run unit-tests"
+      run: make unit-test
+
+      # Functional testing and leaks-check:
+    - name: "Run functional tests and check leaks"
+      run: make memcheck
+
     - name: "Install norminette"
       run: |
         sudo apt-get install ruby ruby-bundler ruby-dev build-essential
         git clone https://github.com/42Paris/norminette.git ~/.norminette/
         cd ~/.norminette/
         bundle
-    - name: "Make libs"
-      run: make -C ft_printf
-    - name: "Run Ceedling unit-tests"
-      run: ceedling test
     - name: "Run norminette tests"
-      run: |
-        cd ~/work/Corewar/Corewar
-        ~/.norminette/norminette.rb src/* includes/* 
-        ~/.norminette/norminette.rb ft_printf/src* ft_printf/includes/*   
-        ~/.norminette/norminette.rb ft_printf/libft/src* ft_printf/libft/includes/*
+      run: make norm
