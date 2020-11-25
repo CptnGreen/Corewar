@@ -35,9 +35,6 @@
     - -:test/support
   :source:
     - src/**
-    - src/asm/**
-    - ft_printf/src/**
-    - ft_printf/libft/src/**
   :include:
     - includes/**
     - ft_printf/includes/**
@@ -45,7 +42,7 @@
     - test/includes/asm/**
   :support:
     - test/support
-  :libraries: [ft_printf/libft, ft_printf]
+  :libraries: [ft_printf]
 
 :defines:
   # in order to add common defines:
@@ -96,8 +93,8 @@
   :placement: :end
   :flag: "-l${1}"
   :path_flag: "-L ${1}"
-  :system: [ft, ftprintf]    # for example, you might list 'm' to grab the math library
-  :test: []
+  :system: []    # for example, you might list 'm' to grab the math library
+  :test: [ftprintf]
   :release: []
 
 :plugins:
@@ -107,6 +104,7 @@
     - stdout_pretty_tests_report
     - module_generator
     - compile_commands_json
+    - xml_tests_report
 
 :module_generator:
   :inc_root: test/includes/

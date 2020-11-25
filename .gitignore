@@ -1,8 +1,13 @@
+leaks_logs
 .ccls-cache
 build
 asm
-valgrind-out.txt
-.vscode
+vm
+.DS_Store
+*.txt
+*.json
+*.cor
+*.s
 
 # Prerequisites
 *.d

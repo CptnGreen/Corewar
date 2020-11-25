@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   live.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 22:07:24 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 18:09:25 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:50:35 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int		live(t_vm *vm, t_process *process)
 	process->alive = 1;
 	vm->num_live += 1;
 	arg_value = (int*)process->registries[0];
-	if (*arg_value > 0 && *arg_value <= MAX_PLAYERS
-	&& vm->players[*arg_value - 1]) // condition acc.to Subject
+	if (*arg_value > 0 && *arg_value <= MAX_PLAYERS &&
+		vm->players[*arg_value - 1])
 		vm->survivor = *arg_value - 1;
 	return (OK);
 }

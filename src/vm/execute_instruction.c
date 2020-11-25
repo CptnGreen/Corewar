@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_instruction.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:31:04 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 16:21:41 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/10/25 11:09:03 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int			execute_instruction(t_vm *vm, t_process *process)
 {
 	int		instruction_size;
 
-	if (process->instruction < 0 || process->instruction >= INSTRUCTION_NUM)
+	if (process->instruction >= INSTRUCTION_NUM)
 		process->pc += 1;
 	else
 	{

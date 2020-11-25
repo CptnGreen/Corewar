@@ -3,21 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/06 18:29:20 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/02 07:33:16 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
+/*
+** for perror():
+*/
+
 # include <stdio.h>
+
 # include "op.h"
 # include "libftprintf.h"
 
-# include <stdint.h> // delete before push to vogsphere
+// # include <stdint.h>
+
+# define INT32_MAX 2147483647
+# define INT64_MAX 9223372036854775807
 
 extern const t_op		g_op_tab[17];
 extern const char		g_arg_type_codes[4][4];

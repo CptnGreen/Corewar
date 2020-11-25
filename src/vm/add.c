@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 11:15:33 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 16:08:04 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:56:42 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int			add(t_vm *vm, t_process *process)
 	reg3 = vm->arena[get_position(process->pc + 4)] - 1;
 	sum = addition(process->registries[reg1], process->registries[reg2]);
 	ft_memcpy(process->registries[reg3], &sum, REG_SIZE);
-	process->carry = sum ? 0 : 1; // condition acc.to Brazhnik
+	process->carry = sum ? 0 : 1;
 	return (OK);
 }

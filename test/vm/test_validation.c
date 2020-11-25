@@ -17,14 +17,12 @@ void test_valid_two_players(void)
 {
     t_vm		*vm;
 	const int	argc = 2;
-	char	*argv[argc] = {
-		"/Users/aimelda/Desktop/Corewar/resources/vm_champs/champs/championships/2014/bguy/sam_2.0.cor",
-		"/Users/aimelda/Desktop/Corewar/resources/vm_champs/champs/championships/2014/bjacob/doge.cor"
-	};
+	char	*argv[argc];
 
+	argv[0] = ft_strjoin(getenv("PWD"), "/resources/vm_champs/champs/championships/2014/bguy/sam_2.0.cor");
+	argv[1] = ft_strjoin(getenv("PWD"), "/resources/vm_champs/champs/championships/2014/bjacob/doge.cor");
 	vm = (t_vm*)ft_memalloc(sizeof(t_vm));
 	vm->dump = -1;
-	ft_printf("GOOD\n");
     TEST_ASSERT_EQUAL_INT(OK, validation(vm, argc, argv));
     // TEST_ASSERT_EQUAL_INT(2, (int)(((t_process*)vm->processes->content)->registries[0][0]));
 	// TEST_ASSERT_EQUAL_INT(1, (int)(((t_process*)vm->processes->next->content)->registries[0][0]));

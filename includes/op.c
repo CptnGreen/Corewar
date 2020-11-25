@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 03:59:47 by aimelda           #+#    #+#             */
-/*   Updated: 2020/08/09 01:53:16 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:59:33 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#ifndef OP_C
+# define OP_C
+
+# include "corewar.h"
 
 const t_op	g_op_tab[17] =
 {
@@ -39,8 +42,6 @@ const t_op	g_op_tab[17] =
 	{0, 0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-const int	g_next_op_tab_elem = sizeof(t_op) / sizeof(t_op*);
-
 const char	g_arg_type_codes[4][4] =
 {
 	{0, 0, 0, 0},
@@ -48,3 +49,5 @@ const char	g_arg_type_codes[4][4] =
 	{0, 128, 32, 8},
 	{0, 192, 48, 12}
 };
+
+#endif

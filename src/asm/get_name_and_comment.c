@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_name_and_comment.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 21:47:18 by slisandr          #+#    #+#             */
-/*   Updated: 2020/08/09 01:51:39 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:42:08 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #define COMMENT 1
 
 /*
+** Called from get_name_and_comment()
+**
 ** This function skips
 ** - comments
 ** - empty lines
@@ -29,8 +31,9 @@ static char	*skip_to_actual_data(size_t fd)
 	while (get_next_line(fd, &line))
 	{
 		skip_whitespaces(&line);
-		if (line[0] != '#' && line[0] != ';' && line[0] != '\0')
+		if (line[0] != COMMENT_CHAR && line[0] != ';' && line[0] != '\0')
 			return (line);
+		ft_strdel(&line);
 	}
 	return (NULL);
 }
@@ -41,9 +44,9 @@ static int	read_data(t_bot *bot, char *line, int *found, size_t fd)
 	{
 		line += 5;
 		skip_whitespaces(&line);
-		if (!(get_name_or_comment(\
-				bot->name,\
-				PROG_NAME_LENGTH,\
+		if (!(get_name_or_comment(
+				bot->name,
+				PROG_NAME_LENGTH,
 				line, fd)))
 			return (KO);
 		found[NAME] += 1;
@@ -53,9 +56,9 @@ static int	read_data(t_bot *bot, char *line, int *found, size_t fd)
 	{
 		line += 8;
 		skip_whitespaces(&line);
-		if (!(get_name_or_comment(\
-				bot->comment,\
-				COMMENT_LENGTH,\
+		if (!(get_name_or_comment(
+				bot->comment,
+				COMMENT_LENGTH,
 				line, fd)))
 			return (KO);
 		found[COMMENT] += 1;
@@ -77,8 +80,8 @@ static int	read_data(t_bot *bot, char *line, int *found, size_t fd)
 ** - get_next_line() returns (-1)
 ** - bot is NULL
 **
-** This function DOESN'T read the next line after it
-** finds the last quotation mark!
+** This function DOESN'T read the next line after
+** it finds the last quotation mark!
 **
 ** TODO: add more tests!
 **
@@ -96,9 +99,11 @@ int			get_name_and_comment(t_bot *bot, size_t fd)
 	found[COMMENT] = 0;
 	while (found[NAME] < 1 || found[COMMENT] < 1)
 	{
-		if (!(line = skip_to_actual_data(fd)) || \
-			!read_data(bot, line, found, fd))
+		if (!(line = skip_to_actual_data(fd)))
 			break ;
+		if (!read_data(bot, line, found, fd))
+			break ;
+		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	if (found[NAME] == 1 && found[COMMENT] == 1)

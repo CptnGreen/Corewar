@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: "C/C++ CI"
 
 on:
   push:
@@ -8,18 +8,35 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
-    - name: install ceedling
+
+      # Library compilation:
+    - name: "Compile libftpribtf library"
+      run: make
+
+      # Unit-testing:
+    - name: "Install ceedling"
       run: sudo gem install ceedling
-    - name: add ceedling to path
+    - name: "Add Ceedling to PATH"
       run: export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
-    - name: make libs
-      run: make -C ft_printf
-    - name: run tests
-      run: ceedling
+    - name: "Run unit-tests"
+      run: make unit-test
+
+      # Functional testing and leaks-check:
+    - name: "Install valgrind"
+      run: sudo apt-get install valgrind
+    - name: "Run functional tests and check leaks"
+      run: make memcheck
+
+    - name: "Install norminette"
+      run: |
+        sudo apt-get install ruby ruby-bundler ruby-dev build-essential
+        git clone https://github.com/42Paris/norminette.git ~/.norminette/
+        cd ~/.norminette/
+        bundle
+    - name: "Run norminette tests"
+      run: make norm

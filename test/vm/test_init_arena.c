@@ -12,7 +12,7 @@ void tearDown(void)
 
 void test_valid_two_players(void)
 {
-    t_vm		*vm;
+	t_vm		*vm;
 	const int	num_players = 2;
 	const int	delta = MEM_SIZE / num_players;
 

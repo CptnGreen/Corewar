@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slisandr <slisandr@student.21-s~.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 22:06:46 by aimelda           #+#    #+#             */
-/*   Updated: 2020/10/02 17:30:16 by aimelda          ###   ########.fr       */
+/*   Updated: 2020/11/01 21:54:19 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		fork__(t_vm *vm, t_process *process)
 	t_list		*new_node;
 	short		arg;
 
-	// ft_printf("HEer");//del
 	if ((new_node = ft_lstnew(NULL)))
 	{
 		ft_lstadd(&(vm->processes), new_node);
