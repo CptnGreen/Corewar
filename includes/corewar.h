@@ -6,7 +6,7 @@
 /*   By: fcatina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/11/27 11:37:05 by fcatina          ###   ########.fr       */
+/*   Updated: 2020/11/27 12:07:07 by fcatina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 # include "op.h"
 # include "libftprintf.h"
 
-// # include <stdint.h>
+/*
+** # include <stdint.h>
+*/
 
 # define INT32_MAX 2147483647
 # define INT64_MAX 9223372036854775807

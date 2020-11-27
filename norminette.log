@@ -33,5 +33,4 @@ Norme: ./src/vm/ld.c
 Norme: ./src/vm/execute_instruction.c
 Norme: ./includes/op.h
 Norme: ./includes/corewar.h
-Error (line 25): C++ comment
 Norme: ./includes/op.c
