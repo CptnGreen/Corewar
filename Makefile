@@ -6,11 +6,11 @@
 #    By: slisandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/11/27 19:04:12 by slisandr         ###   ########.fr        #
+#    Updated: 2020/11/28 00:07:22 by slisandr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re libftprintf norm asm unit-test memcheck test
+.PHONY: all clean fclean re libftprintf norm asm vm unit-test memcheck test
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -107,7 +107,7 @@ $(OBJ_DIR_VM):
 # --------------- CLEANUP -----------------------------------
 
 clean:
-	@ rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_VM)
+	@ rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_VM) bots/*.cor
 	@ make -C ft_printf/ clean
 	@ make -C ft_printf/libft/ clean
 fclean: clean

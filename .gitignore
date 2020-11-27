@@ -7,7 +7,6 @@ vm
 *.txt
 *.json
 *.cor
-*.s
 
 # Prerequisites
 *.d
