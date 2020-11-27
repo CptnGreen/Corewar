@@ -6,7 +6,7 @@
 /*   By: fcatina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:29:39 by aimelda           #+#    #+#             */
-/*   Updated: 2020/11/27 11:36:22 by fcatina          ###   ########.fr       */
+/*   Updated: 2020/11/27 11:51:31 by fcatina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 #define MAGIC_HEADER_SIZE 4
 #define DIV_ZEROES_SIZE 4
 #define EXEC_CODE_SIZE_SIZE 4
-#define BUFFER_SIZE (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
+#define BUFFER_SIZE 2192
+
+/*
+** #define BUFFER_SIZE (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
+*/
 
 static int	error(char *str)
 {

@@ -27,7 +27,6 @@ Norme: ./src/vm/lld.c
 Norme: ./src/vm/and_or_xor.c
 Norme: ./src/vm/add.c
 Norme: ./src/vm/bot_processing.c
-Error (line 18): define must be a constant value
 Norme: ./src/vm/sub.c
 Norme: ./src/vm/get_position.c
 Norme: ./src/vm/ld.c
