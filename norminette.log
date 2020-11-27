@@ -32,12 +32,6 @@ Norme: ./src/vm/get_position.c
 Norme: ./src/vm/ld.c
 Norme: ./src/vm/execute_instruction.c
 Norme: ./includes/op.h
-Error (line 31): define must be a constant value
-Error (line 32): define must be a constant value
-Error (line 33): define must be a constant value
-Error (line 67): define must be a constant value
-Error (line 68): define must be a constant value
-Error (line 92): comment not well formatted
 Norme: ./includes/corewar.h
 Error (line 25): C++ comment
 Norme: ./includes/op.c
