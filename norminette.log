@@ -1,0 +1,44 @@
+Norme: ./src/asm/print_byte_code.c
+Norme: ./src/asm/tobytes.c
+Norme: ./src/asm/get_instruction.c
+Norme: ./src/asm/get_name_and_comment.c
+Norme: ./src/asm/get_number.c
+Norme: ./src/asm/main.c
+Norme: ./src/asm/skip_whitespaces.c
+Norme: ./src/asm/get_name_or_comment.c
+Norme: ./src/asm/get_exec_code.c
+Norme: ./src/asm/new_label.c
+Norme: ./src/vm/instructions.c
+Norme: ./src/vm/zjmp.c
+Norme: ./src/vm/lfork.c
+Norme: ./src/vm/validation.c
+Norme: ./src/vm/ldi_lldi.c
+Norme: ./src/vm/sti.c
+Norme: ./src/vm/fork.c
+Norme: ./src/vm/copy_from_arena.c
+Norme: ./src/vm/live.c
+Norme: ./src/vm/fighting.c
+Norme: ./src/vm/init_arena.c
+Norme: ./src/vm/st.c
+Norme: ./src/vm/main.c
+Norme: ./src/vm/aff.c
+Norme: ./src/vm/copy_to_arena.c
+Norme: ./src/vm/lld.c
+Norme: ./src/vm/and_or_xor.c
+Norme: ./src/vm/add.c
+Norme: ./src/vm/bot_processing.c
+Error (line 18): define must be a constant value
+Norme: ./src/vm/sub.c
+Norme: ./src/vm/get_position.c
+Norme: ./src/vm/ld.c
+Norme: ./src/vm/execute_instruction.c
+Norme: ./includes/op.h
+Error (line 31): define must be a constant value
+Error (line 32): define must be a constant value
+Error (line 33): define must be a constant value
+Error (line 67): define must be a constant value
+Error (line 68): define must be a constant value
+Error (line 92): comment not well formatted
+Norme: ./includes/corewar.h
+Error (line 25): C++ comment
+Norme: ./includes/op.c
