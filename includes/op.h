@@ -6,7 +6,7 @@
 /*   By: fcatina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/11/27 12:03:55 by fcatina          ###   ########.fr       */
+/*   Updated: 2020/11/27 12:05:39 by fcatina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define CHAMP_MAX_SIZE			682
 
 /*
+** # define MEM_SIZE			(4 * 1024)
 ** # define IDX_MOD				(MEM_SIZE / 8)
 ** # define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
 */
