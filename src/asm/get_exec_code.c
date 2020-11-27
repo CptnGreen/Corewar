@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_exec_code.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcatina <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aimelda <aimelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 10:43:32 by fcatina           #+#    #+#             */
-/*   Updated: 2020/11/27 11:34:00 by fcatina          ###   ########.fr       */
+/*   Updated: 2020/11/27 21:05:09 by aimelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,18 @@ static int	parse_exec_code(t_bot *bot, char *line, t_list **labels)
 
 int			get_exec_code(t_bot *bot, size_t fd)
 {
-	char	*old_line;
 	char	*line;
 	char	*tmp;
 	t_list	*labels;
+	int		ret;
 
 	labels = NULL;
-	while (get_next_line(fd, &old_line))
+	while ((ret = get_next_line(fd, &line)))
 	{
-		if ((tmp = ft_strchr(old_line, COMMENT_CHAR)))
-			line = ft_strsub(old_line, 0, ft_strlen(old_line) - ft_strlen(tmp));
-		else
-			line = ft_strdup(old_line);
-		ft_strdel(&old_line);
+		if (ret == 2)
+			return (check_and_clear_labels(labels, bot->exec_code, KO));
+		if ((tmp = ft_strchr(line, COMMENT_CHAR)))
+			*tmp = '\0';
 		if (parse_exec_code(bot, line, &labels) == KO)
 		{
 			ft_strdel(&line);
