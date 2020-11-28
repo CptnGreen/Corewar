@@ -31,6 +31,8 @@ jobs:
       run: sudo apt-get install valgrind
     - name: "Run functional tests and check leaks"
       run: make memcheck
+    - name: "Show logs' tails"
+      run: tail logs/leaks/*
 
     - name: "Install norminette"
       run: |
