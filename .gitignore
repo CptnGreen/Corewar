@@ -3,6 +3,8 @@ obj
 bots/*.cor
 build
 .ccls-cache
+.ccls
+.vscode
 .DS_Store
 *.txt
 *.log
