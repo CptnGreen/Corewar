@@ -16,5 +16,7 @@ int		get_position(int pos)
 {
 	if (pos >= MEM_SIZE)
 		return (pos % MEM_SIZE);
+	if (pos < 0)
+		return (get_position(MEM_SIZE + pos));
 	return (pos);
 }
