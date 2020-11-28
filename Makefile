@@ -6,7 +6,7 @@
 #    By: slisandr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 15:25:21 by slisandr          #+#    #+#              #
-#    Updated: 2020/11/28 00:07:22 by slisandr         ###   ########.fr        #
+#    Updated: 2020/11/28 12:21:23 by slisandr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ libftprintf:
 
 re: fclean all
 
+OBJ_DIR = obj
+
 # --------------- ASSEMBLER: PREREQUISITES ------------------
 
 EXEC_ASM = asm
@@ -34,7 +36,7 @@ EXEC_ASM = asm
 SRC_DIR_ASM = src/asm
 SRC_RAW_ASM = \
 		main.c \
-		../../includes/op.c \
+		op.c \
 		print_byte_code.c \
 		get_name_or_comment.c \
 		get_name_and_comment.c \
@@ -47,7 +49,7 @@ SRC_RAW_ASM = \
 
 SRC_ASM = $(addprefix $(SRC_DIR_ASM)/,$(SRC_RAW_ASM))
 
-OBJ_DIR_ASM = obj/asm
+OBJ_DIR_ASM = $(OBJ_DIR)/asm
 OBJ_ASM = $(addprefix $(OBJ_DIR_ASM)/,$(SRC_RAW_ASM:.c=.o))
 
 # --------------- ASSEMBLER: COMPILATION --------------------
@@ -68,7 +70,7 @@ SRC_RAW_VM = \
 		main.c \
 		add.c \
 		aff.c \
-		../../includes/op.c \
+		op.c \
 		and_or_xor.c \
 		bot_processing.c \
 		copy_from_arena.c \
@@ -92,7 +94,7 @@ SRC_RAW_VM = \
 
 SRC_VM = $(addprefix $(SRC_DIR_VM)/,$(SRC_RAW_VM))
 
-OBJ_DIR_VM = obj/vm
+OBJ_DIR_VM = $(OBJ_DIR)/vm
 OBJ_VM = $(addprefix $(OBJ_DIR_VM)/,$(SRC_RAW_VM:.c=.o))
 
 # ---------------------- VM: COMPILATION --------------------
@@ -107,7 +109,7 @@ $(OBJ_DIR_VM):
 # --------------- CLEANUP -----------------------------------
 
 clean:
-	@ rm -rf $(OBJ_DIR_ASM) $(OBJ_DIR_VM) bots/*.cor
+	@ rm -rf $(OBJ_DIR) bots/*.cor
 	@ make -C ft_printf/ clean
 	@ make -C ft_printf/libft/ clean
 fclean: clean

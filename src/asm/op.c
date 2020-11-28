@@ -3,12 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcatina <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: slisandr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 03:59:47 by aimelda           #+#    #+#             */
-/*   Updated: 2020/11/27 11:37:21 by fcatina          ###   ########.fr       */
+/*   Updated: 2020/11/28 12:19:10 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** Two identical copies of this file are present at src/asm and src/vm
+*/
 
 #ifndef OP_C
 # define OP_C

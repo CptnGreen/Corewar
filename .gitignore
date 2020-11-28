@@ -1,8 +1,6 @@
 leaks_logs
 .ccls-cache
 build
-asm
-vm
 .DS_Store
 *.txt
 *.json
