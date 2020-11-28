@@ -68,19 +68,27 @@ log_leaks_using_valgrind()
     printf "%s Leaks report is saved to %s\n" "--->" "$log_file"
 }
 
-# TODO
+# Almost identical to the corresponding valgrind function
 log_leaks_using_leaks()
 {
-    printf "\n%s bot: %s\n" "--->" "$bot_name"
-    bot_name="$1"
     if [[ "$program" = "asm" ]]; then
+        bot_name="$1"
+        printf "\n%s bot: %s\n" "--->" "$bot_name"
         bot_path="${bots_dir}/${bot_name}.s"
-        iprofiler -leaks -d "${logs_dir}/${program}_${bot_name}_leaks.log" ./"$program" "$bot_path"
+        log_file="${logs_dir}/${program}_${bot_name}_valgrind.log"
+        iprofiler -leaks -d "${log_file}" \
+            ./"$program" "$bot_path"
+    elif [[ "$program" = "corewar" ]]; then
+        echo -e ""
+        log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"valgrind.log"
+        iprofiler -leaks -d \
+            "${log_file}" \
+            ./"$program" bots/*.cor
     else
-        bot_path="${bots_dir}/${bot_name}.cor"
-        iprofiler -leaks -d "${logs_dir}/${program}_${bot_name}_leaks.log" ./"$program" "${bots}"
+        echo -e "Internal error: smth wrong with \`program\` var." >&2
+        exit 1
     fi
-    printf "%s Leaks report is saved to %s/%s_%s_leaks.log\n" "--->" "$logs_dir" "$program" "$bot_name"
+    printf "%s Leaks report is saved to %s\n" "--->" "$log_file"
 }
 
 run_memcheck()
