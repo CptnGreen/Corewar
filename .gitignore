@@ -1,10 +1,12 @@
-leaks_logs
-.ccls-cache
+logs
+obj
+bots/*.cor
 build
+.ccls-cache
 .DS_Store
 *.txt
+*.log
 *.json
-*.cor
 
 # Prerequisites
 *.d
