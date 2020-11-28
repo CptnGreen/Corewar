@@ -17,7 +17,7 @@ main()
 	[[ -d $logs_dir ]] || mkdir "$logs_dir"
 	[[ -f $log ]] && rm "${log}"
 	echo -e "------------------\nNorminette check\n"
-	ruby "${norminette}" src includes > "${log}"
+	ruby "${norminette}" src/asm src/vm includes > "${log}"
 	cat "${log}"
 	if cat "${log}" | grep "Error"; then
 		exit 1
