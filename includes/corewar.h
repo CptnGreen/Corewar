@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcatina <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: slisandr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 23:06:08 by aimelda           #+#    #+#             */
-/*   Updated: 2020/11/27 12:07:07 by fcatina          ###   ########.fr       */
+/*   Updated: 2020/11/29 09:37:39 by slisandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@
 ** # include <stdint.h>
 */
 
-# define INT32_MAX 2147483647
-# define INT64_MAX 9223372036854775807
+# ifndef INT32_MAX
+#  define INT32_MAX 2147483647
+# endif
+
+# ifndef INT64_MAX
+#  define INT64_MAX 9223372036854775807
+# endif
 
 extern const t_op		g_op_tab[17];
 extern const char		g_arg_type_codes[4][4];
