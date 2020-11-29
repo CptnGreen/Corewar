@@ -1,4 +1,4 @@
-name: "C/C++ CI"
+name: "CI pipeline"
 
 on:
   push:
@@ -9,42 +9,52 @@ on:
 jobs:
 
   test:
-    name: Test on ${{ matrix.os }}
+
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-18.04, macOS-10.15]
+    defaults:
+        run:
+          shell: bash
 
     steps:
-    - uses: actions/checkout@v2
+
+    - name: "Setup Ruby for Ceedling and Norminette"
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.5'
+
+    - name: "Clone actual repo"
+      uses: actions/checkout@v2
       with:
         submodules: 'recursive'
 
-      # Library compilation:
     - name: "Compile libftpribtf library"
       run: make
 
-      # Unit-testing:
+    - name: "Install norminette"
+      run: |
+        git clone https://github.com/42Paris/norminette.git ~/.norminette/
+        cd ~/.norminette/
+        bundle
+
+    - name: "Run norminette tests"
+      run: make norm
+
     - name: "Install ceedling"
       run: sudo gem install ceedling
     - name: "Add Ceedling to PATH"
-      run: export PATH="$PATH:~/.gem/ruby/2.5.0/bin"
+      run: export PATH="$PATH:~/.gem/ruby/2.5.0/bin:/usr/local/lib/ruby/gems/2.5.0/gems/ceedling-0.30.0/bin"
+
     - name: "Run unit-tests"
       run: make unit-test
 
       # Functional testing and leaks-check:
     - name: "Install valgrind"
       run: sudo apt-get install valgrind
+      if: ${{ matrix.os(ubuntu-18.04) }}
     - name: "Run functional tests and check leaks"
       run: make memcheck
     - name: "Show logs' tails"
       run: tail logs/leaks/*
-
-    - name: "Install norminette"
-      run: |
-        sudo apt-get install ruby ruby-bundler ruby-dev build-essential
-        git clone https://github.com/42Paris/norminette.git ~/.norminette/
-        cd ~/.norminette/
-        bundle
-    - name: "Run norminette tests"
-      run: make norm
