@@ -62,6 +62,11 @@ jobs:
         brew install --HEAD LouisBrunner/valgrind/valgrind
       if: ${{ matrix.os == 'macos-10.15' }}
 
+    - name: "Install command-line developer tools for MacOS"
+      run: |
+        xcode-select --install
+      if: ${{ matrix.os == 'macos-10.15' }}
+
     - name: "Run functional tests and check leaks"
       run: make memcheck
     - name: "Show logs' tails"
