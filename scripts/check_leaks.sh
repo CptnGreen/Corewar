@@ -19,6 +19,15 @@ declare bots_dir="${PWD}/bots"
 declare -a bots=()
 declare program=""
 
+declare -i found_valgrind=0
+declare -i found_leaks_util=0
+
+printf "\nFound checkers:\n"
+command -v valgrind >/dev/null 2>&1 && { found_valgrind=1; printf "%s valgrind\n" "-->"; }
+command -v leaks >/dev/null 2>&1 && { found_leaks_util=1; printf "%s leaks\n" "-->"; }
+[[ ! found_valgrind && ! found_leaks_util ]] && { printf "Neither valgrind nor leaks utility were found, aborting.\n"; exit 1; }
+printf "%s\n" "-----------"
+
 get_bots()
 {
     declare -i n_bots
@@ -75,12 +84,12 @@ log_leaks_using_leaks()
         bot_name="$1"
         printf "\n%s bot: %s\n" "--->" "$bot_name"
         bot_path="${bots_dir}/${bot_name}.s"
-        log_file="${logs_dir}/${program}_${bot_name}_valgrind.log"
+        log_file="${logs_dir}/${program}_${bot_name}_leaks.log"
         iprofiler -leaks -d "${log_file}" \
             ./"$program" "$bot_path"
     elif [[ "$program" = "corewar" ]]; then
         echo -e ""
-        log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"valgrind.log"
+        log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"leaks.log"
         iprofiler -leaks -d \
             "${log_file}" \
             ./"$program" bots/*.cor
@@ -96,24 +105,12 @@ run_memcheck()
     echo -e "\n<<<<< Checking leaks for ${program} >>>>>"
     if [[ "$program" = "asm" ]]; then
         for bot in "${bots[@]}"; do
-            if command -v valgrind >/dev/null 2>&1; then
-                log_leaks_using_valgrind "${bot}"
-            elif command -v leaks >/dev/null 2>&1; then
-                log_leaks_using_leaks "${bot}"
-            else
-                printf "%s Neither valgrind nor leaks utilities was found, aborting.\n" "--->"
-                exit 1
-            fi
+            [[ $found_valgrind -eq 1 ]] && log_leaks_using_valgrind "${bot}"
+            [[ $found_leaks_util -eq 1 ]] && log_leaks_using_leaks "${bot}"
         done
     elif [[ "$program" = "corewar" ]]; then
-        if command -v valgrind >/dev/null 2>&1; then
-            log_leaks_using_valgrind
-        elif command -v leaks >/dev/null 2>&1; then
-            log_leaks_using_leaks
-        else
-            printf "%s Neither valgrind nor leaks utilities was found, aborting.\n" "--->"
-            exit 1
-        fi
+        [[ $found_valgrind -eq 1 ]] && log_leaks_using_valgrind
+        [[ $found_leaks_util -eq 1 ]] && log_leaks_using_leaks
     fi
 }
 
