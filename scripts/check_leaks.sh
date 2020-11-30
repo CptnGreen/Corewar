@@ -85,15 +85,11 @@ log_leaks_using_leaks()
         printf "\n%s bot: %s\n" "--->" "$bot_name"
         bot_path="${bots_dir}/${bot_name}.s"
         log_file="${logs_dir}/${program}_${bot_name}_leaks.log"
-        iprofiler -leaks \
-            -d "${log_file}" \
-            ./"$program" "$bot_path"
+        sh -c 'leaks $$ >"${log_file}"; exec ./"${program}" "${bot_path}"'
     elif [[ "$program" = "corewar" ]]; then
         echo -e ""
         log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"leaks.log"
-        iprofiler -leaks \
-            -d "${log_file}" \
-            ./"$program" bots/*.cor
+        sh -c 'leaks $$ >"${log_file}"; exec ./"${program}" bots/*.cor'
     else
         echo -e "Internal error: smth wrong with \`program\` var." >&2
         exit 1
