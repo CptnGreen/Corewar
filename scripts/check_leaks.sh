@@ -24,7 +24,7 @@ get_bots()
     declare -i n_bots
 
     [[ -d $bots_dir ]] || { mkdir "${bots_dir}"; echo -e "Dir ${bots_dir} was created; put no more than 4 bots there." >&2; exit 1; }
-    bots=($(for bot in $(ls "${bots_dir}"); do echo $bot | sed -r ' s/(.s|.cor)$// '; done | uniq))
+    bots=($(for bot in $(ls "${bots_dir}"); do echo $bot | sed -E ' s/(.s|.cor)$// '; done | uniq))
     n_bots=${#bots[@]}
     [[ $n_bots -le 4 && $n_bots -ge 1 ]] || { echo -e "Put 1 to 4 bots in the ${bots_dir}." >&2; exit 1; }
     echo -e "\nFound bots:"
