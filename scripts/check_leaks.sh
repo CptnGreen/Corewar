@@ -60,6 +60,11 @@ print_usage()
     echo -e "-h\tdisplay this help and exit"
 }
 
+use_leaks_util()
+{
+    sh -c 'leaks $$ >"$1"; exec ./"$2" "$3"'
+}
+
 log_leaks()
 {
     declare valgr
@@ -71,12 +76,12 @@ log_leaks()
         bot_path="${bots_dir}/${bot_name}.s"
         log_file="${logs_dir}/${program}_${bot_name}_valgrind.log"
         [[ $found_valgrind -eq 1 ]] && eval "${valgr} --log-file=${log_file} ./${program} ${bot_path}"
-        [[ $found_leaks_util -eq 1 ]] && sh -c 'leaks $$ >"${log_file}"; exec ./"${program}" "${bot_path}"'
+        [[ $found_leaks_util -eq 1 ]] && use_leaks_util "${log_file}" "${program}" "${bot_path}"
     elif [[ "$program" = "corewar" ]]; then
         echo -e ""
         log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"valgrind.log"
         [[ $found_valgrind -eq 1 ]] && eval "${valgr} --log-file=${log_file} ./${program} bots/*.cor"
-        [[ $found_leaks_util -eq 1 ]] && sh -c 'leaks $$ >"${log_file}"; exec ./"${program}" bots/*.cor'
+        [[ $found_leaks_util -eq 1 ]] && use_leaks_util "${log_file}" "${program}" bots/*.cor'
     else
         echo -e "Internal error: smth wrong with \`program\` var." >&2
         exit 1
