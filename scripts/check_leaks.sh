@@ -71,11 +71,13 @@ log_leaks()
         bot_path="${bots_dir}/${bot_name}.s"
         log_file="${logs_dir}/${program}_${bot_name}_valgrind.log"
         [[ $found_valgrind -eq 1 ]] && eval "${valgr} --log-file=${log_file} ./${program} ${bot_path}"
+        log_file="${logs_dir}/${program}_${bot_name}_leaks.log"
         [[ $found_leaks_util -eq 1 ]] && eval "sh -c 'leaks $$ > "${log_file}" 2>&1; exec ./"${program}" "${bot_path}"'"
     elif [[ "$program" = "corewar" ]]; then
         echo -e ""
         log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"valgrind.log"
         [[ $found_valgrind -eq 1 ]] && eval "${valgr} --log-file=${log_file} ./${program} bots/*.cor"
+        log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"leaks.log"
         [[ $found_leaks_util -eq 1 ]] && eval "sh -c 'leaks $$ > "${log_file}" 2>&1; exec ./"${program}" bots/*.cor'"
     else
         echo -e "Internal error: smth wrong with \`program\` var." >&2
