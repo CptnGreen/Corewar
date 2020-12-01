@@ -15,18 +15,24 @@ declare logs_dir="${PWD}/logs/leaks"
 # Specify where to look for bots
 declare bots_dir="${PWD}/bots"
 
-# Must be global
+# Must be global:
+
 declare -a bots=()
 declare program=""
 
 declare -i found_valgrind=0
 declare -i found_leaks_util=0
 
-printf "\nFound checkers:\n"
-command -v valgrind >/dev/null 2>&1 && { found_valgrind=1; printf "%s valgrind\n" "-->"; }
-command -v leaks >/dev/null 2>&1 && { found_leaks_util=1; printf "%s leaks\n" "-->"; }
-[[ ! found_valgrind && ! found_leaks_util ]] && { printf "Neither valgrind nor leaks utility were found, aborting.\n"; exit 1; }
-printf "%s\n" "-----------"
+get_checkers()
+{
+    printf "\nFound checkers:\n"
+    command -v valgrind >/dev/null 2>&1 && { found_valgrind=1; printf "%s valgrind\n" "-->"; }
+    command -v leaks >/dev/null 2>&1 && { found_leaks_util=1; printf "%s leaks\n" "-->"; }
+    [[ ! found_valgrind && ! found_leaks_util ]] && { printf "Neither valgrind nor leaks utility were found, aborting.\n"; exit 1; }
+    printf "%s\n" "-----------"
+}
+
+get_checkers
 
 get_bots()
 {
@@ -54,42 +60,23 @@ print_usage()
     echo -e "-h\tdisplay this help and exit"
 }
 
-log_leaks_using_valgrind()
+log_leaks()
 {
+    declare valgr
+
+    valgr=$(printf "valgrind %s %s %s %s" "--leak-check=full" "--show-leak-kinds=all" "--track-origins=yes" "--verbose")
     if [[ "$program" = "asm" ]]; then
         bot_name="$1"
         printf "\n%s bot: %s\n" "--->" "$bot_name"
         bot_path="${bots_dir}/${bot_name}.s"
         log_file="${logs_dir}/${program}_${bot_name}_valgrind.log"
-        valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose \
-            --log-file="${log_file}" \
-            ./"$program" "$bot_path"
+        [[ $found_valgrind -eq 1 ]] && eval "${valgr} --log-file=${log_file} ./${program} ${bot_path}"
+        [[ $found_leaks_util -eq 1 ]] && sh -c 'leaks $$ >"${log_file}"; exec ./"${program}" "${bot_path}"'
     elif [[ "$program" = "corewar" ]]; then
         echo -e ""
         log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"valgrind.log"
-        valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose \
-            --log-file="${log_file}" \
-            ./"$program" bots/*.cor
-    else
-        echo -e "Internal error: smth wrong with \`program\` var." >&2
-        exit 1
-    fi
-    printf "%s Leaks report is saved to %s\n" "--->" "$log_file"
-}
-
-# Almost identical to the corresponding valgrind function
-log_leaks_using_leaks()
-{
-    if [[ "$program" = "asm" ]]; then
-        bot_name="$1"
-        printf "\n%s bot: %s\n" "--->" "$bot_name"
-        bot_path="${bots_dir}/${bot_name}.s"
-        log_file="${logs_dir}/${program}_${bot_name}_leaks.log"
-        sh -c 'leaks $$ >"${log_file}"; exec ./"${program}" "${bot_path}"'
-    elif [[ "$program" = "corewar" ]]; then
-        echo -e ""
-        log_file="${logs_dir}/${program}_"$(for bot in $(ls ${bots_dir}/*.cor); do printf "%s" $(basename -s .cor "${bot}")_; done)"leaks.log"
-        sh -c 'leaks $$ >"${log_file}"; exec ./"${program}" bots/*.cor'
+        [[ $found_valgrind -eq 1 ]] && eval "${valgr} --log-file=${log_file} ./${program} bots/*.cor"
+        [[ $found_leaks_util -eq 1 ]] && sh -c 'leaks $$ >"${log_file}"; exec ./"${program}" bots/*.cor'
     else
         echo -e "Internal error: smth wrong with \`program\` var." >&2
         exit 1
@@ -99,15 +86,14 @@ log_leaks_using_leaks()
 
 run_memcheck()
 {
+    [[ ! -d $logs_dir ]] && { mkdir -p "${logs_dir}"; echo -e "Created ${logs_dir} to store logs."; }
     echo -e "\n<<<<< Checking leaks for ${program} >>>>>"
     if [[ "$program" = "asm" ]]; then
         for bot in "${bots[@]}"; do
-            [[ $found_valgrind -eq 1 ]] && log_leaks_using_valgrind "${bot}"
-            [[ $found_leaks_util -eq 1 ]] && log_leaks_using_leaks "${bot}"
+            log_leaks "${bot}"
         done
     elif [[ "$program" = "corewar" ]]; then
-        [[ $found_valgrind -eq 1 ]] && log_leaks_using_valgrind
-        [[ $found_leaks_util -eq 1 ]] && log_leaks_using_leaks
+        log_leaks
     fi
 }
 
@@ -119,12 +105,10 @@ while getopts "avrh" opt; do
             ;;
         a)
             [[ ! ${bots} ]] && get_bots
-            [[ ! -d $logs_dir ]] && { mkdir -p "${logs_dir}"; echo -e "Created ${logs_dir} to store logs."; }
             program="asm" && run_memcheck
             ;;
         v)
             [[ ! ${bots} ]] && get_bots
-            [[ ! -d $logs_dir ]] && { mkdir -p "${logs_dir}"; echo -e "Created ${logs_dir} to store logs."; }
             program="corewar" && run_memcheck
             ;;
         r)
