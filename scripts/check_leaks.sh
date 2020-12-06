@@ -28,7 +28,7 @@ get_checkers()
     printf "\nFound checkers:\n"
     command -v valgrind >/dev/null 2>&1 && { found_valgrind=1; printf "%s valgrind\n" "-->"; }
     command -v leaks >/dev/null 2>&1 && { found_leaks_util=1; printf "%s leaks\n" "-->"; }
-    [[ ! found_valgrind && ! found_leaks_util ]] && { printf "Neither valgrind nor leaks utility were found, aborting.\n"; exit 1; }
+    [[ $found_valgrind -eq 0 && $found_leaks_util -eq 0 ]] && { printf "Neither valgrind nor leaks utility were found, aborting.\n"; exit 1; }
     printf "%s\n" "-----------"
 }
 
@@ -39,7 +39,7 @@ get_bots()
     declare -i n_bots
 
     [[ -d $bots_dir ]] || { mkdir "${bots_dir}"; echo -e "Dir ${bots_dir} was created; put no more than 4 bots there." >&2; exit 1; }
-    bots=($(for bot in $(ls "${bots_dir}"); do echo $bot | sed -E ' s/(.s|.cor)$// '; done | uniq))
+    mapfile -t bots < <(for bot in "${bots_dir}"/*.s; do basename "${bot}" | sed -E ' s/(.s|.cor)$// '; done | uniq)
     n_bots=${#bots[@]}
     [[ $n_bots -le 4 && $n_bots -ge 1 ]] || { echo -e "Put 1 to 4 bots in the ${bots_dir}." >&2; exit 1; }
     echo -e "\nFound bots:"
